@@ -123,7 +123,7 @@
       box-shadow: var(--shadow-sm);
     }
 
-    /* Category Navigation */
+    /* Category Nav */
     .categories-nav {
       display: flex;
       overflow-x: auto;
@@ -349,6 +349,7 @@
   </footer>
 
   <script>
+    const RESTAURANT_PHONE = "919898237900";
     const SHEET_ID = "1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU";
 
     const params = new URLSearchParams(window.location.search);
@@ -586,7 +587,7 @@
     let cart = {};
     let activeCategory = 'all';
 
-    // Google Sheet લાઈવ અપડેટ
+    // Live Google Sheet sync (Optional backup: won't break page if network is slow)
     async function syncWithSheet() {
       if (!SHEET_ID) return;
       try {
@@ -609,7 +610,7 @@
         });
         renderMenu();
       } catch (err) {
-        console.log("Using default menu fallback");
+        console.log("Using local menu fallback");
       }
     }
 
@@ -721,7 +722,7 @@
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `📌 *Request:* ${serviceTitle}\n` +
                     `_Please attend table immediately._`;
-      let url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
 
@@ -754,8 +755,7 @@
                     noteText + `\n\n` +
                     `_Please confirm the order._`;
 
-      // WhatsApp શેરિંગ URL - ગ્રાહક સીધા તમારા WhatsApp ગ્રુપમાં ઓર્ડર મોકલી શકશે
-      let url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
 
       cart = {};
