@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DEVI COFFEE DAY - Premium Digital Menu</title>
+  <title>DEVI COFFEE DAY - Digital Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -32,47 +32,51 @@
     .header {
       background: var(--primary-gradient);
       color: #fff;
-      padding: 22px 16px 18px;
+      padding: 16px 16px 14px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     }
+    .lang-switcher {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(212, 163, 115, 0.4);
+      color: #f7efe6;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--accent-gold);
+      color: var(--primary);
+      border-color: var(--accent-gold);
+    }
     .brand-logo-wrap {
-      width: 82px;
-      height: 82px;
-      margin: 0 auto 10px;
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 6px;
       border-radius: 50%;
-      background: #f7efe6;
+      background: #edd6bf;
       padding: 2px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.3);
       border: 2px solid var(--accent-gold);
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .brand-logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    .brand-title { font-size: 23px; font-weight: 800; letter-spacing: 1.5px; color: #fbf6f0; }
-    .brand-sub { font-size: 11px; letter-spacing: 3px; color: var(--accent-gold); text-transform: uppercase; margin-top: 2px; font-weight: 700; }
-    .table-badge {
-      display: inline-block;
-      margin-top: 10px;
-      background: rgba(212, 163, 115, 0.2);
-      border: 1.5px solid var(--accent-gold);
-      color: #fff;
-      padding: 5px 20px;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: 800;
-      backdrop-filter: blur(4px);
-    }
+    .brand-logo-wrap svg { width: 100%; height: 100%; border-radius: 50%; }
+    .brand-title { font-size: 21px; font-weight: 800; letter-spacing: 1.5px; color: #fbf6f0; }
+    .brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--accent-gold); text-transform: uppercase; margin-top: 2px; font-weight: 700; }
 
     /* Quick Service Bar */
     .service-bar {
@@ -111,9 +115,8 @@
       background: #fff;
       box-shadow: var(--shadow-sm);
     }
-    .search-box input:focus { border-color: var(--accent-gold); }
 
-    /* Category Navigation */
+    /* Categories Navigation */
     .categories-nav {
       display: flex;
       overflow-x: auto;
@@ -126,7 +129,7 @@
     .categories-nav::-webkit-scrollbar { display: none; }
     .cat-btn {
       white-space: nowrap;
-      padding: 9px 18px;
+      padding: 8px 16px;
       background: #ede2d4;
       color: var(--primary);
       border: none;
@@ -134,16 +137,16 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: 0.2s;
     }
-    .cat-btn.active { background: var(--primary); color: #fff; transform: scale(1.02); }
+    .cat-btn.active { background: var(--primary); color: #fff; }
 
     /* Menu Container */
     .menu-container { max-width: 720px; margin: auto; padding: 6px 16px; }
     .menu-card {
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 15px;
+      padding: 14px;
       margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
@@ -173,7 +176,7 @@
     .badge-bestseller { background: #ffe9b1; color: #8a5300; }
     .badge-special { background: #fed7d7; color: #9b1c1c; }
     .item-name { font-size: 15px; font-weight: 800; color: var(--text-dark); }
-    .item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.35; margin: 4px 0 6px; }
+    .item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.35; margin: 3px 0 5px; }
     .item-price { font-size: 16px; font-weight: 800; color: var(--primary); }
 
     /* Quantity Controls */
@@ -190,24 +193,23 @@
       background: #fff;
       color: var(--primary);
       border: 1px solid #dfcfbe;
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 9px;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .qty-btn:active { background: var(--accent); color: #fff; }
-    .qty-count { min-width: 30px; text-align: center; font-weight: 800; font-size: 15px; color: var(--primary); }
+    .qty-count { min-width: 28px; text-align: center; font-weight: 800; font-size: 14px; color: var(--primary); }
 
-    /* Note Input & Social Footer */
+    /* Note Input & Footer */
     .note-section { max-width: 720px; margin: 16px auto 0; padding: 0 16px; }
     .note-section input {
       width: 100%;
-      padding: 13px 16px;
+      padding: 12px 16px;
       border-radius: 14px;
       border: 1.5px solid var(--border-color);
       background: #fff;
@@ -216,7 +218,7 @@
     }
     .social-footer {
       max-width: 720px;
-      margin: 20px auto 10px;
+      margin: 18px auto 10px;
       text-align: center;
       padding: 0 16px;
     }
@@ -229,7 +231,7 @@
       font-weight: 700;
       text-decoration: none;
       background: #fdf0f7;
-      padding: 8px 18px;
+      padding: 7px 16px;
       border-radius: 20px;
       border: 1px solid #f8c8e3;
     }
@@ -241,7 +243,7 @@
       left: 0;
       right: 0;
       background: #ffffff;
-      padding: 14px 20px;
+      padding: 12px 18px;
       box-shadow: 0 -6px 25px rgba(0,0,0,0.12);
       border-top: 1px solid var(--border-color);
       z-index: 999;
@@ -251,85 +253,80 @@
       max-width: 720px;
       margin: auto;
     }
-    .cart-total-price { font-size: 22px; font-weight: 800; color: var(--primary); }
+    .cart-total-price { font-size: 21px; font-weight: 800; color: var(--primary); }
     .btn-whatsapp {
       background: var(--whatsapp);
       color: #ffffff;
       border: none;
-      padding: 12px 22px;
+      padding: 11px 20px;
       border-radius: 12px;
       font-size: 15px;
       font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     }
-    .btn-whatsapp:active { background: var(--whatsapp-dark); transform: scale(0.96); }
-    .btn-whatsapp svg { width: 20px; height: 20px; fill: #ffffff; }
   </style>
 </head>
 <body>
 
-  <!-- Header with Original Logo -->
+  <!-- Header -->
   <header class="header">
+    <div class="lang-switcher">
+      <button class="lang-btn active" id="btn-gu" onclick="setLanguage('gu')">ગુજરાતી</button>
+      <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
+      <button class="lang-btn" id="btn-hi" onclick="setLanguage('hi')">हिन्दी</button>
+    </div>
+
     <div class="brand-logo-wrap">
-      <img src="logo.png" alt="Devi Coffee Day Logo" onerror="this.src='https://via.placeholder.com/100?text=DEVI'">
+      <svg viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="95" fill="#301509" stroke="#caa27c" stroke-width="4"/>
+        <circle cx="100" cy="100" r="82" fill="#ebcfb2"/>
+        <circle cx="100" cy="100" r="54" fill="#301509"/>
+        <circle cx="100" cy="100" r="50" fill="#fdfbf9"/>
+        <!-- Coffee Cup Graphic -->
+        <path d="M72,96 Q100,138 128,96 Q100,96 72,96 Z" fill="#301509"/>
+        <path d="M123,98 Q144,102 138,118 Q134,127 118,124" fill="none" stroke="#301509" stroke-width="4.5" stroke-linecap="round"/>
+        <!-- Coffee Steam -->
+        <path d="M86,88 Q93,73 87,64" fill="none" stroke="#caa27c" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M100,88 Q108,70 100,58" fill="none" stroke="#301509" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M114,88 Q121,73 115,64" fill="none" stroke="#caa27c" stroke-width="3.5" stroke-linecap="round"/>
+        <text x="100" y="42" font-size="12.5" font-weight="900" fill="#301509" text-anchor="middle" letter-spacing="1">DEVI COFFEE DAY</text>
+        <text x="100" y="170" font-size="11.5" font-weight="800" fill="#301509" text-anchor="middle" letter-spacing="1">ORIGINAL FRESH</text>
+      </svg>
     </div>
     <div class="brand-title">DEVI COFFEE DAY</div>
     <div class="brand-sub">Original Fresh</div>
-    <div class="table-badge" id="table-display">ટેબલ નંબર: ૧</div>
   </header>
 
-  <!-- Quick Service Request Bar -->
+  <!-- Quick Service -->
   <div class="service-bar">
-    <button class="service-btn" onclick="sendServiceReq('પાણી (Water Bottle / Glass)')">💧 પાણી મંગાવો</button>
-    <button class="service-btn" onclick="sendServiceReq('વેઈટર / હેલ્પ (Call Waiter)')">🛎️ વેઈટર બોલાવો</button>
+    <button class="service-btn" id="btnWater" onclick="sendServiceReq('water')">💧 <span id="lblWater">પાણી મંગાવો</span></button>
+    <button class="service-btn" id="btnWaiter" onclick="sendServiceReq('waiter')">🛎️ <span id="lblWaiter">વેઈટર બોલાવો</span></button>
   </div>
 
   <!-- Search -->
   <div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 મેનુમાં વાનગી શોધો (Pizza, Coffee, Pasta, Maggi)..." onkeyup="renderMenu()">
+    <input type="text" id="searchInput" placeholder="🔍 મેનુમાં વાનગી શોધો (Pizza, Coffee, Pasta)..." onkeyup="renderMenu()">
   </div>
 
-  <!-- Categories Navigation -->
-  <nav class="categories-nav" id="categoryNav">
-    <button class="cat-btn active" onclick="filterCategory('all', this)">બધું (All)</button>
-    <button class="cat-btn" onclick="filterCategory('pizza', this)">🍕 Pizza</button>
-    <button class="cat-btn" onclick="filterCategory('maggi', this)">🍜 Maggi</button>
-    <button class="cat-btn" onclick="filterCategory('nachos', this)">🧀 Nachos</button>
-    <button class="cat-btn" onclick="filterCategory('rice-bowl', this)">🍚 Rice Bowl</button>
-    <button class="cat-btn" onclick="filterCategory('dessert', this)">🍨 Dessert</button>
-    <button class="cat-btn" onclick="filterCategory('hot-coffee', this)">☕ Hot Coffee</button>
-    <button class="cat-btn" onclick="filterCategory('hot-chocolate', this)">🍫 Hot Chocolate</button>
-    <button class="cat-btn" onclick="filterCategory('cold-coffee', this)">🥤 Cold Coffee</button>
-    <button class="cat-btn" onclick="filterCategory('ice-blended', this)">🧊 Ice-Blended</button>
-    <button class="cat-btn" onclick="filterCategory('mocktails', this)">🍹 Mocktails</button>
-    <button class="cat-btn" onclick="filterCategory('thick-shakes', this)">🥤 Thick Shakes</button>
-    <button class="cat-btn" onclick="filterCategory('iced-coffee', this)">🧊 Iced Coffee</button>
-    <button class="cat-btn" onclick="filterCategory('iced-tea', this)">🧋 Iced Tea</button>
-    <button class="cat-btn" onclick="filterCategory('appetizers', this)">🍟 Appetizers</button>
-    <button class="cat-btn" onclick="filterCategory('toast', this)">🍞 Toast</button>
-    <button class="cat-btn" onclick="filterCategory('sandwich', this)">🥪 Sandwich</button>
-    <button class="cat-btn" onclick="filterCategory('club-sandwich', this)">🥪 Club Sandwich</button>
-    <button class="cat-btn" onclick="filterCategory('garlic-bread', this)">🥖 Garlic Bread</button>
-    <button class="cat-btn" onclick="filterCategory('pasta', this)">🍝 Indulging Pasta</button>
-    <button class="cat-btn" onclick="filterCategory('extra', this)">➕ Extras & Drinks</button>
-  </nav>
+  <!-- Categories -->
+  <nav class="categories-nav" id="categoryNav"></nav>
 
   <!-- Menu List -->
   <main class="menu-container" id="menuList"></main>
 
   <!-- Note Input -->
   <div class="note-section">
-    <input type="text" id="orderNote" placeholder="✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain, Less Sugar)">
+    <input type="text" id="orderNote" placeholder="✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)">
   </div>
 
   <!-- Social Link -->
   <div class="social-footer">
     <a href="https://instagram.com/devicoffeeday" target="_blank" class="instagram-link">
-      📸 Follow us on Instagram: <b>@devicoffeeday</b>
+      📸 Instagram: <b>@devicoffeeday</b>
     </a>
   </div>
 
@@ -340,8 +337,7 @@
       <span class="cart-total-price">₹<span id="cartTotal">0</span></span>
     </div>
     <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">
-      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-      WhatsApp ઓર્ડર
+      <span id="lblOrderBtn">WhatsApp ઓર્ડર</span> 📲
     </button>
   </footer>
 
@@ -350,7 +346,65 @@
 
     const params = new URLSearchParams(window.location.search);
     const tableNumber = params.get('table') || params.get('Table') || params.get('t') || '1';
-    document.getElementById('table-display').innerText = "📍 ટેબલ નંબર: " + tableNumber;
+
+    let currentLang = 'gu';
+
+    const UI_TRANSLATIONS = {
+      gu: {
+        water: "પાણી મંગાવો",
+        waiter: "વેઈટર બોલાવો",
+        search: "🔍 મેનુમાં વાનગી શોધો (Pizza, Coffee, Pasta)...",
+        note: "✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)",
+        cartText: "આઇટમ્સ સિલેક્ટ કરી",
+        orderBtn: "WhatsApp ઓર્ડર",
+        allCat: "બધું (All)",
+        alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!"
+      },
+      en: {
+        water: "Order Water",
+        waiter: "Call Waiter",
+        search: "🔍 Search menu (Pizza, Coffee, Pasta)...",
+        note: "✍️ Special instructions? (e.g. Less Spicy, Jain)",
+        cartText: "items selected",
+        orderBtn: "Order on WhatsApp",
+        allCat: "All Items",
+        alertNoItem: "Please add items to cart first!"
+      },
+      hi: {
+        water: "पानी मंगवाएं",
+        waiter: "वेटर को बुलाएं",
+        search: "🔍 मेनू में खोजें (Pizza, Coffee, Pasta)...",
+        note: "✍️ कोई विशेष निर्देश? (उदा. Less Spicy, Jain)",
+        cartText: "आइटम चुने गए",
+        orderBtn: "WhatsApp ऑर्डर",
+        allCat: "सभी (All)",
+        alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!"
+      }
+    };
+
+    const categoriesList = [
+      { id: 'all', icon: '✨', en: 'All Items', gu: 'બધું (All)', hi: 'सभी' },
+      { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा' },
+      { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी' },
+      { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'नाचोस' },
+      { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'राइस बाउल' },
+      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'डेज़र्ट' },
+      { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी' },
+      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'हॉट चॉकलेट' },
+      { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी' },
+      { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'आइस ब्लेंडेड' },
+      { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल' },
+      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स' },
+      { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी' },
+      { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी' },
+      { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'स्टार्टर्स' },
+      { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'टोस्ट' },
+      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'सैंडविच' },
+      { id: 'club-sandwich', icon: '🥪', en: 'Club Sandwich', gu: 'Club Sandwich', hi: 'क्लब सैंडविच' },
+      { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ' },
+      { id: 'pasta', icon: '🍝', en: 'Indulging Pasta', gu: 'Pasta', hi: 'पास्ता' },
+      { id: 'extra', icon: '➕', en: 'Extras & Drinks', gu: 'Extras & Drinks', hi: 'अन्य ड्रिंक्स' }
+    ];
 
     const menuData = [
       // PIZZA
@@ -525,6 +579,39 @@
     let cart = {};
     let activeCategory = 'all';
 
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + lang).classList.add('active');
+
+      const t = UI_TRANSLATIONS[lang];
+      document.getElementById('lblWater').innerText = t.water;
+      document.getElementById('lblWaiter').innerText = t.waiter;
+      document.getElementById('searchInput').placeholder = t.search;
+      document.getElementById('orderNote').placeholder = t.note;
+      document.getElementById('lblOrderBtn').innerText = t.orderBtn;
+
+      renderCategories();
+      renderMenu();
+      updateTotal();
+    }
+
+    function renderCategories() {
+      const nav = document.getElementById('categoryNav');
+      nav.innerHTML = '';
+      categoriesList.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn' + (activeCategory === cat.id ? ' active' : '');
+        btn.innerText = cat.icon + ' ' + (cat[currentLang] || cat.en);
+        btn.onclick = () => {
+          activeCategory = cat.id;
+          renderCategories();
+          renderMenu();
+        };
+        nav.appendChild(btn);
+      });
+    }
+
     function renderMenu() {
       const container = document.getElementById('menuList');
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -581,22 +668,16 @@
         totalQty += cart[id].qty;
         totalPrice += cart[id].qty * cart[id].price;
       }
-      document.getElementById('cartCount').innerText = `${totalQty} આઇટમ્સ સિલેક્ટ કરી`;
+      document.getElementById('cartCount').innerText = `${totalQty} ${UI_TRANSLATIONS[currentLang].cartText}`;
       document.getElementById('cartTotal').innerText = totalPrice;
     }
 
-    function filterCategory(cat, btn) {
-      activeCategory = cat;
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderMenu();
-    }
-
-    function sendServiceReq(serviceType) {
-      let message = `🛎️ *DEVI COFFEE DAY - સર્વિસ રિક્વેસ્ટ*\n` +
-                    `📍 *ટેબલ નંબર:* ${tableNumber}\n` +
-                    `📌 *રિક્વેસ્ટ:* ${serviceType}\n` +
-                    `_કૃપા કરીને ટેબલ પર સ્ટાફ મોકલો._`;
+    function sendServiceReq(type) {
+      let serviceTitle = type === 'water' ? '💧 Water Request' : '🛎️ Call Waiter';
+      let message = `🛎️ *DEVI COFFEE DAY - SERVICE REQUEST*\n` +
+                    `📍 *Table Number:* ${tableNumber}\n` +
+                    `📌 *Request:* ${serviceTitle}\n` +
+                    `_Please attend table immediately._`;
       let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
@@ -614,32 +695,32 @@
       }
 
       if (orderItemsText === "") {
-        alert("કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!");
+        alert(UI_TRANSLATIONS[currentLang].alertNoItem);
         return;
       }
 
       let note = document.getElementById('orderNote').value.trim();
-      let noteText = note ? `\n📝 *ખાસ નોંધ:* ${note}` : "";
+      let noteText = note ? `\n📝 *Note:* ${note}` : "";
 
-      let message = `🍽️ *DEVI COFFEE DAY - નવો ઓર્ડર*\n` +
-                    `📍 *ટેબલ નંબર:* ${tableNumber}\n` +
+      let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER*\n` +
+                    `📍 *Table Number:* ${tableNumber}\n` +
                     `--------------------------------\n` +
                     orderItemsText +
                     `--------------------------------\n` +
-                    `💰 *કુલ બિલ:* ₹${total}` +
+                    `💰 *Total Amount:* ₹${total}` +
                     noteText + `\n\n` +
-                    `_ઓર્ડર કન્ફર્મ કરો._`;
+                    `_Please confirm the order._`;
 
       let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
 
-      // Auto-reset cart after sending order
       cart = {};
       document.getElementById('orderNote').value = "";
       updateTotal();
       renderMenu();
     }
 
+    renderCategories();
     renderMenu();
   </script>
 </body>
