@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <title>Devi Coffee Day - Table QR Codes</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #f4efe9; padding: 20px; }
+    h1 { color: #33180c; margin-bottom: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
+    .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 2px solid #d4a373; }
+    .card h2 { color: #33180c; margin: 8px 0; font-size: 18px; }
+    img { width: 180px; height: 180px; }
+    .print-btn { background: #33180c; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; margin-bottom: 25px; font-weight: bold; }
+    @media print { .print-btn { display: none; } }
+  </style>
+</head>
+<body>
+
+  <h1>☕ DEVI COFFEE DAY - ટેબલ QR કોડ્સ</h1>
+  <button class="print-btn" onclick="window.print()">🖨️ બધા QR કોડ પ્રિન્ટ કરો</button>
+
+  <div class="grid" id="qrContainer"></div>
+
+  <script>
+    const baseUrl = "https://ashokdscom-wq.github.io/Devi-Coffee-Day-Manu/?table=";
+    const container = document.getElementById("qrContainer");
+
+    for (let i = 1; i <= 12; i++) {
+      const targetUrl = baseUrl + i;
+      const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
+      
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h2>ટેબલ નંબર: ${i}</h2>
+        <img src="${qrImgUrl}" alt="Table ${i}">
+        <p style="font-size:12px; color:#666; margin-top:5px;">સ્કેન કરીને ઓર્ડર કરો</p>
+      `;
+      container.appendChild(card);
+    }
+  </script>
+</body>
+</html>
