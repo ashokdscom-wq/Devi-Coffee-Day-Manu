@@ -40,16 +40,25 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
     }
     .brand-logo-wrap {
-      width: 76px;
-      height: 76px;
-      margin: 0 auto 8px;
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 10px;
       border-radius: 50%;
       background: #f7efe6;
-      padding: 3px;
+      padding: 2px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.3);
       border: 2px solid var(--accent-gold);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .brand-logo-wrap svg { width: 100%; height: 100%; }
+    .brand-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
     .brand-title { font-size: 23px; font-weight: 800; letter-spacing: 1.5px; color: #fbf6f0; }
     .brand-sub { font-size: 11px; letter-spacing: 3px; color: var(--accent-gold); text-transform: uppercase; margin-top: 2px; font-weight: 700; }
     .table-badge {
@@ -77,7 +86,7 @@
       flex: 1;
       background: #fff;
       border: 1.5px solid var(--border-color);
-      padding: 8px 12px;
+      padding: 9px 12px;
       border-radius: 12px;
       font-size: 13px;
       font-weight: 700;
@@ -263,25 +272,10 @@
 </head>
 <body>
 
-  <!-- Header with Brand Logo -->
+  <!-- Header with Original Logo -->
   <header class="header">
     <div class="brand-logo-wrap">
-      <svg viewBox="0 0 200 200">
-        <circle cx="100" cy="100" r="94" fill="#33180c" stroke="#d4a373" stroke-width="6"/>
-        <circle cx="100" cy="100" r="82" fill="#edd6bf"/>
-        <circle cx="100" cy="100" r="54" fill="#33180c"/>
-        <circle cx="100" cy="100" r="50" fill="#fdfbf9"/>
-        <!-- Coffee Cup SVG -->
-        <path d="M70,95 Q100,140 130,95 Q100,95 70,95 Z" fill="#33180c"/>
-        <path d="M125,98 Q145,102 140,118 Q135,128 120,124" fill="none" stroke="#33180c" stroke-width="5" stroke-linecap="round"/>
-        <!-- Steam -->
-        <path d="M85,86 Q92,72 86,62" fill="none" stroke="#d4a373" stroke-width="4" stroke-linecap="round"/>
-        <path d="M100,86 Q108,68 100,56" fill="none" stroke="#33180c" stroke-width="4" stroke-linecap="round"/>
-        <path d="M115,86 Q122,72 116,62" fill="none" stroke="#d4a373" stroke-width="4" stroke-linecap="round"/>
-        <!-- Text -->
-        <text x="100" y="38" font-size="14" font-weight="900" fill="#33180c" text-anchor="middle" letter-spacing="2">DEVI COFFEE DAY</text>
-        <text x="100" y="174" font-size="12" font-weight="800" fill="#33180c" text-anchor="middle" letter-spacing="1.5">ORIGINAL FRESH</text>
-      </svg>
+      <img src="logo.png" alt="Devi Coffee Day Logo" onerror="this.src='https://via.placeholder.com/100?text=DEVI'">
     </div>
     <div class="brand-title">DEVI COFFEE DAY</div>
     <div class="brand-sub">Original Fresh</div>
@@ -342,7 +336,7 @@
   <!-- Bottom Floating Cart -->
   <footer class="cart-bar">
     <div>
-      <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="cartCount">0 આઇટમ્સ</span><br>
+      <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="cartCount">0 આઇટમ્સ સિલેક્ટ કરી</span><br>
       <span class="cart-total-price">₹<span id="cartTotal">0</span></span>
     </div>
     <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">
