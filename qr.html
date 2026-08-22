@@ -2,41 +2,65 @@
 <html lang="gu">
 <head>
   <meta charset="UTF-8">
-  <title>Devi Coffee Day - Table QR Codes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEVI COFFEE DAY - Table QR Codes</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
-    body { font-family: sans-serif; text-align: center; background: #f4efe9; padding: 20px; }
-    h1 { color: #33180c; margin-bottom: 20px; }
+    body { font-family: sans-serif; background: #fbf8f4; margin: 0; padding: 20px; text-align: center; color: #33180c; }
+    h1 { margin-bottom: 4px; font-size: 24px; }
+    p.sub { color: #75675e; margin-bottom: 20px; font-weight: bold; }
+    .print-btn { background: #25D366; color: white; border: none; padding: 12px 28px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-bottom: 25px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
-    .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 2px solid #d4a373; }
-    .card h2 { color: #33180c; margin: 8px 0; font-size: 18px; }
-    img { width: 180px; height: 180px; }
-    .print-btn { background: #33180c; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 8px; cursor: pointer; margin-bottom: 25px; font-weight: bold; }
-    @media print { .print-btn { display: none; } }
+    .card { background: white; padding: 16px; border-radius: 12px; border: 2px solid #d4a373; box-shadow: 0 4px 10px rgba(0,0,0,0.06); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .card h2 { margin: 0 0 12px; font-size: 18px; color: #33180c; }
+    .qr-box { padding: 6px; background: #fff; display: inline-block; }
+    .card .hint { margin-top: 10px; font-size: 13px; color: #555; font-weight: bold; }
+    @media print {
+      body { background: white; padding: 0; }
+      .print-btn, p.sub { display: none; }
+      .grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+      .card { page-break-inside: avoid; border: 1.5px solid #33180c; box-shadow: none; }
+    }
   </style>
 </head>
 <body>
-
-  <h1>☕ DEVI COFFEE DAY - ટેબલ QR કોડ્સ</h1>
+  <h1>☕ DEVI COFFEE DAY</h1>
+  <p class="sub">૧ થી ૧૨ ટેબલના સ્માર્ટ ઓર્ડરિંગ QR કોડ્સ</p>
   <button class="print-btn" onclick="window.print()">🖨️ બધા QR કોડ પ્રિન્ટ કરો</button>
-
-  <div class="grid" id="qrContainer"></div>
+  
+  <div class="grid" id="qrGrid"></div>
 
   <script>
     const baseUrl = "https://ashokdscom-wq.github.io/Devi-Coffee-Day-Manu/?table=";
-    const container = document.getElementById("qrContainer");
+    const grid = document.getElementById("qrGrid");
 
     for (let i = 1; i <= 12; i++) {
-      const targetUrl = baseUrl + i;
-      const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(targetUrl)}`;
-      
       const card = document.createElement("div");
       card.className = "card";
-      card.innerHTML = `
-        <h2>ટેબલ નંબર: ${i}</h2>
-        <img src="${qrImgUrl}" alt="Table ${i}">
-        <p style="font-size:12px; color:#666; margin-top:5px;">સ્કેન કરીને ઓર્ડર કરો</p>
-      `;
-      container.appendChild(card);
+      
+      const title = document.createElement("h2");
+      title.innerText = "ટેબલ નંબર: " + i;
+      card.appendChild(title);
+
+      const qrContainer = document.createElement("div");
+      qrContainer.className = "qr-box";
+      card.appendChild(qrContainer);
+
+      new QRCode(qrContainer, {
+        text: baseUrl + i,
+        width: 170,
+        height: 170,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.M
+      });
+
+      const hint = document.createElement("div");
+      hint.className = "hint";
+      hint.innerText = "📱 સ્કેન કરીને ઓર્ડર આપો";
+      card.appendChild(hint);
+
+      grid.appendChild(card);
     }
   </script>
 </body>
