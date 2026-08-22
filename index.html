@@ -61,13 +61,15 @@
       color: var(--primary);
       border-color: var(--accent-gold);
     }
+
+    /* Perfect Circular Cropped Logo */
     .brand-logo-wrap {
-      width: 80px;
-      height: 80px;
+      width: 88px;
+      height: 88px;
       margin: 0 auto 8px;
       border-radius: 50%;
       background: #edd6bf;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.35);
       border: 2.5px solid var(--accent-gold);
       overflow: hidden;
       display: flex;
@@ -78,9 +80,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       border-radius: 50%;
       display: block;
+      transform: scale(2.4); /* લોગોના કાર્ડમાંથી વચ્ચે રહેલા રાઉન્ડ લોગો પર ઝૂમ-ઇન કરે છે */
     }
+
     .brand-title { font-size: 21px; font-weight: 800; letter-spacing: 1.5px; color: #fbf6f0; }
     .brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--accent-gold); text-transform: uppercase; margin-top: 2px; font-weight: 700; }
 
@@ -278,7 +283,7 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header with Auto Cropped logo.jpg -->
   <header class="header">
     <div class="lang-switcher">
       <button class="lang-btn active" id="btn-gu" onclick="setLanguage('gu')">ગુજરાતી</button>
@@ -286,9 +291,8 @@
       <button class="lang-btn" id="btn-hi" onclick="setLanguage('hi')">हिन्दी</button>
     </div>
 
-    <!-- Original Logo with Multi-format fallback -->
     <div class="brand-logo-wrap">
-      <img src="logo.jpg" alt="DEVI COFFEE DAY" onerror="this.onerror=null; this.src='logo.JPG';">
+      <img src="logo.jpg" alt="DEVI COFFEE DAY" onerror="this.onerror=null; this.src='logo.png';">
     </div>
     <div class="brand-title">DEVI COFFEE DAY</div>
     <div class="brand-sub">Original Fresh</div>
@@ -393,7 +397,7 @@
       { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'स्टार्टर्स' },
       { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'टोस्ट' },
       { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સैंडવિચ' },
-      { id: 'club-sandwich', icon: '🥪', en: 'Club Sandwich', gu: 'Club Sandwich', hi: 'क्लब सैंडविच' },
+      { id: 'club-sandwich', icon: '🥪', en: 'Club Sandwich', gu: 'Club Sandwich', hi: 'ક્લબ સैंडવિચ' },
       { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ' },
       { id: 'pasta', icon: '🍝', en: 'Indulging Pasta', gu: 'Pasta', hi: 'पास्ता' },
       { id: 'extra', icon: '➕', en: 'Extras & Drinks', gu: 'Extras & Drinks', hi: 'अन्य ड्रिंक्स' }
@@ -718,3 +722,4 @@
   </script>
 </body>
 </html>
+
