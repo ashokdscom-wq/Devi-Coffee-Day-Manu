@@ -102,7 +102,6 @@
   <script>
     const RESTAURANT_PHONE = "919898237900";
 
-    // URL માંથી ટેબલ નંબર લેવા માટે
     const params = new URLSearchParams(window.location.search);
     const tableNumber = params.get('table') || params.get('Table') || params.get('t') || '1';
     document.getElementById('table-display').innerText = "📍 ટેબલ નંબર: " + tableNumber;
@@ -369,7 +368,15 @@
                     `_ઓર્ડર કન્ફર્મ કરો._`;
 
       let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
+      
+      // WhatsApp ખોલો
       window.open(url, '_blank');
+
+      // ઓર્ડર મોકલ્યા પછી કાર્ટ અને નોટ તરત જ ક્લિયર/રીસેટ થઈ જશે
+      cart = {};
+      document.getElementById('orderNote').value = "";
+      updateTotal();
+      renderMenu();
     }
 
     renderMenu();
