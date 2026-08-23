@@ -6,51 +6,85 @@
   <title>DEVI COFFEE DAY - Digital Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1f0d05;
-      --primary-gradient: linear-gradient(180deg, #1b0a04 0%, #301408 100%);
+      --primary: #2a1309;
+      --accent: #d4a373;
       --accent-gold: #e5b07b;
-      --bg: #f9f6f0;
+      --bg: #f8f5f0;
       --card-bg: #ffffff;
-      --text-dark: #1a1a1a;
-      --text-muted: #5c5249;
-      --border-color: #e5d5c5;
-      --veg-green: #0d8235;
+      --text-dark: #22150e;
+      --text-muted: #6e5f55;
+      --border-color: #eedcc9;
+      --veg-green: #0f8a3c;
       --whatsapp: #25D366;
+      --shadow-sm: 0 2px 8px rgba(42, 19, 9, 0.05);
+      --shadow-md: 0 6px 18px rgba(42, 19, 9, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 140px; }
 
-    /* Crisp & Clean Solid Header */
+    /* Header With Background Ad Slider */
     .header {
-      background: var(--primary-gradient);
-      color: #fff;
-      padding: 16px 16px 14px;
-      text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      padding: 16px 16px 14px;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Background Slides */
+    .header-bg-slider {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+      background: #2a1309;
+    }
+    .slide-img {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      transform: scale(1.05);
+    }
+    .slide-img.active {
+      opacity: 0.38; /* ફોટો પર હળવો ડાર્ક લેયર જેથી આગળનું લખાણ ક્લિયર દેખાય */
+    }
+    .header-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(36,17,8,0.7) 0%, rgba(42,19,9,0.85) 100%);
+      z-index: 2;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 3;
     }
 
     .lang-switcher {
       display: flex;
       justify-content: center;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 10px;
     }
     .lang-btn {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(229, 176, 123, 0.4);
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(229, 176, 123, 0.5);
       color: #f7efe6;
-      padding: 5px 14px;
-      border-radius: 20px;
+      padding: 4px 12px;
+      border-radius: 16px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
+      backdrop-filter: blur(4px);
     }
     .lang-btn.active {
       background: var(--accent-gold);
@@ -58,44 +92,30 @@
       border-color: var(--accent-gold);
     }
 
-    /* Sharp & Crisp Logo Box */
     .brand-logo-wrap {
-      width: 78px;
-      height: 78px;
+      width: 86px;
+      height: 86px;
       margin: 0 auto 8px;
       border-radius: 50%;
-      background: #eedcc9;
-      border: 2px solid var(--accent-gold);
+      background: #edd6bf;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      border: 2.5px solid var(--accent-gold);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     .brand-logo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
-      display: block;
+      border-radius: 50%;
+      transform: scale(2.4);
     }
+    .brand-title { font-size: 21px; font-weight: 800; letter-spacing: 1.5px; color: #fbf6f0; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+    .brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--accent-gold); text-transform: uppercase; margin-top: 2px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
 
-    .brand-title {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      color: #ffffff;
-    }
-    .brand-sub {
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      margin-top: 2px;
-      font-weight: 700;
-    }
-
-    /* Quick Service Bar */
+    /* Service Bar */
     .service-bar {
       max-width: 720px;
       margin: 12px auto 0;
@@ -105,35 +125,35 @@
     }
     .service-btn {
       flex: 1;
-      background: #ffffff;
+      background: #fff;
       border: 1.5px solid var(--border-color);
-      padding: 10px 12px;
+      padding: 9px 12px;
       border-radius: 12px;
       font-size: 13px;
       font-weight: 700;
       color: var(--primary);
       cursor: pointer;
+      box-shadow: var(--shadow-sm);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
     /* Search Box */
     .search-box { padding: 12px 16px 4px; max-width: 720px; margin: auto; }
     .search-box input {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 13px 18px;
+      border-radius: 14px;
       border: 1.5px solid var(--border-color);
       outline: none;
       font-size: 14px;
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      background: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
-    /* Categories Navigation */
+    /* Category Nav */
     .categories-nav {
       display: flex;
       overflow-x: auto;
@@ -147,32 +167,33 @@
     .cat-btn {
       white-space: nowrap;
       padding: 8px 16px;
-      background: #eae0d5;
+      background: #ede2d4;
       color: var(--primary);
       border: none;
-      border-radius: 20px;
+      border-radius: 25px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
+      transition: 0.2s;
     }
-    .cat-btn.active { background: var(--primary); color: #ffffff; }
+    .cat-btn.active { background: var(--primary); color: #fff; }
 
     /* Menu Container */
     .menu-container { max-width: 720px; margin: auto; padding: 6px 16px; }
     .menu-card {
       background: var(--card-bg);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 14px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 1.5px solid var(--border-color);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
     }
     .menu-card.disabled {
-      opacity: 0.55;
-      background: #f1ece7;
+      opacity: 0.6;
+      background: #f0ece9;
     }
     .item-details { flex: 1; padding-right: 12px; }
     .item-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
@@ -184,20 +205,19 @@
       align-items: center;
       justify-content: center;
       border-radius: 3px;
-      flex-shrink: 0;
     }
     .veg-icon span { width: 7px; height: 7px; background: var(--veg-green); border-radius: 50%; }
     .item-badge {
       font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 10px;
       font-weight: 800;
       text-transform: uppercase;
     }
-    .badge-bestseller { background: #fff1d6; color: #8a5300; }
-    .badge-special { background: #fee2e2; color: #991b1b; }
+    .badge-bestseller { background: #ffe9b1; color: #8a5300; }
+    .badge-special { background: #fed7d7; color: #9b1c1c; }
 
-    .item-name { font-size: 15px; font-weight: 700; color: #111111; }
+    .item-name { font-size: 15px; font-weight: 800; color: var(--text-dark); }
     .item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.35; margin: 3px 0 5px; }
     .item-price { font-size: 16px; font-weight: 800; color: var(--primary); }
 
@@ -206,34 +226,34 @@
       display: flex;
       align-items: center;
       background: #f7efe6;
-      border-radius: 10px;
-      padding: 3px;
+      border-radius: 12px;
+      padding: 4px;
       border: 1px solid var(--border-color);
       flex-shrink: 0;
     }
     .qty-btn {
-      background: #ffffff;
+      background: #fff;
       color: var(--primary);
-      border: 1px solid #d9c7b5;
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      font-size: 16px;
+      border: 1px solid #dfcfbe;
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      font-size: 17px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .qty-count { min-width: 26px; text-align: center; font-weight: 800; font-size: 14px; color: var(--primary); }
+    .qty-count { min-width: 28px; text-align: center; font-weight: 800; font-size: 14px; color: var(--primary); }
     .soldout-tag {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
-      color: #dc2626;
-      background: #fef2f2;
-      padding: 5px 10px;
-      border-radius: 6px;
-      border: 1px solid #fecaca;
+      color: #e53e3e;
+      background: #fff5f5;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid #fed7d7;
     }
 
     /* Note Input & Footer */
@@ -241,9 +261,9 @@
     .note-section input {
       width: 100%;
       padding: 12px 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1.5px solid var(--border-color);
-      background: #ffffff;
+      background: #fff;
       font-size: 13px;
       outline: none;
     }
@@ -267,7 +287,7 @@
       border: 1px solid #f8c8e3;
     }
 
-    /* Floating Cart Bar */
+    /* Cart Bar */
     .cart-bar {
       position: fixed;
       bottom: 0;
@@ -275,8 +295,8 @@
       right: 0;
       background: #ffffff;
       padding: 12px 18px;
-      box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-      border-top: 1.5px solid var(--border-color);
+      box-shadow: 0 -6px 25px rgba(0,0,0,0.12);
+      border-top: 1px solid var(--border-color);
       z-index: 999;
       display: flex;
       align-items: center;
@@ -284,7 +304,7 @@
       max-width: 720px;
       margin: auto;
     }
-    .cart-total-price { font-size: 20px; font-weight: 800; color: var(--primary); }
+    .cart-total-price { font-size: 21px; font-weight: 800; color: var(--primary); }
     .btn-whatsapp {
       background: var(--whatsapp);
       color: #ffffff;
@@ -297,28 +317,37 @@
       align-items: center;
       gap: 7px;
       cursor: pointer;
-      box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
     }
   </style>
 </head>
 <body>
 
-  <!-- Clean Header -->
+  <!-- Header with Auto Changing Background Slideshow -->
   <header class="header">
-    <div class="lang-switcher">
-      <button class="lang-btn active" id="btn-gu" onclick="setLanguage('gu')">ગુજરાતી</button>
-      <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
-      <button class="lang-btn" id="btn-hi" onclick="setLanguage('hi')">हिन्दी</button>
+    <div class="header-bg-slider">
+      <div class="slide-img active" style="background-image: url('banner1.jpg'), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800');"></div>
+      <div class="slide-img" style="background-image: url('banner2.jpg'), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800');"></div>
+      <div class="slide-img" style="background-image: url('banner3.jpg'), url('https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800');"></div>
     </div>
+    <div class="header-overlay"></div>
 
-    <div class="brand-logo-wrap">
-      <img src="logo.jpg" alt="DEVI COFFEE DAY" onerror="this.onerror=null; this.src='logo.png';">
+    <div class="header-content">
+      <div class="lang-switcher">
+        <button class="lang-btn active" id="btn-gu" onclick="setLanguage('gu')">ગુજરાતી</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">English</button>
+        <button class="lang-btn" id="btn-hi" onclick="setLanguage('hi')">हिन्दी</button>
+      </div>
+
+      <div class="brand-logo-wrap">
+        <img src="logo.jpg" alt="DEVI COFFEE DAY" onerror="this.onerror=null; this.src='logo.png';">
+      </div>
+      <div class="brand-title">DEVI COFFEE DAY</div>
+      <div class="brand-sub">Original Fresh</div>
     </div>
-    <div class="brand-title">DEVI COFFEE DAY</div>
-    <div class="brand-sub">Original Fresh</div>
   </header>
 
-  <!-- Service Buttons -->
+  <!-- Quick Service -->
   <div class="service-bar">
     <button class="service-btn" onclick="sendServiceReq('water')">💧 <span id="lblWater">પાણી મંગાવો</span></button>
     <button class="service-btn" onclick="sendServiceReq('waiter')">🛎️ <span id="lblWaiter">વેઈટર બોલાવો</span></button>
@@ -332,7 +361,7 @@
   <!-- Categories -->
   <nav class="categories-nav" id="categoryNav"></nav>
 
-  <!-- Menu Items List -->
+  <!-- Menu List -->
   <main class="menu-container" id="menuList"></main>
 
   <!-- Note Input -->
@@ -347,7 +376,7 @@
     </a>
   </div>
 
-  <!-- Bottom Cart Bar -->
+  <!-- Bottom Floating Cart -->
   <footer class="cart-bar">
     <div>
       <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="cartCount">0 આઇટમ્સ સિલેક્ટ કરી</span><br>
@@ -359,12 +388,21 @@
   </footer>
 
   <script>
-    const RESTAURANT_PHONE = "919898237900";
+    const RESTAURANT_PHONE = "919898237900"; // જે નંબર પર ઓર્ડર લેવો હોય તે
 
     const params = new URLSearchParams(window.location.search);
     const tableNumber = params.get('table') || params.get('Table') || params.get('t') || '1';
 
     let currentLang = 'gu';
+
+    // Auto Slider Animation Logic (Runs every 3.5 seconds)
+    const slides = document.querySelectorAll('.slide-img');
+    let currentSlide = 0;
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 3500);
 
     const UI_TRANSLATIONS = {
       gu: {
@@ -409,18 +447,18 @@
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी' },
       { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'हॉट चॉकलेट' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी' },
-      { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'આઇસ બ્લેન્ડેડ' },
+      { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'आइस ब्लेंडेड' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल' },
       { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी' },
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी' },
-      { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'સ્ટાર્ટર્સ' },
-      { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'ટોસ્ટ' },
-      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સેન્ડવિચ' },
-      { id: 'club-sandwich', icon: '🥪', en: 'Club Sandwich', gu: 'Club Sandwich', hi: 'ક્લબ સેન્ડવિચ' },
+      { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'स्टार्टर्स' },
+      { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'टोस्ट' },
+      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સैंडવિચ' },
+      { id: 'club-sandwich', icon: '🥪', en: 'Club Sandwich', gu: 'Club Sandwich', hi: 'ક્લબ સैंडવિચ' },
       { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ' },
-      { id: 'pasta', icon: '🍝', en: 'Pasta', gu: 'Pasta', hi: 'પાસ્તા' },
-      { id: 'extra', icon: '➕', en: 'Extras & Drinks', gu: 'Extras & Drinks', hi: 'અન્ય ડ્રિંક્સ' }
+      { id: 'pasta', icon: '🍝', en: 'Pasta', gu: 'Pasta', hi: 'पास्ता' },
+      { id: 'extra', icon: '➕', en: 'Extras & Drinks', gu: 'Extras & Drinks', hi: 'अन्य ड्रिंक्स' }
     ];
 
     let menuData = [
