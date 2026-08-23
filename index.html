@@ -24,7 +24,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 140px; }
 
-    /* Header */
+    /* Clean Solid Header */
     .header {
       background: var(--primary-gradient);
       color: #fff;
@@ -78,22 +78,21 @@
     .brand-title { font-size: 20px; font-weight: 800; letter-spacing: 1.2px; color: #ffffff; }
     .brand-sub { font-size: 10px; letter-spacing: 3px; color: var(--accent-gold); text-transform: uppercase; margin-top: 2px; font-weight: 700; }
 
-    /* 15 Banner HD Auto-Slider */
+    /* Ultra-HD 100% Original Quality Slider */
     .banner-slider-container {
       max-width: 720px;
       margin: 14px auto 0;
       padding: 0 16px;
-      position: relative;
     }
     .banner-wrapper {
       position: relative;
       width: 100%;
-      height: 200px;
+      height: 220px;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 6px 18px rgba(0,0,0,0.12);
       border: 1.5px solid var(--border-color);
-      background: #1f0d05;
+      background: #000000;
     }
     .banner-slide {
       position: absolute;
@@ -108,7 +107,7 @@
     .banner-slide img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* ૧૦૦% શાર્પ અને ઓરિજિનલ બ્રાઇટનેસ */
       display: block;
     }
     .banner-dots {
@@ -303,7 +302,7 @@
       border: 1px solid #f8c8e3;
     }
 
-    /* Floating Cart Bar */
+    /* Cart Bar */
     .cart-bar {
       position: fixed;
       bottom: 0;
@@ -354,7 +353,7 @@
     <div class="brand-sub">Original Fresh</div>
   </header>
 
-  <!-- 15 Banner Slideshow -->
+  <!-- Clear 15 Banner Slideshow -->
   <div class="banner-slider-container">
     <div class="banner-wrapper" id="bannerSlider">
       <div class="banner-slide active"><img src="banner1.jpg" onerror="this.src='https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800'"></div>
@@ -424,7 +423,6 @@
 
     let currentLang = 'gu';
 
-    // 15 Slideshow Auto-play Engine
     function initSlider() {
       const slides = Array.from(document.querySelectorAll('.banner-slide'));
       const dotsContainer = document.getElementById('bannerDots');
