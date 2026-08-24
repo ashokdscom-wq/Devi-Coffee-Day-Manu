@@ -663,7 +663,6 @@
     function sendServiceReq(type) {
       let serviceTitle = type === 'water' ? '💧 Water Request' : '🛎️ Call Waiter';
 
-      // Sheet Log
       const logUrl = GOOGLE_SCRIPT_WEBAPP_URL + 
         `?table=${encodeURIComponent("Table " + tableNumber)}` +
         `&items=${encodeURIComponent(serviceTitle)}` +
@@ -671,7 +670,6 @@
         `&note=${encodeURIComponent("Service Call")}`;
       new Image().src = logUrl;
 
-      // WhatsApp Message
       let message = `🛎️ *DEVI COFFEE DAY - SERVICE REQUEST*\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `📌 *Request:* ${serviceTitle}\n` +
@@ -705,15 +703,18 @@
       let note = document.getElementById('orderNote').value.trim();
       let noteText = note ? `\n📝 *Note:* ${note}` : "";
 
-      // ૧. Google Sheet માં ઓર્ડર એન્ટ્રી (Push Trigger)
       const logUrl = GOOGLE_SCRIPT_WEBAPP_URL + 
         `?table=${encodeURIComponent("Table " + tableNumber)}` +
         `&items=${encodeURIComponent(orderSummaryForSheet.join(", "))}` +
         `&total=${encodeURIComponent("₹" + total)}` +
         `&note=${encodeURIComponent(note || "-")}`;
-      new Image().src = logUrl;
 
-      // ૨. WhatsApp મેસેજ
+      try {
+        await fetch(logUrl, { mode: 'no-cors' });
+      } catch (e) {
+        console.log(e);
+      }
+
       let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER*\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `--------------------------------\n` +
@@ -731,7 +732,7 @@
         document.getElementById('orderNote').value = "";
         updateTotal();
         renderMenu();
-      }, 250);
+      }, 400);
     }
 
     renderCategories();
@@ -739,4 +740,3 @@
   </script>
 </body>
 </html>
-
