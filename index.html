@@ -668,7 +668,12 @@
         `&items=${encodeURIComponent(serviceTitle)}` +
         `&total=-` +
         `&note=${encodeURIComponent("Service Call")}`;
-      new Image().src = logUrl;
+      
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(logUrl);
+      } else {
+        new Image().src = logUrl;
+      }
 
       let message = `🛎️ *DEVI COFFEE DAY - SERVICE REQUEST*\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
@@ -709,10 +714,12 @@
         `&total=${encodeURIComponent("₹" + total)}` +
         `&note=${encodeURIComponent(note || "-")}`;
 
-      try {
-        await fetch(logUrl, { mode: 'no-cors' });
-      } catch (e) {
-        console.log(e);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(logUrl);
+      } else {
+        try {
+          await fetch(logUrl, { mode: 'no-cors' });
+        } catch (e) {}
       }
 
       let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER*\n` +
@@ -740,3 +747,4 @@
   </script>
 </body>
 </html>
+
