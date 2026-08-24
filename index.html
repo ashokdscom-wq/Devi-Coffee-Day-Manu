@@ -428,8 +428,11 @@
   <script>
     const RESTAURANT_PHONE = "919898237900";
 
-    // તમારી Google Sheet સાથે સીધું કનેક્શન (CSV Export)
+    // Google Sheet Live Menu Link (CSV)
     const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU/export?format=csv";
+
+    // Google Apps Script Web App URL (Live Order Alert Entry)
+    const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwO0a9quduWuBC6W_0b4iQrsKur5pxchTCfFdHLV59Bo65U540EBMeckblpaTdSlhNc/exec";
 
     const params = new URLSearchParams(window.location.search);
     const tableNumber = params.get('table') || params.get('Table') || params.get('t') || '1';
@@ -454,7 +457,7 @@
         search: "🔍 મેનુમાં વાનગી શોધો...",
         note: "✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)",
         cartText: "આઇટમ્સ સિલેક્ટ કરી",
-        orderBtn: "WhatsApp ઓર્ડર",
+        orderBtn: "ઓર્ડર કરો",
         soldOut: "હાજર નથી (Sold Out)",
         alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!"
       },
@@ -464,7 +467,7 @@
         search: "🔍 Search menu...",
         note: "✍️ Special instructions? (e.g. Less Spicy, Jain)",
         cartText: "items selected",
-        orderBtn: "Order on WhatsApp",
+        orderBtn: "Place Order",
         soldOut: "Sold Out",
         alertNoItem: "Please add items to cart first!"
       },
@@ -474,7 +477,7 @@
         search: "🔍 मेनू में खोजें...",
         note: "✍️ कोई विशेष निर्देश? (उदा. Less Spicy, Jain)",
         cartText: "आइटम चुने गए",
-        orderBtn: "WhatsApp ऑर्डर",
+        orderBtn: "ऑर्डर करें",
         soldOut: "उपलब्ध नहीं (Sold Out)",
         alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!"
       }
@@ -508,7 +511,6 @@
     let cart = {};
     let activeCategory = 'all';
 
-    // CSV Parse Helper
     function parseCSVLine(text) {
       let result = [];
       let row = [''];
@@ -532,7 +534,6 @@
       return row;
     }
 
-    // Live Google Sheet Fetching
     async function loadLiveMenu() {
       try {
         const liveURL = GOOGLE_SHEET_CSV_URL + '&t=' + Date.now();
@@ -698,15 +699,17 @@
       window.open(url, '_blank');
     }
 
-    function sendOrderWhatsApp() {
+    async function sendOrderWhatsApp() {
       let total = 0;
       let orderItemsText = "";
+      let orderSummaryForSheet = [];
 
       for (let id in cart) {
         if (cart[id].qty > 0) {
           let itemCost = cart[id].qty * cart[id].price;
           total += itemCost;
           orderItemsText += `• *${cart[id].name}* x ${cart[id].qty} = ₹${itemCost}\n`;
+          orderSummaryForSheet.push(`${cart[id].name} (x${cart[id].qty})`);
         }
       }
 
@@ -718,6 +721,24 @@
       let note = document.getElementById('orderNote').value.trim();
       let noteText = note ? `\n📝 *Note:* ${note}` : "";
 
+      // ૧. Google Sheets માં ઓટોમેટિક ઓર્ડર એન્ટ્રી (Push Notification Trigger)
+      try {
+        fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            table: "Table " + tableNumber,
+            items: orderSummaryForSheet.join(", "),
+            total: "₹" + total,
+            note: note || "-"
+          })
+        });
+      } catch (err) {
+        console.error("Sheet Sync Error:", err);
+      }
+
+      // ૨. WhatsApp મેસેજ ખોલો
       let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER*\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `--------------------------------\n` +
