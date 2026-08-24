@@ -23,7 +23,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 140px; }
 
-    /* Header with 15 Clean Changing Backgrounds */
     .header {
       position: sticky;
       top: 0;
@@ -39,7 +38,6 @@
       justify-content: center;
     }
 
-    /* 15 HD Background Images Container */
     .header-bg-slider {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -54,11 +52,8 @@
       opacity: 0;
       transition: opacity 1s ease-in-out;
     }
-    .slide-img.active {
-      opacity: 1;
-    }
+    .slide-img.active { opacity: 1; }
 
-    /* Soft Gradient Overlay */
     .header-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -66,10 +61,7 @@
       z-index: 2;
     }
 
-    .header-content {
-      position: relative;
-      z-index: 3;
-    }
+    .header-content { position: relative; z-index: 3; }
 
     .lang-switcher {
       display: flex;
@@ -94,7 +86,6 @@
       border-color: var(--accent-gold);
     }
 
-    /* Big Original Round Logo */
     .brand-logo-wrap {
       width: 90px;
       height: 90px;
@@ -133,7 +124,6 @@
       text-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    /* Service Bar */
     .service-bar {
       max-width: 720px;
       margin: 12px auto 0;
@@ -158,7 +148,6 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
-    /* Search Box */
     .search-box { padding: 12px 16px 4px; max-width: 720px; margin: auto; }
     .search-box input {
       width: 100%;
@@ -171,7 +160,6 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
 
-    /* Categories Navigation */
     .categories-nav {
       display: flex;
       overflow-x: auto;
@@ -195,7 +183,6 @@
     }
     .cat-btn.active { background: var(--primary); color: #ffffff; }
 
-    /* Menu Container */
     .menu-container { max-width: 720px; margin: auto; padding: 6px 16px; }
     .menu-card {
       background: var(--card-bg);
@@ -239,7 +226,6 @@
     .item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.35; margin: 3px 0 5px; }
     .item-price { font-size: 16px; font-weight: 800; color: var(--primary); }
 
-    /* Quantity Controls */
     .qty-controls {
       display: flex;
       align-items: center;
@@ -274,7 +260,6 @@
       border: 1px solid #fecaca;
     }
 
-    /* Note Input & Footer */
     .note-section { max-width: 720px; margin: 16px auto 0; padding: 0 16px; }
     .note-section input {
       width: 100%;
@@ -305,7 +290,6 @@
       border: 1px solid #f8c8e3;
     }
 
-    /* Cart Bar */
     .cart-bar {
       position: fixed;
       bottom: 0;
@@ -347,7 +331,6 @@
 </head>
 <body>
 
-  <!-- Header with 15 Clean Changing Backgrounds & Big Logo -->
   <header class="header">
     <div class="header-bg-slider" id="bgSlider">
       <div class="slide-img active" style="background-image: url('banner1.jpg'), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800');"></div>
@@ -383,55 +366,44 @@
     </div>
   </header>
 
-  <!-- Service Buttons -->
   <div class="service-bar">
     <button class="service-btn" onclick="sendServiceReq('water')">💧 <span id="lblWater">પાણી મંગાવો</span></button>
     <button class="service-btn" onclick="sendServiceReq('waiter')">🛎️ <span id="lblWaiter">વેઈટર બોલાવો</span></button>
   </div>
 
-  <!-- Search -->
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="🔍 મેનુમાં વાનગી શોધો..." onkeyup="renderMenu()">
   </div>
 
-  <!-- Categories -->
   <nav class="categories-nav" id="categoryNav"></nav>
 
-  <!-- Menu Items List -->
   <main class="menu-container" id="menuList">
     <div class="loader-text">મેનુ લોડ થઈ રહ્યું છે...</div>
   </main>
 
-  <!-- Note Input -->
   <div class="note-section">
     <input type="text" id="orderNote" placeholder="✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)">
   </div>
 
-  <!-- Social Link -->
   <div class="social-footer">
     <a href="https://instagram.com/devicoffeeday" target="_blank" class="instagram-link">
       📸 Instagram: <b>@devicoffeeday</b>
     </a>
   </div>
 
-  <!-- Bottom Cart Bar -->
   <footer class="cart-bar">
     <div>
       <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="cartCount">0 આઇટમ્સ સિલેક્ટ કરી</span><br>
       <span class="cart-total-price">₹<span id="cartTotal">0</span></span>
     </div>
     <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">
-      <span id="lblOrderBtn">WhatsApp ઓર્ડર</span> 📲
+      <span id="lblOrderBtn">ઓર્ડર કરો</span> 📲
     </button>
   </footer>
 
   <script>
     const RESTAURANT_PHONE = "919898237900";
-
-    // Google Sheet Live Menu Link (CSV)
     const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU/export?format=csv";
-
-    // Google Apps Script Web App URL (Live Order Alert Entry)
     const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwO0a9quduWuBC6W_0b4iQrsKur5pxchTCfFdHLV59Bo65U540EBMeckblpaTdSlhNc/exec";
 
     const params = new URLSearchParams(window.location.search);
@@ -439,7 +411,6 @@
 
     let currentLang = 'gu';
 
-    // 15 Auto-Changing Background Logic
     const bgSlides = Array.from(document.querySelectorAll('.slide-img'));
     let currentBgIdx = 0;
 
@@ -691,12 +662,25 @@
 
     function sendServiceReq(type) {
       let serviceTitle = type === 'water' ? '💧 Water Request' : '🛎️ Call Waiter';
+
+      // Sheet Log
+      const logUrl = GOOGLE_SCRIPT_WEBAPP_URL + 
+        `?table=${encodeURIComponent("Table " + tableNumber)}` +
+        `&items=${encodeURIComponent(serviceTitle)}` +
+        `&total=-` +
+        `&note=${encodeURIComponent("Service Call")}`;
+      new Image().src = logUrl;
+
+      // WhatsApp Message
       let message = `🛎️ *DEVI COFFEE DAY - SERVICE REQUEST*\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `📌 *Request:* ${serviceTitle}\n` +
                     `_Please attend table immediately._`;
       let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+      
+      setTimeout(() => {
+        window.open(url, '_blank');
+      }, 200);
     }
 
     async function sendOrderWhatsApp() {
@@ -721,24 +705,15 @@
       let note = document.getElementById('orderNote').value.trim();
       let noteText = note ? `\n📝 *Note:* ${note}` : "";
 
-      // ૧. Google Sheets માં ઓટોમેટિક ઓર્ડર એન્ટ્રી (Push Notification Trigger)
-      try {
-        fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            table: "Table " + tableNumber,
-            items: orderSummaryForSheet.join(", "),
-            total: "₹" + total,
-            note: note || "-"
-          })
-        });
-      } catch (err) {
-        console.error("Sheet Sync Error:", err);
-      }
+      // ૧. Google Sheet માં ઓર્ડર એન્ટ્રી (Push Trigger)
+      const logUrl = GOOGLE_SCRIPT_WEBAPP_URL + 
+        `?table=${encodeURIComponent("Table " + tableNumber)}` +
+        `&items=${encodeURIComponent(orderSummaryForSheet.join(", "))}` +
+        `&total=${encodeURIComponent("₹" + total)}` +
+        `&note=${encodeURIComponent(note || "-")}`;
+      new Image().src = logUrl;
 
-      // ૨. WhatsApp મેસેજ ખોલો
+      // ૨. WhatsApp મેસેજ
       let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER*\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `--------------------------------\n` +
@@ -749,12 +724,14 @@
                     `_Please confirm the order._`;
 
       let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-
-      cart = {};
-      document.getElementById('orderNote').value = "";
-      updateTotal();
-      renderMenu();
+      
+      setTimeout(() => {
+        window.open(url, '_blank');
+        cart = {};
+        document.getElementById('orderNote').value = "";
+        updateTotal();
+        renderMenu();
+      }, 250);
     }
 
     renderCategories();
