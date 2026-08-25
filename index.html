@@ -23,17 +23,17 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 140px; }
 
-    /* Header with 15 Clean Changing Backgrounds */
+    /* Header with 100% Crisp Background Slideshow Behind Logo/Title */
     .header {
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 16px 16px 16px;
+      padding: 16px 16px 14px;
       text-align: center;
       color: #fff;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
-      min-height: 220px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      min-height: 195px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -55,14 +55,14 @@
       transition: opacity 1s ease-in-out;
     }
     .slide-img.active {
-      opacity: 1;
+      opacity: 1; /* ફોટો ૧૦૦% ક્લીન અને ચોખ્ખો દેખાશે */
     }
 
-    /* Soft Gradient Overlay */
+    /* Soft Gradient Layer so text & logo are sharp */
     .header-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.75) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
       z-index: 2;
     }
 
@@ -75,10 +75,10 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .lang-btn {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.4);
       color: #ffffff;
       padding: 4px 13px;
@@ -94,30 +94,29 @@
       border-color: var(--accent-gold);
     }
 
-    /* Big Original Round Logo */
+    /* Logo Box */
     .brand-logo-wrap {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 8px;
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 6px;
       border-radius: 50%;
       background: #eedcc9;
-      border: 2.5px solid var(--accent-gold);
+      border: 2px solid #ffffff;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
     .brand-logo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transform: scale(2.4);
     }
 
     .brand-title {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       letter-spacing: 1.5px;
       color: #ffffff;
@@ -341,7 +340,7 @@
 </head>
 <body>
 
-  <!-- Header with 15 Clean Changing Backgrounds & Big Logo -->
+  <!-- Header with 15 Clean Changing Backgrounds -->
   <header class="header">
     <div class="header-bg-slider" id="bgSlider">
       <div class="slide-img active" style="background-image: url('banner1.jpg'), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800');"></div>
@@ -425,7 +424,7 @@
 
     let currentLang = 'gu';
 
-    // 15 Auto-Changing Background Logic
+    // 15 Auto-Changing Background Logic (Runs smoothly every 3 seconds)
     const bgSlides = Array.from(document.querySelectorAll('.slide-img'));
     let currentBgIdx = 0;
 
@@ -480,8 +479,8 @@
       { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'हॉट चॉकलेट' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'આઇસ બ્લેન્ડેડ' },
-      { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल' },
-      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स' },
+      { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'મॉकટેલ' },
+      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक શેક્સ' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी' },
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी' },
       { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'સ્ટાર્ટર્સ' },
