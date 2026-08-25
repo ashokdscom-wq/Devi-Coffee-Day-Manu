@@ -482,10 +482,10 @@
       { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'આઇસ બ્લેન્ડેડ' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल' },
-      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स' },
+      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक શેक्स' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी' },
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी' },
-      { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'स्टार्टर्स' },
+      { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'સ્ટાર્ટર્સ' },
       { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'ટોસ્ટ' },
       { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સેન્ડવિચ' },
       { id: 'club-sandwich', icon: '🥪', en: 'Club Sandwich', gu: 'Club Sandwich', hi: 'ક્લબ સેન્ડવિચ' },
@@ -667,7 +667,7 @@
     let cart = {};
     let activeCategory = 'all';
 
-    // Google Sheet લાઈવ સિન્ક (ON / OFF ઓટોમેટિક અપડેટ માટે)
+    // Google Sheet Live Sync Function
     async function syncWithSheet() {
       if (!SHEET_ID) return;
       try {
@@ -684,7 +684,7 @@
             const status = String(c[4].v).toUpperCase().trim();
             const item = menuData.find(m => m.id === rowId);
             if (item) {
-              item.isAvailable = (status !== 'OFF' && status !== 'NO' && status !== '0');
+              item.isAvailable = (status !== 'OFF' && status !== 'NO' && status !== '0' && status !== 'FALSE');
             }
           }
         });
@@ -846,7 +846,7 @@
 
     renderCategories();
     renderMenu();
-    syncWithSheet();
+    syncWithSheet(); // હવે ગૂગલ શીટ લાઈવ સિંક ચાલુ થઈ ગયું છે
   </script>
 </body>
 </html>
