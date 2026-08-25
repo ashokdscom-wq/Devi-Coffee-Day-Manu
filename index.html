@@ -337,12 +337,6 @@
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
     }
-    .loader-text {
-      text-align: center;
-      padding: 30px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
   </style>
 </head>
 <body>
@@ -398,9 +392,7 @@
   <nav class="categories-nav" id="categoryNav"></nav>
 
   <!-- Menu Items List -->
-  <main class="menu-container" id="menuList">
-    <div class="loader-text">મેનુ લોડ થઈ રહ્યું છે...</div>
-  </main>
+  <main class="menu-container" id="menuList"></main>
 
   <!-- Note Input -->
   <div class="note-section">
@@ -427,9 +419,6 @@
 
   <script>
     const RESTAURANT_PHONE = "919898237900";
-
-    // તમારી Google Sheet સાથે સીધું કનેક્શન (CSV Export)
-    const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU/export?format=csv";
 
     const params = new URLSearchParams(window.location.search);
     const tableNumber = params.get('table') || params.get('Table') || params.get('t') || '1';
@@ -485,16 +474,16 @@
       { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा' },
       { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी' },
       { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'नाचोस' },
-      { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'રાઇસ બાઉલ' },
-      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'ડેઝર્ટ' },
-      { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'હોટ કોફી' },
-      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'હોટ ચોકલેટ' },
-      { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'કોલ્ડ કોફી' },
+      { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'राइस बाउल' },
+      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'डेज़र्ट' },
+      { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी' },
+      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'हॉट चॉकलेट' },
+      { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'આઇસ બ્લેન્ડેડ' },
-      { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'મોકટેલ' },
-      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'થિક શેક્સ' },
-      { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'આઇસ્ડ કોફી' },
-      { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'આઇસ્ડ ટી' },
+      { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल' },
+      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स' },
+      { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी' },
+      { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी' },
       { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'સ્ટાર્ટર્સ' },
       { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'ટોસ્ટ' },
       { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સેન્ડવિચ' },
@@ -504,77 +493,178 @@
       { id: 'extra', icon: '➕', en: 'Extras & Drinks', gu: 'Extras & Drinks', hi: 'અન્ય ડ્રિંક્સ' }
     ];
 
-    let menuData = [];
+    let menuData = [
+      // PIZZA
+      { id: 101, cat: 'pizza', name: 'Classic Margherita Pizza (8")', price: 249, desc: 'Signature Sauce, Fresh Basil, Mozzarella cheese.', badge: 'bestseller', isAvailable: true },
+      { id: 102, cat: 'pizza', name: 'Classic Margherita Pizza (11")', price: 349, desc: 'Signature Sauce, Fresh Basil, Mozzarella cheese.', isAvailable: true },
+      { id: 103, cat: 'pizza', name: 'Classic Veg Pizza (8")', price: 279, desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno.', isAvailable: true },
+      { id: 104, cat: 'pizza', name: 'Classic Veg Pizza (11")', price: 379, desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno.', isAvailable: true },
+      { id: 105, cat: 'pizza', name: 'Quattro Fromaggi Pizza (8")', price: 299, desc: 'Four cheese: Cheddar, Mozzarella, White cheese & cheese jalapeno.', isAvailable: true },
+      { id: 106, cat: 'pizza', name: 'Quattro Fromaggi Pizza (11")', price: 409, desc: 'Four cheese: Cheddar, Mozzarella, White cheese & cheese jalapeno.', isAvailable: true },
+      { id: 107, cat: 'pizza', name: 'Mexican Classic Pizza (8")', price: 309, desc: 'Mozzarella Cheese with Chilli, Jalapeno, Onion & Tabasco sauce.', isAvailable: true },
+      { id: 108, cat: 'pizza', name: 'Mexican Classic Pizza (11")', price: 409, desc: 'Mozzarella Cheese with Chilli, Jalapeno, Onion & Tabasco sauce.', isAvailable: true },
+      { id: 109, cat: 'pizza', name: '5 Peppers Pizza (8")', price: 319, desc: 'Mozzarella Cheese with colorful bellpeppers, green chilli, jalapeno.', isAvailable: true },
+      { id: 110, cat: 'pizza', name: '5 Peppers Pizza (11")', price: 419, desc: 'Mozzarella Cheese with colorful bellpeppers, green chilli, jalapeno.', isAvailable: true },
+      { id: 111, cat: 'pizza', name: 'Spicy Paneer Tikka Pizza (8")', price: 349, desc: 'Tandoori Paneer Tikka, Onion, Tomato, Capsicum with Mozzarella Cheese.', badge: 'special', isAvailable: true },
+      { id: 112, cat: 'pizza', name: 'Spicy Paneer Tikka Pizza (11")', price: 459, desc: 'Tandoori Paneer Tikka, Onion, Tomato, Capsicum with Mozzarella Cheese.', isAvailable: true },
+      { id: 113, cat: 'pizza', name: 'Indian Pizza (8")', price: 269, desc: 'Spice Mix Sprinkle over base of Red onions and green chillies.', isAvailable: true },
+      { id: 114, cat: 'pizza', name: 'Indian Pizza (11")', price: 379, desc: 'Spice Mix Sprinkle over base of Red onions and green chillies.', isAvailable: true },
+      { id: 115, cat: 'pizza', name: 'Pesto Pizza (8")', price: 299, desc: 'Pesto sauce with olives, onions, capsicum, and mozzarella cheese.', isAvailable: true },
+      { id: 116, cat: 'pizza', name: 'Pesto Pizza (11")', price: 399, desc: 'Pesto sauce with olives, onions, capsicum, and mozzarella cheese.', isAvailable: true },
+      { id: 117, cat: 'pizza', name: 'Peri Peri Veggies Pizza (8")', price: 319, desc: 'Mozzarella Cheese, fresh veggies with fiery Peri Peri Spice.', isAvailable: true },
+      { id: 118, cat: 'pizza', name: 'Peri Peri Veggies Pizza (11")', price: 429, desc: 'Mozzarella Cheese, fresh veggies with fiery Peri Peri Spice.', isAvailable: true },
+      { id: 119, cat: 'pizza', name: 'Cheese & Jalapeno Kick Pizza (8")', price: 369, desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno kick.', isAvailable: true },
+      { id: 120, cat: 'pizza', name: 'Cheese & Jalapeno Kick Pizza (11")', price: 549, desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno kick.', isAvailable: true },
+      { id: 121, cat: 'pizza', name: 'Devi Special Pizza (8")', price: 379, desc: 'Mozzarella cheese, bellpepper, Onion, Olives, Jalapeno, Broccoli & Paneer.', badge: 'special', isAvailable: true },
+      { id: 122, cat: 'pizza', name: 'Devi Special Pizza (11")', price: 579, desc: 'Mozzarella cheese, bellpepper, Onion, Olives, Jalapeno, Broccoli & Paneer.', badge: 'special', isAvailable: true },
+      { id: 123, cat: 'pizza', name: 'Cheesy 7 Pizza (8")', price: 399, desc: 'Served with 7 different types of rich cheese.', isAvailable: true },
+      { id: 124, cat: 'pizza', name: 'Cheesy 7 Pizza (11")', price: 619, desc: 'Served with 7 different types of rich cheese.', isAvailable: true },
+      { id: 125, cat: 'pizza', name: 'Add-On: Double Cheese (75 gm)', price: 99, desc: 'Extra loaded cheese topping.', isAvailable: true },
+      { id: 126, cat: 'pizza', name: 'Add-On: Jain Preparation', price: 69, desc: 'Custom Jain preparation.', isAvailable: true },
+      { id: 127, cat: 'pizza', name: 'Add-On: Thin Crust Base', price: 69, desc: 'Crispy Thin Crust base.', isAvailable: true },
+      { id: 128, cat: 'pizza', name: 'Add-On: Pan Crust Base', price: 69, desc: 'Soft and thick Pan Crust base.', isAvailable: true },
+
+      // MAGGI & NACHOS
+      { id: 129, cat: 'maggi', name: 'Masala Maggi', price: 99, desc: 'Classic Maggi with spicy Indian masala.', isAvailable: true },
+      { id: 130, cat: 'maggi', name: 'Butter Maggi', price: 119, desc: 'Enriched with buttery goodness.', isAvailable: true },
+      { id: 131, cat: 'maggi', name: 'Cheese Masala Maggi', price: 139, desc: 'Maggi with mouthwatering melted cheese.', badge: 'bestseller', isAvailable: true },
+      { id: 132, cat: 'maggi', name: 'Vegetable Maggi', price: 149, desc: 'Maggi with medley of fresh vegetables.', isAvailable: true },
+      { id: 133, cat: 'maggi', name: 'Cheese Vegetable Maggi', price: 169, desc: 'Rich cheese with veggies & spices.', isAvailable: true },
+      { id: 134, cat: 'nachos', name: 'Cheese Nachos', price: 179, desc: 'Crispy Nachos with tangy salsa & cheese sauce.', isAvailable: true },
+      { id: 135, cat: 'nachos', name: 'Loaded Nachos', price: 209, desc: 'Topped with cheese, olives, jalapenos & dips.', badge: 'special', isAvailable: true },
+
+      // RICE BOWL & DESSERT
+      { id: 136, cat: 'rice-bowl', name: 'Italian Risotto', price: 229, desc: 'Creamy rice, veggies & white cheese gravy.', isAvailable: true },
+      { id: 137, cat: 'rice-bowl', name: 'Pink Risotto', price: 249, desc: 'Rice & veggies in creamy pink sauce gravy.', isAvailable: true },
+      { id: 138, cat: 'rice-bowl', name: 'Mexican Hot Pot', price: 299, desc: 'Rice, veggies, nachos with cheese sauce gravy.', isAvailable: true },
+      { id: 139, cat: 'rice-bowl', name: 'Paneer Tikka Rice Bowl', price: 329, desc: 'Paneer tikka on rice with rich gravy.', badge: 'bestseller', isAvailable: true },
+      { id: 140, cat: 'dessert', name: 'Jamun Shot', price: 199, desc: 'Refreshing Jamun Ice with sweet & lemon twist.', isAvailable: true },
+      { id: 141, cat: 'dessert', name: 'Sizzling Brownie', price: 249, desc: 'Chocolate brownie, vanilla ice cream & choco chips on sizzler.', badge: 'special', isAvailable: true },
+      { id: 142, cat: 'dessert', name: 'Special Dessert', price: 269, desc: 'Brownie topped with dual ice cream, cookies & KitKat.', isAvailable: true },
+
+      // HOT COFFEE & CHOCOLATE
+      { id: 1, cat: 'hot-coffee', name: 'Espresso', price: 79, desc: 'Creamy, brewed hot under pressure.', isAvailable: true },
+      { id: 2, cat: 'hot-coffee', name: 'Affogato', price: 149, desc: 'Espresso poured over vanilla ice cream.', isAvailable: true },
+      { id: 3, cat: 'hot-coffee', name: 'Hot Americano', price: 159, desc: 'Brewed coffee with hot water.', isAvailable: true },
+      { id: 4, cat: 'hot-coffee', name: 'Brew Cappuccino', price: 199, desc: 'Espresso with velvety steamed milk.', badge: 'bestseller', isAvailable: true },
+      { id: 5, cat: 'hot-coffee', name: 'Honey Cinnamon', price: 219, desc: 'Espresso with honey & cinnamon.', isAvailable: true },
+      { id: 6, cat: 'hot-coffee', name: 'Make Your Own Latte', price: 229, desc: 'Latte in Vanilla, Hazelnut, Irish, Tiramisu, Caramel.', isAvailable: true },
+      { id: 7, cat: 'hot-coffee', name: 'Spiced Vanilla', price: 239, desc: 'Coffee, cinnamon powder & sweet vanilla syrup.', isAvailable: true },
+      { id: 8, cat: 'hot-coffee', name: 'Hazelnut Mocha', price: 249, desc: 'Mocha & nutty hazelnut sweetness.', isAvailable: true },
+      { id: 9, cat: 'hot-coffee', name: 'Spanish Latte', price: 249, desc: 'Latte with sweet condensed milk.', badge: 'special', isAvailable: true },
+      { id: 10, cat: 'hot-chocolate', name: 'Signature Hot Chocolate', price: 229, desc: 'Classic thick cocoa delight.', badge: 'bestseller', isAvailable: true },
+      { id: 11, cat: 'hot-chocolate', name: 'Hazelnut Hot Chocolate', price: 239, desc: 'Hot chocolate with hazelnut.', isAvailable: true },
+      { id: 12, cat: 'hot-chocolate', name: 'Orange Hot Chocolate', price: 249, desc: 'Hot chocolate with hint of orange.', isAvailable: true },
+      { id: 13, cat: 'hot-chocolate', name: 'Nutella Hot Chocolate', price: 279, desc: 'Blended with alluring Nutella.', isAvailable: true },
+
+      // COLD COFFEE & ICE-BLENDED
+      { id: 14, cat: 'cold-coffee', name: 'Classic Cold Coffee', price: 199, desc: 'Thick and creamy chilled coffee.', badge: 'bestseller', isAvailable: true },
+      { id: 15, cat: 'cold-coffee', name: 'Mocha Cold Coffee', price: 209, desc: 'Cold coffee with chocolate syrup.', isAvailable: true },
+      { id: 16, cat: 'cold-coffee', name: 'Oreo Coffee', price: 219, desc: 'Blended with Oreo biscuits.', isAvailable: true },
+      { id: 17, cat: 'cold-coffee', name: 'Make Your Own Coffee', price: 229, desc: 'Vanilla, Hazelnut, Irish, Tiramisu or Caramel.', isAvailable: true },
+      { id: 18, cat: 'cold-coffee', name: 'Java Chips', price: 229, desc: 'Chilled coffee with crunchy Java chips.', isAvailable: true },
+      { id: 19, cat: 'cold-coffee', name: 'Nutella Cold Coffee', price: 249, desc: 'Infused with richness of Nutella.', badge: 'special', isAvailable: true },
+      { id: 20, cat: 'cold-coffee', name: 'Lotus Biscoff Cold Coffee', price: 249, desc: 'Combined with Lotus Biscoff cookies.', badge: 'special', isAvailable: true },
+      { id: 21, cat: 'cold-coffee', name: 'Add On: Espresso (30 ml)', price: 49, desc: 'Extra fresh double shot espresso.', isAvailable: true },
+      { id: 22, cat: 'ice-blended', name: 'Oreo Ice-Blended', price: 169, desc: 'Icy coffee blended with Oreo.', isAvailable: true },
+      { id: 23, cat: 'ice-blended', name: 'Caramel Ice-Blended', price: 179, desc: 'Coffee swirled with caramel.', isAvailable: true },
+      { id: 24, cat: 'ice-blended', name: 'Hazelnut Ice-Blended', price: 189, desc: 'Nutty bliss iced coffee.', isAvailable: true },
+
+      // MOCKTAILS & SHAKES
+      { id: 25, cat: 'mocktails', name: 'Fresh Lime Soda', price: 149, desc: 'Classic lemon soda.', isAvailable: true },
+      { id: 26, cat: 'mocktails', name: 'Chiaseeds Lemonade', price: 179, desc: 'Lemonade with chia seeds.', isAvailable: true },
+      { id: 27, cat: 'mocktails', name: 'Virgin Mojito', price: 199, desc: 'Lemon & fresh mint mojito.', badge: 'bestseller', isAvailable: true },
+      { id: 28, cat: 'mocktails', name: 'Watermelon Mojito', price: 209, desc: 'Watermelon twist with Sprite.', isAvailable: true },
+      { id: 29, cat: 'mocktails', name: 'Orange Basil Mojito', price: 219, desc: 'Fresh basil, orange & lemon.', isAvailable: true },
+      { id: 30, cat: 'mocktails', name: 'Bloody Marry (Mocktail)', price: 219, desc: 'Cranberry juice, lemon & grenadine.', isAvailable: true },
+      { id: 31, cat: 'mocktails', name: 'Blue Lagoon', price: 219, desc: 'Blue curacao, lemon & Sprite.', isAvailable: true },
+      { id: 32, cat: 'mocktails', name: 'Cucumber Mojito', price: 229, desc: 'Mojito with fresh cucumber.', isAvailable: true },
+      { id: 33, cat: 'mocktails', name: 'Sex on the Beach (Mocktail)', price: 229, desc: 'Peach, cranberry & fizz.', isAvailable: true },
+      { id: 34, cat: 'mocktails', name: 'Spicy Guava Martini', price: 229, desc: 'Guava with Tabasco & spices.', badge: 'special', isAvailable: true },
+      { id: 35, cat: 'mocktails', name: 'Spicy Mango', price: 229, desc: 'Spicy mango syrup, soda & Tabasco.', isAvailable: true },
+      { id: 36, cat: 'mocktails', name: 'Kashmir to Kanyakumari', price: 239, desc: 'Green apple, coconut & peach.', isAvailable: true },
+      { id: 37, cat: 'mocktails', name: 'Berry Mist', price: 249, desc: 'Berries and lemon juice with soda.', isAvailable: true },
+      { id: 38, cat: 'mocktails', name: 'Redbull Mojito', price: 259, desc: 'Red Bull with mojito mint.', isAvailable: true },
+      { id: 39, cat: 'thick-shakes', name: 'Kitkat Thick Shake', price: 209, desc: 'KitKat blended with choco ice cream.', isAvailable: true },
+      { id: 40, cat: 'thick-shakes', name: 'Snackers Doodles', price: 219, desc: 'Cookies and cream shake.', isAvailable: true },
+      { id: 41, cat: 'thick-shakes', name: 'Strawberry Thick Shake', price: 229, desc: 'Sweet strawberry shake.', isAvailable: true },
+      { id: 42, cat: 'thick-shakes', name: 'Peanut Butter Shake', price: 239, desc: 'Rich peanut butter shake.', isAvailable: true },
+      { id: 43, cat: 'thick-shakes', name: 'Blue Berry Oreo Shake', price: 239, desc: 'Blueberry with Oreo crunch.', isAvailable: true },
+      { id: 44, cat: 'thick-shakes', name: 'Nutella Brownie Shake', price: 249, desc: 'Fudge brownie & Nutella.', badge: 'special', isAvailable: true },
+      { id: 45, cat: 'thick-shakes', name: 'Choco Mud Pie', price: 249, desc: 'Rich chocolate mud pie shake.', isAvailable: true },
+      { id: 46, cat: 'thick-shakes', name: 'Oreo Dipped Chocolate Cookie', price: 249, desc: 'Vanilla shake with Oreo.', isAvailable: true },
+      { id: 47, cat: 'thick-shakes', name: 'Ferrero Rocher Shake', price: 259, desc: 'Crunchy Ferrero Rocher shake.', badge: 'special', isAvailable: true },
+      { id: 48, cat: 'thick-shakes', name: 'Lotus Biscoff Shake', price: 269, desc: 'Lotus Biscoff cookies shake.', badge: 'bestseller', isAvailable: true },
+      { id: 49, cat: 'thick-shakes', name: 'Choco Dark Indulgence', price: 269, desc: 'Dark chocolate & vanilla shake.', isAvailable: true },
+
+      // ICED COFFEE & ICED TEA
+      { id: 50, cat: 'iced-coffee', name: 'Iced Americano', price: 159, desc: 'Espresso over ice.', isAvailable: true },
+      { id: 51, cat: 'iced-coffee', name: 'Espresso Tonic', price: 209, desc: 'Espresso with tonic water.', isAvailable: true },
+      { id: 52, cat: 'iced-coffee', name: 'Cranberry Iced Coffee', price: 219, desc: 'Coffee with cranberry twist.', isAvailable: true },
+      { id: 53, cat: 'iced-coffee', name: 'Espresso Ginger Ale', price: 229, desc: 'Sparkling ginger ale coffee.', isAvailable: true },
+      { id: 54, cat: 'iced-coffee', name: 'Coffee Peach Spritzer', price: 239, desc: 'Coffee infused with peach.', isAvailable: true },
+      { id: 55, cat: 'iced-coffee', name: 'Red Bull Coffee', price: 269, desc: 'Iced coffee with Red Bull.', isAvailable: true },
+      { id: 56, cat: 'iced-tea', name: 'Lemon Iced Tea', price: 169, desc: 'Brewed tea with tangy lemon.', isAvailable: true },
+      { id: 57, cat: 'iced-tea', name: 'Peach Iced Tea', price: 179, desc: 'Fruity tea with peach syrup.', isAvailable: true },
+      { id: 58, cat: 'iced-tea', name: 'Strawberry Iced Tea', price: 199, desc: 'Strawberry infused iced tea.', isAvailable: true },
+      { id: 59, cat: 'iced-tea', name: 'Passion Fruit Iced Tea', price: 209, desc: 'Passion fruit blended iced tea.', isAvailable: true },
+      { id: 60, cat: 'iced-tea', name: 'Cranberry Iced Tea', price: 219, desc: 'Cranberry infused iced tea.', isAvailable: true },
+
+      // APPETIZERS, TOAST, SANDWICH, GARLIC BREAD, PASTA
+      { id: 61, cat: 'appetizers', name: 'Salted Fries', price: 149, desc: 'Crispy salted fries.', isAvailable: true },
+      { id: 62, cat: 'appetizers', name: 'Peri Peri Fries', price: 169, desc: 'Spicy peri peri fries.', isAvailable: true },
+      { id: 63, cat: 'appetizers', name: 'Cheese Corn Balls', price: 189, desc: 'Cheese corn bites.', badge: 'bestseller', isAvailable: true },
+      { id: 64, cat: 'appetizers', name: 'Loaded Fries', price: 199, desc: 'Fries loaded with cheese & jalapenos.', isAvailable: true },
+      { id: 65, cat: 'appetizers', name: 'Onion Ring', price: 199, desc: 'Golden crispy onion rings.', isAvailable: true },
+      { id: 66, cat: 'appetizers', name: 'Potato Cheese Shots', price: 209, desc: 'Potato balls filled with cheese.', isAvailable: true },
+      { id: 67, cat: 'appetizers', name: 'Veggie Fingers', price: 219, desc: 'Crispy vegetable sticks.', isAvailable: true },
+      { id: 68, cat: 'appetizers', name: 'Coin Pizza', price: 249, desc: 'Cheesy pocket pizza bites.', isAvailable: true },
+      { id: 69, cat: 'toast', name: 'Butter Toast', price: 89, desc: 'Classic butter toast.', isAvailable: true },
+      { id: 70, cat: 'toast', name: 'Cheese Garlic Toast', price: 99, desc: 'Cheese and garlic toast.', isAvailable: true },
+      { id: 71, cat: 'toast', name: 'Cheese Chilli Garlic Toast', price: 109, desc: 'Zesty chili garlic toast.', isAvailable: true },
+      { id: 72, cat: 'toast', name: 'Cheese Corn Toast', price: 119, desc: 'Cheese and sweet corn toast.', isAvailable: true },
+      { id: 73, cat: 'toast', name: 'Italian Toast', price: 139, desc: 'Italian herb toast.', isAvailable: true },
+      { id: 74, cat: 'toast', name: 'Cheesy Peri Peri Paneer Toast', price: 149, desc: 'Paneer toast with peri peri.', isAvailable: true },
+      { id: 75, cat: 'sandwich', name: 'Classic Veg Sandwich', price: 149, desc: 'Fresh crisp vegetable sandwich.', isAvailable: true },
+      { id: 76, cat: 'sandwich', name: 'Cheese Chilli Garlic Sandwich', price: 159, desc: 'Spicy garlic & cheese.', isAvailable: true },
+      { id: 77, cat: 'sandwich', name: 'Pasta Heaven Sandwich', price: 169, desc: 'Pasta filled grilled sandwich.', isAvailable: true },
+      { id: 78, cat: 'sandwich', name: 'Tandoori Paneer Grilled Sandwich', price: 179, desc: 'Spicy tandoori paneer sandwich.', badge: 'bestseller', isAvailable: true },
+      { id: 79, cat: 'sandwich', name: 'Cheese Chocolate Sandwich', price: 199, desc: 'Cheese and sweet chocolate.', isAvailable: true },
+      { id: 80, cat: 'sandwich', name: 'Cheese Chutney Grilled', price: 199, desc: 'Green chutney and cheese.', isAvailable: true },
+      { id: 81, cat: 'sandwich', name: 'Garlic Bonanza Grilled Sandwich', price: 209, desc: 'Garlic flavor explosion.', isAvailable: true },
+      { id: 82, cat: 'sandwich', name: 'Pizzawhich', price: 219, desc: 'Pizza grilled sandwich.', isAvailable: true },
+      { id: 83, cat: 'club-sandwich', name: 'American Club Grilled Sandwich', price: 249, desc: 'Triple-decker club sandwich.', isAvailable: true },
+      { id: 84, cat: 'club-sandwich', name: 'Chipotle Blast Club Sandwich', price: 259, desc: 'Chipotle sauce & melted cheese.', isAvailable: true },
+      { id: 85, cat: 'club-sandwich', name: 'Three in One Sandwich', price: 269, desc: 'Potatoes, chutney, jam & cheese.', isAvailable: true },
+      { id: 86, cat: 'club-sandwich', name: 'Mexican Club Sandwich', price: 289, desc: 'Spiced beans & cheese.', isAvailable: true },
+      { id: 87, cat: 'club-sandwich', name: 'Paneer Tikka Masala Club', price: 309, desc: 'Paneer tikka masala sandwich.', isAvailable: true },
+      { id: 88, cat: 'club-sandwich', name: 'Devi Special Sandwich', price: 329, desc: 'Chef special premium sandwich.', badge: 'special', isAvailable: true },
+      { id: 89, cat: 'garlic-bread', name: 'Cheese Garlic Bread', price: 179, desc: 'Garlic bread with cheese.', isAvailable: true },
+      { id: 90, cat: 'garlic-bread', name: 'Cheese Corn Bread', price: 189, desc: 'Sweet corn & garlic bread.', isAvailable: true },
+      { id: 91, cat: 'garlic-bread', name: 'Cheese Chilli Garlic Bread', price: 199, desc: 'Fiery chili garlic bread.', isAvailable: true },
+      { id: 92, cat: 'garlic-bread', name: 'Italian Premium Bread', price: 209, desc: 'Veggies & cheese garlic bread.', isAvailable: true },
+      { id: 93, cat: 'garlic-bread', name: 'Exotic Garlic Bread', price: 219, desc: 'Olives, jalapenos & bell pepper.', badge: 'bestseller', isAvailable: true },
+      { id: 94, cat: 'pasta', name: 'Arrabiata Pasta (Red Sauce)', price: 269, desc: 'Spicy tomato sauce pasta + Garlic Bread.', isAvailable: true },
+      { id: 95, cat: 'pasta', name: 'Alfredo Pasta (White Sauce)', price: 279, desc: 'Creamy white cheese pasta + Garlic Bread.', badge: 'bestseller', isAvailable: true },
+      { id: 96, cat: 'pasta', name: 'Pesto Pasta (Green Sauce)', price: 289, desc: 'Basil pesto sauce pasta.', isAvailable: true },
+      { id: 97, cat: 'pasta', name: 'Baked Penne Mozzarella Pasta', price: 299, desc: 'Baked pasta with white cheese sauce.', isAvailable: true },
+      { id: 98, cat: 'pasta', name: 'Rosato Pasta (Pink Sauce)', price: 309, desc: 'Pink sauce herb pasta.', isAvailable: true },
+      { id: 99, cat: 'pasta', name: 'Mac-N-Cheese Pasta', price: 329, desc: 'Baked mac and cheddar cheese.', badge: 'special', isAvailable: true },
+
+      // EXTRAS
+      { id: 143, cat: 'extra', name: 'Water Bottle', price: 29, desc: 'Packaged drinking water.', isAvailable: true },
+      { id: 144, cat: 'extra', name: 'Cheese Dip', price: 39, desc: 'Cheesy dip sauce.', isAvailable: true },
+      { id: 145, cat: 'extra', name: 'Vanilla Ice Cream', price: 59, desc: 'Single scoop.', isAvailable: true },
+      { id: 146, cat: 'extra', name: 'Chai', price: 59, desc: 'Hot fresh brewed Indian tea.', isAvailable: true },
+      { id: 147, cat: 'extra', name: 'Chocolate Ice Cream', price: 79, desc: 'Single scoop.', isAvailable: true },
+      { id: 148, cat: 'extra', name: 'Cookies And Cream', price: 99, desc: 'Ice cream scoop.', isAvailable: true },
+      { id: 149, cat: 'extra', name: 'Cranberry Juice', price: 149, desc: 'Chilled cranberry juice.', isAvailable: true },
+      { id: 150, cat: 'extra', name: 'Orange Juice', price: 149, desc: 'Chilled orange juice.', isAvailable: true },
+      { id: 151, cat: 'extra', name: 'Red Bull Energy Drink', price: 179, desc: 'Red Bull can.', isAvailable: true }
+    ];
+
     let cart = {};
     let activeCategory = 'all';
-
-    // CSV Parse Helper
-    function parseCSVLine(text) {
-      let result = [];
-      let row = [''];
-      let inQuotes = false;
-      for (let i = 0; i < text.length; i++) {
-        let c = text[i];
-        let next = text[i+1];
-        if (c === '"') {
-          if (inQuotes && next === '"') {
-            row[row.length - 1] += '"';
-            i++;
-          } else {
-            inQuotes = !inQuotes;
-          }
-        } else if (c === ',' && !inQuotes) {
-          row.push('');
-        } else {
-          row[row.length - 1] += c;
-        }
-      }
-      return row;
-    }
-
-    // Live Google Sheet Fetching
-    async function loadLiveMenu() {
-      try {
-        const liveURL = GOOGLE_SHEET_CSV_URL + '&t=' + Date.now();
-        const res = await fetch(liveURL);
-        const csvText = await res.text();
-        const lines = csvText.split(/\r?\n/).filter(line => line.trim() !== '');
-
-        if (lines.length > 1) {
-          let parsedData = [];
-          const rows = lines.slice(1);
-
-          rows.forEach((row, idx) => {
-            const cols = parseCSVLine(row);
-            if (cols.length >= 5) {
-              const id = parseInt(cols[0]?.trim()) || (idx + 1);
-              const cat = cols[1]?.trim().toLowerCase() || 'extra';
-              const name = cols[2]?.trim() || '';
-              const price = parseFloat(cols[3]?.trim()) || 0;
-              const status = cols[4] ? cols[4].trim().toLowerCase() : 'on';
-
-              if (name !== '') {
-                parsedData.push({
-                  id: id,
-                  cat: cat,
-                  name: name,
-                  price: price,
-                  desc: '',
-                  isAvailable: (status === 'on' || status === '')
-                });
-              }
-            }
-          });
-
-          if (parsedData.length > 0) {
-            menuData = parsedData;
-            renderMenu();
-          }
-        }
-      } catch (err) {
-        console.error("લાઈવ શીટ લોડ કરવામાં ભૂલ:", err);
-      }
-    }
 
     function setLanguage(lang) {
       currentLang = lang;
@@ -614,21 +704,11 @@
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
       container.innerHTML = '';
 
-      if (menuData.length === 0) {
-        container.innerHTML = '<div class="loader-text">મેનુ લોડ થઈ રહ્યું છે...</div>';
-        return;
-      }
-
       let filtered = menuData.filter(item => {
         let matchCat = (activeCategory === 'all' || item.cat === activeCategory);
-        let matchSearch = item.name.toLowerCase().includes(q) || (item.desc && item.desc.toLowerCase().includes(q));
+        let matchSearch = item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
         return matchCat && matchSearch;
       });
-
-      if (filtered.length === 0) {
-        container.innerHTML = '<div class="loader-text">કોઈ વાનગી મળી નથી.</div>';
-        return;
-      }
 
       filtered.forEach(item => {
         let qty = cart[item.id] ? cart[item.id].qty : 0;
@@ -656,7 +736,7 @@
               ${badgeHtml}
               <div class="item-name">${item.name}</div>
             </div>
-            ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}
+            <div class="item-desc">${item.desc}</div>
             <div class="item-price">₹${item.price}</div>
           </div>
           ${actionArea}
@@ -737,7 +817,7 @@
     }
 
     renderCategories();
-    loadLiveMenu();
+    renderMenu();
   </script>
 </body>
 </html>
