@@ -23,7 +23,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 140px; }
 
-    /* Header with 15 Clean Changing Backgrounds Behind Logo */
+    /* Header with Changing Backgrounds Behind Logo */
     .header {
       position: sticky;
       top: 0;
@@ -460,7 +460,7 @@
 </head>
 <body>
 
-  <!-- Header with 15 Clean Changing Backgrounds & Original Big Logo -->
+  <!-- Header with Changing Backgrounds & Original Big Logo -->
   <header class="header">
     <div class="header-bg-slider" id="bgSlider">
       <div class="slide-img active" style="background-image: url('banner1.jpg'), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800');"></div>
@@ -575,13 +575,14 @@
         </div>
       </div>
 
-      <button class="btn-order-modal" onclick="sendOrderWhatsApp()">
-        <span id="lblSendOrderBtn">WhatsApp પર ઓર્ડર મોકલો</span> 📲
+      <button class="btn-order-modal" onclick="sendOrderWhatsAppDirect()">
+        <span id="lblSendOrderBtn">Send Order on WhatsApp</span> 📲
       </button>
     </div>
   </div>
 
   <script>
+    // તમારો WhatsApp બિઝનેસ / રેસ્ટોરન્ટ નંબર (કંટ્રી કોડ 91 સાથે)
     const RESTAURANT_PHONE = "919898237900";
     const RESTAURANT_GROUP_LINK = "https://chat.whatsapp.com/IRRuE3NdA3UIlDSY6lZjGc";
     const SHEET_ID = "1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU";
@@ -591,7 +592,7 @@
 
     let currentLang = 'gu';
 
-    // 15 Auto-Changing Background Logic
+    // Auto-Changing Background Logic
     const bgSlides = Array.from(document.querySelectorAll('.slide-img'));
     let currentBgIdx = 0;
 
@@ -615,11 +616,10 @@
         tableText: `ટેબલ નંબર: ${tableNumber}`,
         subtotal: "આઇટમ સબટોટલ (AMOUNT):",
         grandTotal: "કુલ રકમ (GRAND TOTAL):",
-        sendBtn: "WhatsApp પર ઓર્ડર મોકલો",
+        sendBtn: "Send Order on WhatsApp",
         soldOut: "હાજર નથી (Sold Out)",
         alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!",
-        emptyBill: "તમારા કાર્ટમાં કોઈ વાનગી નથી.",
-        orderCopied: "ઓર્ડર કોપી થઈ ગયો છે! WhatsApp ગ્રુપમાં ફક્ત Paste કરીને Send કરો."
+        emptyBill: "તમારા કાર્ટમાં કોઈ વાનગી નથી."
       },
       en: {
         water: "Order Water",
@@ -636,8 +636,7 @@
         sendBtn: "Send Order on WhatsApp",
         soldOut: "Sold Out",
         alertNoItem: "Please add items to cart first!",
-        emptyBill: "Your cart is empty.",
-        orderCopied: "Order copied! Please Paste & Send in the WhatsApp Group."
+        emptyBill: "Your cart is empty."
       },
       hi: {
         water: "पानी मंगवाएं",
@@ -651,11 +650,10 @@
         tableText: `टेबल नंबर: ${tableNumber}`,
         subtotal: "आइटम सबटोटल (AMOUNT):",
         grandTotal: "कुल राशि (GRAND TOTAL):",
-        sendBtn: "WhatsApp पर ऑर्डर भेजें",
+        sendBtn: "Send Order on WhatsApp",
         soldOut: "उपलब्ध नहीं (Sold Out)",
         alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!",
-        emptyBill: "आपके कार्ट में कोई आइटम नहीं है।",
-        orderCopied: "ऑर्डर कॉपी हो गया है! WhatsApp ग्रुप में Paste करके Send करें।"
+        emptyBill: "आपके कार्ट में कोई आइटम नहीं है।"
       }
     };
 
@@ -663,7 +661,7 @@
       { id: 'all', icon: '✨', en: 'All Items', gu: 'બધું (All)', hi: 'सभी' },
       { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा' },
       { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी' },
-      { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'नाचोस' },
+      { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'નાચોસ' },
       { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'રાઇસ બાઉલ' },
       { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'ડેઝર્ટ' },
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी' },
@@ -856,7 +854,7 @@
     let cart = {};
     let activeCategory = 'all';
 
-    // Google Sheet Live Sync Function
+    // Live Google Sheet Sync
     async function syncWithSheet() {
       if (!SHEET_ID) return;
       try {
@@ -1064,14 +1062,12 @@
                     `📌 *Request:* ${serviceTitle}\n` +
                     `_Please attend table immediately._`;
       
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(message);
-      }
-      alert(UI_TRANSLATIONS[currentLang].orderCopied || "Request copied! Send it in the group.");
-      window.open(RESTAURANT_GROUP_LINK, '_blank');
+      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
     }
 
-    function sendOrderWhatsApp() {
+    // Direct WhatsApp Chat Function
+    function sendOrderWhatsAppDirect() {
       const calc = getCartCalculation();
 
       if (calc.totalQty === 0) {
@@ -1083,33 +1079,33 @@
       for (let id in cart) {
         if (cart[id].qty > 0) {
           let itemCost = cart[id].qty * cart[id].price;
-          orderItemsText += `• *${cart[id].name}* x ${cart[id].qty} = ₹${itemCost}\n`;
+          orderItemsText += `• *${cart[id].name}*\n   ${cart[id].qty} × ₹${cart[id].price} = ₹${itemCost}\n`;
         }
       }
 
       let note = document.getElementById('orderNote').value.trim();
-      let noteText = note ? `\n📝 *Note:* ${note}` : "";
+      let noteText = note ? `\n📝 *Special Note:* ${note}` : "";
 
-      let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER*\n` +
+      let message = `🍽️ *DEVI COFFEE DAY - NEW ORDER* 🍽️\n` +
+                    `--------------------------------\n` +
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `--------------------------------\n` +
+                    `📋 *ITEMS:*\n` +
                     orderItemsText +
                     `--------------------------------\n` +
                     `💵 *AMOUNT (Subtotal):* ₹${calc.subtotal}\n` +
                     `🏛️ *CGST (2.5%):* ₹${calc.cgst.toFixed(2)}\n` +
                     `🏛️ *SGST (2.5%):* ₹${calc.sgst.toFixed(2)}\n` +
-                    `💰 *GRAND TOTAL:* ₹${calc.grandTotal}` +
+                    `--------------------------------\n` +
+                    `💰 *GRAND TOTAL: ₹${calc.grandTotal}*\n` +
+                    `--------------------------------` +
                     noteText + `\n\n` +
                     `_Please confirm the order._`;
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(message);
-      }
-      
-      alert(UI_TRANSLATIONS[currentLang].orderCopied);
-      window.open(RESTAURANT_GROUP_LINK, '_blank');
+      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
 
-      // Reset cart
+      // Cart reset after placing order
       cart = {};
       document.getElementById('orderNote').value = "";
       closeBillModal();
