@@ -39,7 +39,6 @@
       justify-content: center;
     }
 
-    /* 15 HD Background Images Container */
     .header-bg-slider {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -58,7 +57,6 @@
       opacity: 1;
     }
 
-    /* Gradient overlay for readability */
     .header-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -94,7 +92,6 @@
       border-color: var(--accent-gold);
     }
 
-    /* Original Big Round Logo */
     .brand-logo-wrap {
       width: 88px;
       height: 88px;
@@ -290,30 +287,41 @@
       margin: 18px auto 10px;
       text-align: center;
       padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-    .instagram-link {
+    .instagram-link, .whatsapp-group-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: #9d2d6d;
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
-      background: #fdf0f7;
       padding: 7px 16px;
       border-radius: 20px;
+    }
+    .instagram-link {
+      color: #9d2d6d;
+      background: #fdf0f7;
       border: 1px solid #f8c8e3;
     }
+    .whatsapp-group-link {
+      color: #0b6e31;
+      background: #eafaf1;
+      border: 1px solid #b7eed0;
+    }
 
-    /* Cart Bar */
+    /* Bottom Cart Bar */
     .cart-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       background: #ffffff;
-      padding: 12px 18px;
-      box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+      padding: 10px 18px;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.12);
       border-top: 1.5px solid var(--border-color);
       z-index: 999;
       display: flex;
@@ -322,7 +330,19 @@
       max-width: 720px;
       margin: auto;
     }
-    .cart-total-price { font-size: 20px; font-weight: 800; color: var(--primary); }
+    .cart-info {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-total-price { font-size: 18px; font-weight: 800; color: var(--primary); }
+    .cart-gst-hint { font-size: 10px; color: var(--text-muted); font-weight: 700; margin-top: -2px; }
+    .view-bill-btn {
+      font-size: 11px;
+      color: var(--primary);
+      font-weight: 800;
+      text-decoration: underline;
+    }
     .btn-whatsapp {
       background: var(--whatsapp);
       color: #ffffff;
@@ -336,6 +356,105 @@
       gap: 7px;
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Bill Modal (Popup) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(3px);
+      z-index: 1000;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .bill-sheet {
+      background: #ffffff;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 20px 20px 0 0;
+      padding: 20px 18px 24px;
+      max-height: 85vh;
+      overflow-y: auto;
+      animation: slideUp 0.3s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .bill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1.5px dashed var(--border-color);
+      margin-bottom: 14px;
+    }
+    .bill-header h3 { font-size: 18px; color: var(--primary); font-weight: 800; }
+    .btn-close {
+      background: #f1ece7;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--primary);
+    }
+    .bill-items-list { margin-bottom: 16px; }
+    .bill-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f4ece4;
+    }
+    .bill-item-info { flex: 1; }
+    .bill-item-name { font-size: 14px; font-weight: 700; color: #222; }
+    .bill-item-price { font-size: 12px; color: var(--text-muted); }
+    .bill-summary-box {
+      background: #fdfaf6;
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .summary-row.total-row {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      border-top: 1.5px dashed var(--border-color);
+      padding-top: 8px;
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+    .btn-order-modal {
+      width: 100%;
+      background: var(--whatsapp);
+      color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-top: 16px;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
     }
   </style>
 </head>
@@ -399,26 +518,72 @@
     <input type="text" id="orderNote" placeholder="✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)">
   </div>
 
-  <!-- Social Link -->
+  <!-- Social & Group Links -->
   <div class="social-footer">
     <a href="https://instagram.com/devicoffeeday" target="_blank" class="instagram-link">
       📸 Instagram: <b>@devicoffeeday</b>
+    </a>
+    <a href="https://chat.whatsapp.com/IRRuE3NdA3UIlDSY6lZjGc" target="_blank" class="whatsapp-group-link">
+      💬 WhatsApp Group
     </a>
   </div>
 
   <!-- Bottom Cart Bar -->
   <footer class="cart-bar">
-    <div>
-      <span style="font-size:12px; color:var(--text-muted); font-weight:600;" id="cartCount">0 આઇટમ્સ સિલેક્ટ કરી</span><br>
-      <span class="cart-total-price">₹<span id="cartTotal">0</span></span>
+    <div class="cart-info" onclick="openBillModal()">
+      <span style="font-size:11px; color:var(--text-muted); font-weight:700;" id="cartCount">0 આઇટમ્સ સિલેક્ટ કરી</span>
+      <span class="cart-total-price">₹<span id="cartGrandTotal">0</span></span>
+      <span class="cart-gst-hint" id="lblGstInclusive">(GST સહિત) <span class="view-bill-btn">બિલ જુઓ 📋</span></span>
     </div>
-    <button class="btn-whatsapp" onclick="sendOrderWhatsApp()">
-      <span id="lblOrderBtn">WhatsApp ઓર્ડર</span> 📲
+    <button class="btn-whatsapp" onclick="openBillModal()">
+      <span id="lblOrderBtn">ઓર્ડર કરો</span> 🛒
     </button>
   </footer>
 
+  <!-- Bill Modal / Popup -->
+  <div class="modal-overlay" id="billModal" onclick="closeBillModal(event)">
+    <div class="bill-sheet" onclick="event.stopPropagation()">
+      <div class="bill-header">
+        <div>
+          <h3 id="lblBillTitle">🧾 તમારો ઓર્ડર (બિલ)</h3>
+          <span style="font-size:12px; color:var(--text-muted); font-weight:700;" id="lblTableNum">ટેબલ નંબર: 1</span>
+        </div>
+        <button class="btn-close" onclick="closeBillModal()">✕</button>
+      </div>
+
+      <div class="bill-items-list" id="billItemsContainer">
+        <!-- Live Selected Items Rendered Here -->
+      </div>
+
+      <!-- Bill Calculation Details -->
+      <div class="bill-summary-box">
+        <div class="summary-row">
+          <span id="lblSubtotal">આઇટમ સબટોટલ (AMOUNT):</span>
+          <span>₹<span id="billSubtotal">0</span></span>
+        </div>
+        <div class="summary-row">
+          <span>CGST (2.5%):</span>
+          <span>₹<span id="billCgst">0.00</span></span>
+        </div>
+        <div class="summary-row">
+          <span>SGST (2.5%):</span>
+          <span>₹<span id="billSgst">0.00</span></span>
+        </div>
+        <div class="summary-row total-row">
+          <span id="lblGrandTotal">કુલ રકમ (GRAND TOTAL):</span>
+          <span>₹<span id="billFinalTotal">0</span></span>
+        </div>
+      </div>
+
+      <button class="btn-order-modal" onclick="sendOrderWhatsApp()">
+        <span id="lblSendOrderBtn">WhatsApp પર ઓર્ડર મોકલો</span> 📲
+      </button>
+    </div>
+  </div>
+
   <script>
     const RESTAURANT_PHONE = "919898237900";
+    const RESTAURANT_GROUP_LINK = "https://chat.whatsapp.com/IRRuE3NdA3UIlDSY6lZjGc";
     const SHEET_ID = "1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU";
 
     const params = new URLSearchParams(window.location.search);
@@ -444,9 +609,17 @@
         search: "🔍 મેનુમાં વાનગી શોધો...",
         note: "✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)",
         cartText: "આઇટમ્સ સિલેક્ટ કરી",
-        orderBtn: "WhatsApp ઓર્ડર",
+        orderBtn: "ઓર્ડર કરો",
+        gstInclusive: "(GST સહિત) બિલ જુઓ 📋",
+        billTitle: "🧾 તમારો ઓર્ડર (બિલ)",
+        tableText: `ટેબલ નંબર: ${tableNumber}`,
+        subtotal: "આઇટમ સબટોટલ (AMOUNT):",
+        grandTotal: "કુલ રકમ (GRAND TOTAL):",
+        sendBtn: "WhatsApp પર ઓર્ડર મોકલો",
         soldOut: "હાજર નથી (Sold Out)",
-        alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!"
+        alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!",
+        emptyBill: "તમારા કાર્ટમાં કોઈ વાનગી નથી.",
+        orderCopied: "ઓર્ડર કોપી થઈ ગયો છે! WhatsApp ગ્રુપમાં ફક્ત Paste કરીને Send કરો."
       },
       en: {
         water: "Order Water",
@@ -454,9 +627,17 @@
         search: "🔍 Search menu...",
         note: "✍️ Special instructions? (e.g. Less Spicy, Jain)",
         cartText: "items selected",
-        orderBtn: "Order on WhatsApp",
+        orderBtn: "Place Order",
+        gstInclusive: "(Incl. GST) View Bill 📋",
+        billTitle: "🧾 Your Order (Bill)",
+        tableText: `Table Number: ${tableNumber}`,
+        subtotal: "Item Amount (Subtotal):",
+        grandTotal: "Grand Total:",
+        sendBtn: "Send Order on WhatsApp",
         soldOut: "Sold Out",
-        alertNoItem: "Please add items to cart first!"
+        alertNoItem: "Please add items to cart first!",
+        emptyBill: "Your cart is empty.",
+        orderCopied: "Order copied! Please Paste & Send in the WhatsApp Group."
       },
       hi: {
         water: "पानी मंगवाएं",
@@ -464,9 +645,17 @@
         search: "🔍 मेनू में खोजें...",
         note: "✍️ कोई विशेष निर्देश? (उदा. Less Spicy, Jain)",
         cartText: "आइटम चुने गए",
-        orderBtn: "WhatsApp ऑर्डर",
+        orderBtn: "ऑर्डर करें",
+        gstInclusive: "(GST सहित) बिल देखें 📋",
+        billTitle: "🧾 आपका ऑर्डर (बिल)",
+        tableText: `टेबल नंबर: ${tableNumber}`,
+        subtotal: "आइटम सबटोटल (AMOUNT):",
+        grandTotal: "कुल राशि (GRAND TOTAL):",
+        sendBtn: "WhatsApp पर ऑर्डर भेजें",
         soldOut: "उपलब्ध नहीं (Sold Out)",
-        alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!"
+        alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!",
+        emptyBill: "आपके कार्ट में कोई आइटम नहीं है।",
+        orderCopied: "ऑर्डर कॉपी हो गया है! WhatsApp ग्रुप में Paste करके Send करें।"
       }
     };
 
@@ -475,14 +664,14 @@
       { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा' },
       { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी' },
       { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'नाचोस' },
-      { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'राइस बाउल' },
-      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'डेज़र्ट' },
+      { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'રાઇસ બાઉલ' },
+      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'ડેઝર્ટ' },
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी' },
       { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'हॉट चॉकलेट' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice-Blended', gu: 'Ice-Blended', hi: 'આઇસ બ્લેન્ડેડ' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल' },
-      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक શેक्स' },
+      { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'થિક શેક્સ' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी' },
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी' },
       { id: 'appetizers', icon: '🍟', en: 'Appetizers', gu: 'Appetizers', hi: 'સ્ટાર્ટર્સ' },
@@ -705,6 +894,12 @@
       document.getElementById('searchInput').placeholder = t.search;
       document.getElementById('orderNote').placeholder = t.note;
       document.getElementById('lblOrderBtn').innerText = t.orderBtn;
+      document.getElementById('lblGstInclusive').innerHTML = t.gstInclusive;
+      document.getElementById('lblBillTitle').innerText = t.billTitle;
+      document.getElementById('lblTableNum').innerText = t.tableText;
+      document.getElementById('lblSubtotal').innerText = t.subtotal;
+      document.getElementById('lblGrandTotal').innerText = t.grandTotal;
+      document.getElementById('lblSendOrderBtn').innerText = t.sendBtn;
 
       renderCategories();
       renderMenu();
@@ -783,17 +978,83 @@
 
       const countEl = document.getElementById(`c-${id}`);
       if (countEl) countEl.innerText = cart[id] ? cart[id].qty : 0;
+
       updateTotal();
+      if (document.getElementById('billModal').classList.contains('active')) {
+        renderBillItems();
+      }
+    }
+
+    function getCartCalculation() {
+      let totalQty = 0;
+      let subtotal = 0;
+      for (let id in cart) {
+        totalQty += cart[id].qty;
+        subtotal += cart[id].qty * cart[id].price;
+      }
+      let cgst = subtotal * 0.025; // 2.5% CGST
+      let sgst = subtotal * 0.025; // 2.5% SGST
+      let grandTotal = Math.round(subtotal + cgst + sgst);
+
+      return { totalQty, subtotal, cgst, sgst, grandTotal };
     }
 
     function updateTotal() {
-      let totalQty = 0, totalPrice = 0;
-      for (let id in cart) {
-        totalQty += cart[id].qty;
-        totalPrice += cart[id].qty * cart[id].price;
+      const calc = getCartCalculation();
+      document.getElementById('cartCount').innerText = `${calc.totalQty} ${UI_TRANSLATIONS[currentLang].cartText}`;
+      document.getElementById('cartGrandTotal').innerText = calc.grandTotal;
+
+      document.getElementById('billSubtotal').innerText = calc.subtotal;
+      document.getElementById('billCgst').innerText = calc.cgst.toFixed(2);
+      document.getElementById('billSgst').innerText = calc.sgst.toFixed(2);
+      document.getElementById('billFinalTotal').innerText = calc.grandTotal;
+    }
+
+    function openBillModal() {
+      const calc = getCartCalculation();
+      if (calc.totalQty === 0) {
+        alert(UI_TRANSLATIONS[currentLang].alertNoItem);
+        return;
       }
-      document.getElementById('cartCount').innerText = `${totalQty} ${UI_TRANSLATIONS[currentLang].cartText}`;
-      document.getElementById('cartTotal').innerText = totalPrice;
+      renderBillItems();
+      document.getElementById('billModal').classList.add('active');
+    }
+
+    function closeBillModal(e) {
+      if (!e || e.target.id === 'billModal' || e.target.classList.contains('btn-close')) {
+        document.getElementById('billModal').classList.remove('active');
+      }
+    }
+
+    function renderBillItems() {
+      const container = document.getElementById('billItemsContainer');
+      container.innerHTML = '';
+      let hasItems = false;
+
+      for (let id in cart) {
+        let item = cart[id];
+        if (item.qty > 0) {
+          hasItems = true;
+          let row = document.createElement('div');
+          row.className = 'bill-item-row';
+          row.innerHTML = `
+            <div class="bill-item-info">
+              <div class="bill-item-name">${item.name}</div>
+              <div class="bill-item-price">₹${item.price} × ${item.qty} = <b>₹${item.price * item.qty}</b></div>
+            </div>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+              <span class="qty-count">${item.qty}</span>
+              <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+            </div>
+          `;
+          container.appendChild(row);
+        }
+      }
+
+      if (!hasItems) {
+        container.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:20px 0;">${UI_TRANSLATIONS[currentLang].emptyBill}</p>`;
+      }
     }
 
     function sendServiceReq(type) {
@@ -802,25 +1063,28 @@
                     `📍 *Table Number:* ${tableNumber}\n` +
                     `📌 *Request:* ${serviceTitle}\n` +
                     `_Please attend table immediately._`;
-      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+      
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(message);
+      }
+      alert(UI_TRANSLATIONS[currentLang].orderCopied || "Request copied! Send it in the group.");
+      window.open(RESTAURANT_GROUP_LINK, '_blank');
     }
 
     function sendOrderWhatsApp() {
-      let total = 0;
-      let orderItemsText = "";
+      const calc = getCartCalculation();
 
+      if (calc.totalQty === 0) {
+        alert(UI_TRANSLATIONS[currentLang].alertNoItem);
+        return;
+      }
+
+      let orderItemsText = "";
       for (let id in cart) {
         if (cart[id].qty > 0) {
           let itemCost = cart[id].qty * cart[id].price;
-          total += itemCost;
           orderItemsText += `• *${cart[id].name}* x ${cart[id].qty} = ₹${itemCost}\n`;
         }
-      }
-
-      if (orderItemsText === "") {
-        alert(UI_TRANSLATIONS[currentLang].alertNoItem);
-        return;
       }
 
       let note = document.getElementById('orderNote').value.trim();
@@ -831,22 +1095,31 @@
                     `--------------------------------\n` +
                     orderItemsText +
                     `--------------------------------\n` +
-                    `💰 *Total Amount:* ₹${total}` +
+                    `💵 *AMOUNT (Subtotal):* ₹${calc.subtotal}\n` +
+                    `🏛️ *CGST (2.5%):* ₹${calc.cgst.toFixed(2)}\n` +
+                    `🏛️ *SGST (2.5%):* ₹${calc.sgst.toFixed(2)}\n` +
+                    `💰 *GRAND TOTAL:* ₹${calc.grandTotal}` +
                     noteText + `\n\n` +
                     `_Please confirm the order._`;
 
-      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(message);
+      }
+      
+      alert(UI_TRANSLATIONS[currentLang].orderCopied);
+      window.open(RESTAURANT_GROUP_LINK, '_blank');
 
+      // Reset cart
       cart = {};
       document.getElementById('orderNote').value = "";
+      closeBillModal();
       updateTotal();
       renderMenu();
     }
 
     renderCategories();
     renderMenu();
-    syncWithSheet(); // હવે ગૂગલ શીટ લાઈવ સિંક ચાલુ થઈ ગયું છે
+    syncWithSheet();
   </script>
 </body>
 </html>
