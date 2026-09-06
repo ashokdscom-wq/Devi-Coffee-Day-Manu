@@ -17,7 +17,6 @@
       --text-muted: #5c5249;
       --border-color: #e5d5c5;
       --veg-green: #0d8235;
-      --jain-green: #15803d;
       --whatsapp: #25D366;
     }
 
@@ -199,22 +198,22 @@
       border-color: #15803d;
     }
 
-    /* Menu Container & Cards */
+    /* Clean Card Layout Without Images */
     .menu-container { max-width: 720px; margin: auto; padding: 6px 16px; }
     .menu-card {
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 14px;
+      padding: 14px 16px;
       margin-bottom: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
       border: 1.5px solid var(--border-color);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
     .menu-card.disabled { opacity: 0.55; background: #f1ece7; }
-    .item-details { flex: 1; min-width: 0; padding-right: 8px; }
+    .item-details { flex: 1; min-width: 0; }
     .item-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
     .veg-icon {
       width: 15px;
@@ -275,6 +274,7 @@
       padding: 5px 10px;
       border-radius: 6px;
       border: 1px solid #fecaca;
+      flex-shrink: 0;
     }
 
     /* Note Input & Footer */
@@ -725,9 +725,8 @@
       }
     };
 
-    // Categories List with Jain Special Tab
+    // Categories List (Without 'all', Starts with Jain Special)
     const categoriesList = [
-      { id: 'all', icon: '✨', en: 'All Items', gu: 'બધું (All)', hi: 'सभी' },
       { id: 'jain', icon: '🌱', en: 'Jain Special', gu: 'જૈન મેનુ (Jain)', hi: 'जैन स्पेशल', isJainTab: true },
       { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा' },
       { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी' },
@@ -962,7 +961,7 @@
     ];
 
     let cart = {};
-    let activeCategory = 'all';
+    let activeCategory = 'jain'; // Starts with Jain Special
 
     // Live Google Sheet Sync
     async function syncWithSheet() {
@@ -1040,8 +1039,7 @@
 
       let filtered = menuData.filter(item => {
         let matchCat = false;
-        if (activeCategory === 'all') matchCat = true;
-        else if (activeCategory === 'jain') matchCat = (item.cat === 'jain' || item.isJain === true);
+        if (activeCategory === 'jain') matchCat = (item.cat === 'jain' || item.isJain === true);
         else matchCat = (item.cat === activeCategory);
 
         let matchSearch = item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
@@ -1222,7 +1220,7 @@
               ${optText}
               <div class="bill-item-price">₹${item.price} × ${item.qty} = <b>₹${item.price * item.qty}</b></div>
             </div>
-            <div class="qty-controls" style="width: 85px;">
+            <div class="qty-controls">
               <button class="qty-btn" onclick="updateCartDirect('${item.cartKey}', -1)">-</button>
               <span class="qty-count">${item.qty}</span>
               <button class="qty-btn" onclick="updateCartDirect('${item.cartKey}', 1)">+</button>
@@ -1248,6 +1246,7 @@
       window.open(url, '_blank');
     }
 
+    // Direct WhatsApp Chat Function With Maggi Masala Options & Jain Tags
     function sendOrderWhatsAppDirect() {
       const calc = getCartCalculation();
 
@@ -1288,7 +1287,7 @@
       let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
 
-      // Reset cart
+      // Cart reset after placing order
       cart = {};
       document.getElementById('orderNote').value = "";
       closeBillModal();
