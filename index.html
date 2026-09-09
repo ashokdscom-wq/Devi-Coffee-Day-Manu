@@ -219,7 +219,7 @@
       box-shadow: 0 4px 10px rgba(31, 13, 5, 0.3) !important;
     }
 
-    /* Menu Container & Cards Without Images */
+    /* Menu Container & Cards */
     .menu-container { max-width: 720px; margin: auto; padding: 6px 16px; }
     .menu-card {
       background: var(--card-bg);
@@ -751,7 +751,7 @@
     const categoriesList = [
       { id: 'jain', icon: '🌱', en: 'Jain', gu: 'Jain', hi: 'जैन', colorClass: 'cat-btn-jain' },
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी', colorClass: 'cat-btn-hot-coffee' },
-      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'हॉट चॉकलेट', colorClass: 'cat-btn-hot-chocolate' },
+      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'હૉટ ચોકલેટ', colorClass: 'cat-btn-hot-chocolate' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold coffee', gu: 'Cold coffee', hi: 'कोल्ड कॉफ़ी', colorClass: 'cat-btn-cold-coffee' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice - Blended', gu: 'Ice - Blended', hi: 'आइस ब्लेंडेड', colorClass: 'cat-btn-ice-blended' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल', colorClass: 'cat-btn-mocktails' },
@@ -761,15 +761,15 @@
       { id: 'appetizers', icon: '🍟', en: 'Appetisers', gu: 'Appetisers', hi: 'ऐपेटाइज़र', colorClass: 'cat-btn-appetizers' },
       { id: 'toast', icon: '🍞', en: 'Tost', gu: 'Tost', hi: 'टोस्ट', colorClass: 'cat-btn-toast' },
       { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'सैंडविच', colorClass: 'cat-btn-sandwich' },
-      { id: 'club-sandwich', icon: '🥪', en: 'Club sandwich', gu: 'Club sandwich', hi: 'क्लब सैंडविच', colorClass: 'cat-btn-club-sandwich' },
+      { id: 'club-sandwich', icon: '🥪', en: 'Club sandwich', gu: 'Club sandwich', hi: 'ક્લબ સેન્ડવિચ', colorClass: 'cat-btn-club-sandwich' },
       { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ', colorClass: 'cat-btn-garlic-bread' },
-      { id: 'pasta', icon: '🍝', en: 'Indulging Pasta', gu: 'Indulging Pasta', hi: 'पास्ता', colorClass: 'cat-btn-pasta' },
+      { id: 'pasta', icon: '🍝', en: 'Indulging Pasta', gu: 'Indulging Pasta', hi: 'પાસ્તા', colorClass: 'cat-btn-pasta' },
       { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा', colorClass: 'cat-btn-pizza' },
       { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी', colorClass: 'cat-btn-maggi' },
       { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'નાચોસ', colorClass: 'cat-btn-nachos' },
       { id: 'rice-bowl', icon: '🍚', en: 'Rice Bowl', gu: 'Rice Bowl', hi: 'राइस बाउल', colorClass: 'cat-btn-rice-bowl' },
-      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'डेज़र्ट', colorClass: 'cat-btn-dessert' },
-      { id: 'extra', icon: '➕', en: 'Extra', gu: 'Extra', hi: 'एक्स्ट्रा', colorClass: 'cat-btn-extra' }
+      { id: 'dessert', icon: '🍨', en: 'Dessert', gu: 'Dessert', hi: 'ડેઝર્ટ', colorClass: 'cat-btn-dessert' },
+      { id: 'extra', icon: '➕', en: 'Extra', gu: 'Extra', hi: 'એક્સ્ટ્રા', colorClass: 'cat-btn-extra' }
     ];
 
     let menuData = [
@@ -994,7 +994,6 @@
     ];
 
     let cart = {};
-    // First category in order is 'jain'
     let activeCategory = 'jain';
 
     // Live Google Sheet Sync
@@ -1071,8 +1070,6 @@
       let filtered = menuData.filter(item => {
         let matchCat = (item.cat === activeCategory);
         let matchSearch = item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
-        
-        // If user is searching in searchbox, search across all items
         if (q.length > 0) return matchSearch;
         return matchCat;
       });
@@ -1251,7 +1248,7 @@
               ${optText}
               <div class="bill-item-price">₹${item.price} × ${item.qty} = <b>₹${item.price * item.qty}</b></div>
             </div>
-            <div class="qty-controls">
+            <div class="qty-controls" style="width: 85px;">
               <button class="qty-btn" onclick="updateCartDirect('${item.cartKey}', -1)">-</button>
               <span class="qty-count">${item.qty}</span>
               <button class="qty-btn" onclick="updateCartDirect('${item.cartKey}', 1)">+</button>
@@ -1266,6 +1263,19 @@
       }
     }
 
+    // Universal WhatsApp Launcher (Supports Regular WhatsApp, WhatsApp Business & Web)
+    function openWhatsAppUnified(phone, text) {
+      const encodedText = encodeURIComponent(text);
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        // Universal intent link that lets device choose Regular or Business WhatsApp
+        window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
+      } else {
+        window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encodedText}`, '_blank');
+      }
+    }
+
     function sendServiceReq(type) {
       let serviceTitle = type === 'water' ? '💧 Water Request' : '🛎️ Call Waiter';
       let message = `🛎️ *DEVI COFFEE DAY - SERVICE REQUEST*\n` +
@@ -1273,11 +1283,10 @@
                     `📌 *Request:* ${serviceTitle}\n` +
                     `_Please attend table immediately._`;
       
-      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+      openWhatsAppUnified(RESTAURANT_PHONE, message);
     }
 
-    // Direct WhatsApp Chat Function
+    // Direct WhatsApp Chat Function for Regular WhatsApp & WhatsApp Business
     function sendOrderWhatsAppDirect() {
       const calc = getCartCalculation();
 
@@ -1315,8 +1324,7 @@
                     noteText + `\n\n` +
                     `_Please confirm the order._`;
 
-      let url = `https://wa.me/${RESTAURANT_PHONE}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+      openWhatsAppUnified(RESTAURANT_PHONE, message);
 
       cart = {};
       document.getElementById('orderNote').value = "";
