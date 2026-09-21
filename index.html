@@ -195,6 +195,7 @@
     .cat-btn-hot-chocolate { background: #fdf2f8; color: #be185d; border-color: #fbcfe8; }
     .cat-btn-cold-coffee   { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
     .cat-btn-ice-blended   { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
+    .cat-btn-ice-latte     { background: #f0f9ff; color: #0369a1; border-color: #7dd3fc; }
     .cat-btn-mocktails     { background: #fff1f2; color: #e11d48; border-color: #fecdd3; }
     .cat-btn-thick-shakes  { background: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
     .cat-btn-iced-coffee   { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
@@ -586,7 +587,7 @@
     <input type="text" id="searchInput" placeholder="🔍 મેનુમાં વાનગી શોધો..." onkeyup="renderMenu()">
   </div>
 
-  <!-- Categories Ordered 1 to 21 -->
+  <!-- Categories Navigation -->
   <nav class="categories-nav" id="categoryNav"></nav>
 
   <!-- Menu Items List -->
@@ -747,13 +748,14 @@
       }
     };
 
-    // 1 to 21 Strict Categories Order with Custom Colors
+    // Categories Order with ICE LATTE placed right after ICE - BLENDED
     const categoriesList = [
       { id: 'jain', icon: '🌱', en: 'Jain', gu: 'Jain', hi: 'जैन', colorClass: 'cat-btn-jain' },
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी', colorClass: 'cat-btn-hot-coffee' },
       { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'હૉટ ચોકલેટ', colorClass: 'cat-btn-hot-chocolate' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold coffee', gu: 'Cold coffee', hi: 'कोल्ड कॉफ़ी', colorClass: 'cat-btn-cold-coffee' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice - Blended', gu: 'Ice - Blended', hi: 'आइस ब्लेंडेड', colorClass: 'cat-btn-ice-blended' },
+      { id: 'ice-latte', icon: '🧋', en: 'Ice Latte', gu: 'Ice Latte', hi: 'आइस लाटे', colorClass: 'cat-btn-ice-latte' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल', colorClass: 'cat-btn-mocktails' },
       { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स', colorClass: 'cat-btn-thick-shakes' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी', colorClass: 'cat-btn-iced-coffee' },
@@ -834,7 +836,13 @@
       { id: 23, cat: 'ice-blended', name: 'Caramel Ice-Blended', price: 179, desc: 'Coffee swirled with caramel.', isAvailable: true },
       { id: 24, cat: 'ice-blended', name: 'Hazelnut Ice-Blended', price: 189, desc: 'Nutty bliss iced coffee.', isAvailable: true },
 
-      // ====== 6. MOCKTAILS ======
+      // ====== 6. ICE LATTE (NEWLY ADDED) ======
+      { id: 250, cat: 'ice-latte', name: 'Honey Ice Latte', price: 199, desc: 'Refreshing iced latte sweetened with natural honey and chilled milk over ice.', badge: 'special', isAvailable: true },
+      { id: 251, cat: 'ice-latte', name: 'Hazelnut Ice Latte', price: 199, desc: 'Chilled espresso and milk infused with rich nutty hazelnut flavor over ice.', badge: 'bestseller', isAvailable: true },
+      { id: 252, cat: 'ice-latte', name: 'Tiramisu Ice Latte', price: 199, desc: 'Iced coffee blended with classic Italian tiramisu notes and creamy milk.', isAvailable: true },
+      { id: 253, cat: 'ice-latte', name: 'Vanilla Ice Latte', price: 199, desc: 'Smooth chilled espresso combined with sweet vanilla syrup and fresh milk.', isAvailable: true },
+
+      // ====== 7. MOCKTAILS ======
       { id: 25, cat: 'mocktails', name: 'Fresh Lime Soda', price: 149, desc: 'Classic lemon soda.', isAvailable: true },
       { id: 26, cat: 'mocktails', name: 'Chiaseeds Lemonade', price: 179, desc: 'Lemonade with chia seeds.', isAvailable: true },
       { id: 27, cat: 'mocktails', name: 'Virgin Mojito', price: 199, desc: 'Lemon & fresh mint mojito.', badge: 'bestseller', isAvailable: true },
@@ -850,7 +858,7 @@
       { id: 37, cat: 'mocktails', name: 'Berry Mist', price: 249, desc: 'Berries and lemon juice with soda.', isAvailable: true },
       { id: 38, cat: 'mocktails', name: 'Redbull Mojito', price: 259, desc: 'Red Bull with mojito mint.', isAvailable: true },
 
-      // ====== 7. THICK SHAKES ======
+      // ====== 8. THICK SHAKES ======
       { id: 39, cat: 'thick-shakes', name: 'Kitkat Thick Shake', price: 209, desc: 'KitKat blended with choco ice cream.', isAvailable: true },
       { id: 40, cat: 'thick-shakes', name: 'Snackers Doodles', price: 219, desc: 'Cookies and cream shake.', isAvailable: true },
       { id: 41, cat: 'thick-shakes', name: 'Strawberry Thick Shake', price: 229, desc: 'Sweet strawberry shake.', isAvailable: true },
@@ -863,7 +871,7 @@
       { id: 48, cat: 'thick-shakes', name: 'Lotus Biscoff Shake', price: 269, desc: 'Lotus Biscoff cookies shake.', badge: 'bestseller', isAvailable: true },
       { id: 49, cat: 'thick-shakes', name: 'Choco Dark Indulgence', price: 269, desc: 'Dark chocolate & vanilla shake.', isAvailable: true },
 
-      // ====== 8. ICED COFFEE ======
+      // ====== 9. ICED COFFEE ======
       { id: 50, cat: 'iced-coffee', name: 'Iced Americano', price: 159, desc: 'Espresso over ice.', isAvailable: true },
       { id: 51, cat: 'iced-coffee', name: 'Espresso Tonic', price: 209, desc: 'Espresso with tonic water.', isAvailable: true },
       { id: 52, cat: 'iced-coffee', name: 'Cranberry Iced Coffee', price: 219, desc: 'Coffee with cranberry twist.', isAvailable: true },
@@ -871,14 +879,14 @@
       { id: 54, cat: 'iced-coffee', name: 'Coffee Peach Spritzer', price: 239, desc: 'Coffee infused with peach.', isAvailable: true },
       { id: 55, cat: 'iced-coffee', name: 'Red Bull Coffee', price: 269, desc: 'Iced coffee with Red Bull.', isAvailable: true },
 
-      // ====== 9. ICED TEA ======
+      // ====== 10. ICED TEA ======
       { id: 56, cat: 'iced-tea', name: 'Lemon Iced Tea', price: 169, desc: 'Brewed tea with tangy lemon.', isAvailable: true },
       { id: 57, cat: 'iced-tea', name: 'Peach Iced Tea', price: 179, desc: 'Fruity tea with peach syrup.', isAvailable: true },
       { id: 58, cat: 'iced-tea', name: 'Strawberry Iced Tea', price: 199, desc: 'Strawberry infused iced tea.', isAvailable: true },
       { id: 59, cat: 'iced-tea', name: 'Passion Fruit Iced Tea', price: 209, desc: 'Passion fruit blended iced tea.', isAvailable: true },
       { id: 60, cat: 'iced-tea', name: 'Cranberry Iced Tea', price: 219, desc: 'Cranberry infused iced tea.', isAvailable: true },
 
-      // ====== 10. APPETISERS ======
+      // ====== 11. APPETISERS ======
       { id: 61, cat: 'appetizers', name: 'Salted Fries', price: 149, desc: 'Crispy salted fries.', isAvailable: true },
       { id: 62, cat: 'appetizers', name: 'Peri Peri Fries', price: 169, desc: 'Spicy peri peri fries.', isAvailable: true },
       { id: 63, cat: 'appetizers', name: 'Cheese Corn Balls', price: 189, desc: 'Cheese corn bites.', badge: 'bestseller', isAvailable: true },
@@ -888,7 +896,7 @@
       { id: 67, cat: 'appetizers', name: 'Veggie Fingers', price: 219, desc: 'Crispy vegetable sticks.', isAvailable: true },
       { id: 68, cat: 'appetizers', name: 'Coin Pizza', price: 249, desc: 'Cheesy pocket pizza bites.', isAvailable: true },
 
-      // ====== 11. TOST ======
+      // ====== 12. TOST ======
       { id: 69, cat: 'toast', name: 'Butter Toast', price: 89, desc: 'Classic butter toast.', isAvailable: true },
       { id: 70, cat: 'toast', name: 'Cheese Garlic Toast', price: 99, desc: 'Cheese and garlic toast.', isAvailable: true },
       { id: 71, cat: 'toast', name: 'Cheese Chilli Garlic Toast', price: 109, desc: 'Zesty chili garlic toast.', isAvailable: true },
@@ -896,7 +904,7 @@
       { id: 73, cat: 'toast', name: 'Italian Toast', price: 139, desc: 'Italian herb toast.', isAvailable: true },
       { id: 74, cat: 'toast', name: 'Cheesy Peri Peri Paneer Toast', price: 149, desc: 'Paneer toast with peri peri.', isAvailable: true },
 
-      // ====== 12. SANDWICH ======
+      // ====== 13. SANDWICH ======
       { id: 75, cat: 'sandwich', name: 'Classic Veg Sandwich', price: 149, desc: 'Fresh crisp vegetable sandwich.', isAvailable: true },
       { id: 76, cat: 'sandwich', name: 'Cheese Chilli Garlic Sandwich', price: 159, desc: 'Spicy garlic & cheese.', isAvailable: true },
       { id: 77, cat: 'sandwich', name: 'Pasta Heaven Sandwich', price: 169, desc: 'Pasta filled grilled sandwich.', isAvailable: true },
@@ -906,7 +914,7 @@
       { id: 81, cat: 'sandwich', name: 'Garlic Bonanza Grilled Sandwich', price: 209, desc: 'Garlic flavor explosion.', isAvailable: true },
       { id: 82, cat: 'sandwich', name: 'Pizzawhich', price: 219, desc: 'Pizza grilled sandwich.', isAvailable: true },
 
-      // ====== 13. CLUB SANDWICH ======
+      // ====== 14. CLUB SANDWICH ======
       { id: 83, cat: 'club-sandwich', name: 'American Club Grilled Sandwich', price: 249, desc: 'Triple-decker club sandwich.', isAvailable: true },
       { id: 84, cat: 'club-sandwich', name: 'Chipotle Blast Club Sandwich', price: 259, desc: 'Chipotle sauce & melted cheese.', isAvailable: true },
       { id: 85, cat: 'club-sandwich', name: 'Three in One Sandwich', price: 269, desc: 'Potatoes, chutney, jam & cheese.', isAvailable: true },
@@ -914,14 +922,14 @@
       { id: 87, cat: 'club-sandwich', name: 'Paneer Tikka Masala Club', price: 309, desc: 'Paneer tikka masala sandwich.', isAvailable: true },
       { id: 88, cat: 'club-sandwich', name: 'Devi Special Sandwich', price: 329, desc: 'Chef special premium sandwich.', badge: 'special', isAvailable: true },
 
-      // ====== 14. GARLIC BREAD ======
+      // ====== 15. GARLIC BREAD ======
       { id: 89, cat: 'garlic-bread', name: 'Cheese Garlic Bread', price: 179, desc: 'Garlic bread with cheese.', isAvailable: true },
       { id: 90, cat: 'garlic-bread', name: 'Cheese Corn Bread', price: 189, desc: 'Sweet corn & garlic bread.', isAvailable: true },
       { id: 91, cat: 'garlic-bread', name: 'Cheese Chilli Garlic Bread', price: 199, desc: 'Fiery chili garlic bread.', isAvailable: true },
       { id: 92, cat: 'garlic-bread', name: 'Italian Premium Bread', price: 209, desc: 'Veggies & cheese garlic bread.', isAvailable: true },
       { id: 93, cat: 'garlic-bread', name: 'Exotic Garlic Bread', price: 219, desc: 'Olives, jalapenos & bell pepper.', badge: 'bestseller', isAvailable: true },
 
-      // ====== 15. INDULGING PASTA ======
+      // ====== 16. INDULGING PASTA ======
       { id: 94, cat: 'pasta', name: 'Arrabiata Pasta (Red Sauce)', price: 269, desc: 'Spicy tomato sauce pasta + Garlic Bread.', isAvailable: true },
       { id: 95, cat: 'pasta', name: 'Alfredo Pasta (White Sauce)', price: 279, desc: 'Creamy white cheese pasta + Garlic Bread.', badge: 'bestseller', isAvailable: true },
       { id: 96, cat: 'pasta', name: 'Pesto Pasta (Green Sauce)', price: 289, desc: 'Basil pesto sauce pasta.', isAvailable: true },
@@ -929,7 +937,7 @@
       { id: 98, cat: 'pasta', name: 'Rosato Pasta (Pink Sauce)', price: 309, desc: 'Pink sauce herb pasta.', isAvailable: true },
       { id: 99, cat: 'pasta', name: 'Mac-N-Cheese Pasta', price: 329, desc: 'Baked mac and cheddar cheese.', badge: 'special', isAvailable: true },
 
-      // ====== 16. PIZZA ======
+      // ====== 17. PIZZA ======
       { id: 101, cat: 'pizza', name: 'Classic Margherita Pizza (8")', price: 249, desc: 'Signature Sauce, Fresh Basil, Mozzarella cheese.', badge: 'bestseller', isAvailable: true },
       { id: 102, cat: 'pizza', name: 'Classic Margherita Pizza (11")', price: 349, desc: 'Signature Sauce, Fresh Basil, Mozzarella cheese.', isAvailable: true },
       { id: 103, cat: 'pizza', name: 'Classic Veg Pizza (8")', price: 279, desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno.', isAvailable: true },
@@ -959,29 +967,29 @@
       { id: 127, cat: 'pizza', name: 'Add-On: Thin Crust Base', price: 69, desc: 'Crispy Thin Crust base.', isAvailable: true },
       { id: 128, cat: 'pizza', name: 'Add-On: Pan Crust Base', price: 69, desc: 'Soft and thick Pan Crust base.', isAvailable: true },
 
-      // ====== 17. MAGGI ======
+      // ====== 18. MAGGI ======
       { id: 129, cat: 'maggi', isMaggi: true, name: 'Masala Maggi', price: 99, desc: 'Classic Maggi with spicy Indian masala.', isAvailable: true },
       { id: 130, cat: 'maggi', isMaggi: true, name: 'Butter Maggi', price: 119, desc: 'Enriched with buttery goodness.', isAvailable: true },
       { id: 131, cat: 'maggi', isMaggi: true, name: 'Cheese Masala Maggi', price: 139, desc: 'Maggi with mouthwatering melted cheese.', badge: 'bestseller', isAvailable: true },
       { id: 132, cat: 'maggi', isMaggi: true, name: 'Vegetable Maggi', price: 149, desc: 'Maggi with medley of fresh vegetables.', isAvailable: true },
       { id: 133, cat: 'maggi', isMaggi: true, name: 'Cheese Vegetable Maggi', price: 169, desc: 'Rich cheese with veggies & spices.', isAvailable: true },
 
-      // ====== 18. NACHOS ======
+      // ====== 19. NACHOS ======
       { id: 134, cat: 'nachos', name: 'Cheese Nachos', price: 179, desc: 'Crispy Nachos with tangy salsa & cheese sauce.', isAvailable: true },
       { id: 135, cat: 'nachos', name: 'Loaded Nachos', price: 209, desc: 'Topped with cheese, olives, jalapenos & dips.', badge: 'special', isAvailable: true },
 
-      // ====== 19. RICE BOWL ======
+      // ====== 20. RICE BOWL ======
       { id: 136, cat: 'rice-bowl', name: 'Italian Risotto', price: 229, desc: 'Creamy rice, veggies & white cheese gravy.', isAvailable: true },
       { id: 137, cat: 'rice-bowl', name: 'Pink Risotto', price: 249, desc: 'Rice & veggies in creamy pink sauce gravy.', isAvailable: true },
       { id: 138, cat: 'rice-bowl', name: 'Mexican Hot Pot', price: 299, desc: 'Rice, veggies, nachos with cheese sauce gravy.', isAvailable: true },
       { id: 139, cat: 'rice-bowl', name: 'Paneer Tikka Rice Bowl', price: 329, desc: 'Paneer tikka on rice with rich gravy.', badge: 'bestseller', isAvailable: true },
 
-      // ====== 20. DESSERT ======
+      // ====== 21. DESSERT ======
       { id: 140, cat: 'dessert', name: 'Jamun Shot', price: 199, desc: 'Refreshing Jamun Ice with sweet & lemon twist.', isAvailable: true },
       { id: 141, cat: 'dessert', name: 'Sizzling Brownie', price: 249, desc: 'Chocolate brownie, vanilla ice cream on sizzler.', badge: 'special', isAvailable: true },
       { id: 142, cat: 'dessert', name: 'Special Dessert', price: 269, desc: 'Brownie topped with dual ice cream & KitKat.', isAvailable: true },
 
-      // ====== 21. EXTRA ======
+      // ====== 22. EXTRA ======
       { id: 143, cat: 'extra', name: 'Water Bottle', price: 29, desc: 'Packaged drinking water.', isAvailable: true },
       { id: 144, cat: 'extra', name: 'Cheese Dip', price: 39, desc: 'Cheesy dip sauce.', isAvailable: true },
       { id: 145, cat: 'extra', name: 'Vanilla Ice Cream', price: 59, desc: 'Single scoop.', isAvailable: true },
@@ -1263,13 +1271,12 @@
       }
     }
 
-    // Universal WhatsApp Launcher (Supports Regular WhatsApp, WhatsApp Business & Web)
+    // Universal WhatsApp Launcher
     function openWhatsAppUnified(phone, text) {
       const encodedText = encodeURIComponent(text);
       const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
       if (isMobile) {
-        // Universal intent link that lets device choose Regular or Business WhatsApp
         window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
       } else {
         window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encodedText}`, '_blank');
@@ -1286,7 +1293,6 @@
       openWhatsAppUnified(RESTAURANT_PHONE, message);
     }
 
-    // Direct WhatsApp Chat Function for Regular WhatsApp & WhatsApp Business
     function sendOrderWhatsAppDirect() {
       const calc = getCartCalculation();
 
