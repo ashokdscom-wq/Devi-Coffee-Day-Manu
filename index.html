@@ -270,7 +270,7 @@
       background: #f7efe6;
       border-radius: 10px;
       padding: 3px 6px;
-      border: 1px solid var(--border-color);
+      border: 1.5px solid var(--border-color);
       flex-shrink: 0;
       gap: 6px;
     }
@@ -762,7 +762,7 @@
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी', colorClass: 'cat-btn-iced-tea' },
       { id: 'appetizers', icon: '🍟', en: 'Appetisers', gu: 'Appetisers', hi: 'ऐपेटाइज़र', colorClass: 'cat-btn-appetizers' },
       { id: 'toast', icon: '🍞', en: 'Tost', gu: 'Tost', hi: 'टोस्ट', colorClass: 'cat-btn-toast' },
-      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'सैंडविच', colorClass: 'cat-btn-sandwich' },
+      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સैंडविच', colorClass: 'cat-btn-sandwich' },
       { id: 'club-sandwich', icon: '🥪', en: 'Club sandwich', gu: 'Club sandwich', hi: 'ક્લબ સેન્ડવિચ', colorClass: 'cat-btn-club-sandwich' },
       { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ', colorClass: 'cat-btn-garlic-bread' },
       { id: 'pasta', icon: '🍝', en: 'Indulging Pasta', gu: 'Indulging Pasta', hi: 'પાસ્તા', colorClass: 'cat-btn-pasta' },
@@ -1272,14 +1272,16 @@
       }
     }
 
-    // Universal WhatsApp Launcher
+    // Universal WhatsApp Launcher (Supports regular WhatsApp and WhatsApp Business seamlessly)
     function openWhatsAppUnified(phone, text) {
       const encodedText = encodeURIComponent(text);
       const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
       if (isMobile) {
-        window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
+        // wa.me link automatically triggers whichever WhatsApp app (Regular or Business) is installed on the phone
+        window.location.href = `https://wa.me/${phone}?text=${encodedText}`;
       } else {
+        // For desktop/laptop web browsers
         window.open(`https://web.whatsapp.com/send?phone=${phone}&text=${encodedText}`, '_blank');
       }
     }
