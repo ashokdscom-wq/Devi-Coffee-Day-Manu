@@ -270,7 +270,7 @@
       background: #f7efe6;
       border-radius: 10px;
       padding: 3px 6px;
-      border: 1px solid var(--border-color);
+      border: 1.5px solid var(--border-color);
       flex-shrink: 0;
       gap: 6px;
     }
@@ -482,7 +482,7 @@
       box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
     }
 
-    /* Generic Option Dialog (For Pizza Size Selection) */
+    /* Generic Option Dialog (For Pizza Size & Maggi) */
     .option-dialog {
       background: #ffffff;
       width: 100%;
@@ -614,7 +614,7 @@
     </button>
   </footer>
 
-  <!-- Generic Option Modal (For Maggi & Pizza Size) -->
+  <!-- Generic Option Modal (For Maggi, Pizza Size & Jain Pizza Size) -->
   <div class="modal-overlay center-modal" id="optionModal">
     <div class="option-dialog" onclick="event.stopPropagation()">
       <div id="optionModalIcon" style="font-size:36px; margin-bottom:8px;">🍕</div>
@@ -642,7 +642,7 @@
       <!-- Calculation Details -->
       <div class="bill-summary-box">
         <div class="summary-row">
-          <span id="lblSubtotal">આઇટમ સબટોટल (AMOUNT):</span>
+          <span id="lblSubtotal">આઇટમ સબટોટલ (AMOUNT):</span>
           <span>₹<span id="billSubtotal">0</span></span>
         </div>
         <div class="summary-row">
@@ -697,7 +697,7 @@
         gstInclusive: "(GST સહિત) બિલ જુઓ 📋",
         billTitle: "🧾 તમારો ઓર્ડર (બિલ)",
         tableText: `ટેબલ નંબર: ${tableNumber}`,
-        subtotal: "આઇટમ સબટોટल (AMOUNT):",
+        subtotal: "આઇટમ સબટોટલ (AMOUNT):",
         grandTotal: "કુલ રકમ (GRAND TOTAL):",
         sendBtn: "Send Order on WhatsApp",
         soldOut: "હાજર નથી (Sold Out)",
@@ -767,7 +767,7 @@
     ];
 
     let menuData = [
-      // ====== 1. JAIN ITEMS (27 ITEMS) ======
+      // ====== 1. JAIN ITEMS (Combined Jain Pizzas into single items with size options) ======
       { id: 201, cat: 'jain', isJain: true, name: 'Cheese corn ball (jain)', price: 189, desc: 'Pure Jain preparation with rich melted cheese and golden sweet corn.', badge: 'jain', isAvailable: true },
       { id: 202, cat: 'jain', isJain: true, name: 'Butter toast (jain)', price: 89, desc: 'Crispy butter toasted bread without root vegetables.', badge: 'jain', isAvailable: true },
       { id: 203, cat: 'jain', isJain: true, name: 'Cheese corn toast (jain)', price: 119, desc: 'Jain bread topped with premium cheese and tender sweet corn.', badge: 'jain', isAvailable: true },
@@ -779,14 +779,66 @@
       { id: 209, cat: 'jain', isJain: true, name: 'Alfredo pasta (jain)', price: 279, desc: 'Rich creamy white cheese sauce pasta prepared in pure Jain style.', badge: 'jain', isAvailable: true },
       { id: 210, cat: 'jain', isJain: true, name: 'Bakedo pene muzela pasta (jain)', price: 299, desc: 'Oven-baked pasta loaded with melted Mozzarella cheese (Jain).', badge: 'jain', isAvailable: true },
       { id: 211, cat: 'jain', isJain: true, name: 'Rojato pasta (jain)', price: 309, desc: 'Pink sauce pasta blending creamy cheese & tangy tomato Jain base.', badge: 'jain', isAvailable: true },
-      { id: 212, cat: 'jain', isJain: true, name: 'Classic margareta pizza (8 inch jain)', price: 249, desc: 'Fresh basil, signature Jain tomato sauce and 100% Mozzarella cheese.', badge: 'jain', isAvailable: true },
-      { id: 213, cat: 'jain', isJain: true, name: 'Classic margarita pizza ( 11 inch Jain)', price: 349, desc: 'Large 11" thin crust Margherita with fresh basil and Jain sauce.', badge: 'jain', isAvailable: true },
-      { id: 214, cat: 'jain', isJain: true, name: 'Quatttro fromeggi pizza (8 inch jain)', price: 299, desc: 'Four delicious cheeses: Cheddar, Mozzarella, White cheese & Jalapeno.', badge: 'jain', isAvailable: true },
-      { id: 215, cat: 'jain', isJain: true, name: 'Quattro fromeggi pizza (11 inch jain)', price: 409, desc: 'Large 11" 4-Cheese pizza baked to perfection without root vegetables.', badge: 'jain', isAvailable: true },
-      { id: 216, cat: 'jain', isJain: true, name: '5 peppers pizza (8 inch jain)', price: 319, desc: 'Colorful bell peppers, green chillies and spicy jalapenos on cheese base.', badge: 'jain', isAvailable: true },
-      { id: 217, cat: 'jain', isJain: true, name: '5 peppers pizza (11 inch jain)', price: 419, desc: '11" Pizza loaded with tri-color capsicum, jalapeno & pure Jain cheese.', badge: 'jain', isAvailable: true },
-      { id: 218, cat: 'jain', isJain: true, name: '7 cheese pizza ( 8 inch jain)', price: 399, desc: 'Seven distinct varieties of rich cheeses on crunchy Jain crust.', badge: 'jain', isAvailable: true },
-      { id: 219, cat: 'jain', isJain: true, name: '7 cheese pizza (11 inch jain)', price: 619, desc: 'Ultimate 11" cheese overload pizza with 7 types of cheese (Jain).', badge: 'jain', isAvailable: true },
+      { 
+        id: 212, 
+        cat: 'jain', 
+        isJain: true, 
+        name: 'Classic Margherita Pizza (Jain)', 
+        price: 249, 
+        desc: 'Fresh basil, signature Jain tomato sauce and 100% Mozzarella cheese.', 
+        badge: 'jain', 
+        isAvailable: true,
+        isPizza: true,
+        sizes: [
+          { name: '8 Inch', price: 249 },
+          { name: '11 Inch', price: 349 }
+        ]
+      },
+      { 
+        id: 214, 
+        cat: 'jain', 
+        isJain: true, 
+        name: 'Quattro Fromaggi Pizza (Jain)', 
+        price: 299, 
+        desc: 'Four delicious cheeses baked to perfection without root vegetables (Jain).', 
+        badge: 'jain', 
+        isAvailable: true,
+        isPizza: true,
+        sizes: [
+          { name: '8 Inch', price: 299 },
+          { name: '11 Inch', price: 409 }
+        ]
+      },
+      { 
+        id: 216, 
+        cat: 'jain', 
+        isJain: true, 
+        name: '5 Peppers Pizza (Jain)', 
+        price: 319, 
+        desc: 'Colorful bell peppers, green chillies and spicy jalapenos on Jain cheese base.', 
+        badge: 'jain', 
+        isAvailable: true,
+        isPizza: true,
+        sizes: [
+          { name: '8 Inch', price: 319 },
+          { name: '11 Inch', price: 419 }
+        ]
+      },
+      { 
+        id: 218, 
+        cat: 'jain', 
+        isJain: true, 
+        name: '7 Cheese Pizza (Jain)', 
+        price: 399, 
+        desc: 'Ultimate cheese overload pizza with 7 types of rich cheese (Jain).', 
+        badge: 'jain', 
+        isAvailable: true,
+        isPizza: true,
+        sizes: [
+          { name: '8 Inch', price: 399 },
+          { name: '11 Inch', price: 619 }
+        ]
+      },
       { id: 220, cat: 'jain', isJain: true, isMaggi: true, name: 'Masala meggi ( Meggi masala yes/no Jain)', price: 99, desc: 'Classic noodles in special Jain spices.', badge: 'jain', isAvailable: true },
       { id: 221, cat: 'jain', isJain: true, isMaggi: true, name: 'Butter Meggi ( Meggi masala yes/no Jain)', price: 119, desc: 'Buttery noodles cooked in pure Jain recipe.', badge: 'jain', isAvailable: true },
       { id: 222, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese masala meggi ( Maggi masala yes/no jain)', price: 139, desc: 'Mouthwatering melted cheese Maggi.', badge: 'jain', isAvailable: true },
@@ -930,7 +982,7 @@
       { id: 98, cat: 'pasta', name: 'Rosato Pasta (Pink Sauce)', price: 309, desc: 'Pink sauce herb pasta.', isAvailable: true },
       { id: 99, cat: 'pasta', name: 'Mac-N-Cheese Pasta', price: 329, desc: 'Baked mac and cheddar cheese.', badge: 'special', isAvailable: true },
 
-      // ====== 17. PIZZA (Combined into single items with 8" and 11" options) ======
+      // ====== 17. PIZZA ======
       { 
         id: 101, 
         cat: 'pizza', 
@@ -1238,7 +1290,6 @@
           <div class="soldout-tag">${UI_TRANSLATIONS[currentLang].soldOut}</div>
         `;
 
-        // If it's a pizza, show base starting price
         let priceDisplay = item.isPizza ? `₹${item.price} onwards` : `₹${item.price}`;
 
         div.innerHTML = `
@@ -1524,4 +1575,3 @@
   </script>
 </body>
 </html>
-
