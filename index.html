@@ -22,19 +22,17 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 140px; }
+    body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 120px; overflow-x: hidden; }
 
     /* Header */
     .header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 18px 16px;
+      position: relative;
+      padding: 16px;
       text-align: center;
       color: #fff;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      min-height: 240px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+      min-height: 200px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -59,7 +57,7 @@
     .header-overlay {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%);
       z-index: 2;
     }
 
@@ -69,15 +67,15 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .lang-btn {
       background: rgba(0, 0, 0, 0.6);
       border: 1px solid rgba(255, 255, 255, 0.4);
       color: #ffffff;
-      padding: 4px 14px;
+      padding: 4px 12px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       backdrop-filter: blur(6px);
@@ -89,17 +87,17 @@
     }
 
     .brand-logo-wrap {
-      width: 88px;
-      height: 88px;
-      margin: 0 auto 8px;
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 6px;
       border-radius: 50%;
       background: #eedcc9;
-      border: 2.5px solid var(--accent-gold);
+      border: 2px solid var(--accent-gold);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
     }
     .brand-logo-wrap img {
       width: 100%;
@@ -110,136 +108,179 @@
     }
 
     .brand-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.9);
     }
     .brand-sub {
       font-size: 10px;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       color: var(--accent-gold);
       text-transform: uppercase;
-      margin-top: 2px;
       font-weight: 800;
       text-shadow: 0 2px 6px rgba(0,0,0,0.9);
     }
 
-    /* Service Bar */
+    /* Top Action Bar (Service & Search) */
+    .top-controls {
+      max-width: 900px;
+      margin: auto;
+      padding: 10px 12px 6px;
+    }
     .service-bar {
-      max-width: 720px;
-      margin: 12px auto 0;
-      padding: 0 16px;
       display: flex;
-      gap: 10px;
+      gap: 8px;
+      margin-bottom: 8px;
     }
     .service-btn {
       flex: 1;
       background: #ffffff;
       border: 1.5px solid var(--border-color);
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--primary);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      gap: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
-
-    /* Search Box */
-    .search-box { padding: 12px 16px 4px; max-width: 720px; margin: auto; }
     .search-box input {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
       border: 1.5px solid var(--border-color);
       outline: none;
-      font-size: 14px;
+      font-size: 13px;
       background: #ffffff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
-    /* Categories Navigation */
-    .categories-nav {
+    /* ====== 2-COLUMN MAIN LAYOUT ====== */
+    .layout-wrapper {
       display: flex;
-      overflow-x: auto;
-      padding: 10px 16px;
-      gap: 8px;
+      max-width: 900px;
+      margin: 8px auto 0;
+      height: calc(100vh - 250px);
+      min-height: 480px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Left Sidebar: Categories */
+    .categories-nav {
+      width: 98px;
+      min-width: 98px;
+      background: #f4ede4;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 6px 4px 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      border-right: 1.5px solid var(--border-color);
       scrollbar-width: none;
-      max-width: 720px;
-      margin: auto;
     }
     .categories-nav::-webkit-scrollbar { display: none; }
-    
+
     .cat-btn {
-      white-space: nowrap;
-      padding: 9px 16px;
-      border-radius: 22px;
-      font-size: 13px;
-      font-weight: 800;
+      width: 100%;
+      border-radius: 12px;
+      padding: 8px 4px;
       cursor: pointer;
+      text-align: center;
       transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
       border: 1.5px solid transparent;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
     }
-    .cat-btn:hover { transform: translateY(-1px); }
+    .cat-btn .cat-icon { font-size: 20px; line-height: 1; }
+    .cat-btn .cat-name {
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.15;
+      word-break: break-word;
+    }
 
-    /* Category Specific Color Schemes */
-    .cat-btn-jain          { background: #ecfdf5; color: #047857; border-color: #a7f3d0; }
-    .cat-btn-hot-coffee    { background: #fffbeb; color: #b45309; border-color: #fde68a; }
-    .cat-btn-hot-chocolate { background: #fdf2f8; color: #be185d; border-color: #fbcfe8; }
-    .cat-btn-cold-coffee   { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
-    .cat-btn-ice-blended   { background: #ecfeff; color: #0e7490; border-color: #a5f3fc; }
-    .cat-btn-ice-latte     { background: #eff6ff; color: #1d4ed8; border-color: #93c5fd; }
-    .cat-btn-mocktails     { background: #fff1f2; color: #e11d48; border-color: #fecdd3; }
-    .cat-btn-thick-shakes  { background: #faf5ff; color: #7e22ce; border-color: #e9d5ff; }
-    .cat-btn-iced-coffee   { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; }
-    .cat-btn-iced-tea      { background: #fefce8; color: #a16207; border-color: #fef08a; }
-    .cat-btn-appetizers    { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
-    .cat-btn-toast         { background: #fef3c7; color: #92400e; border-color: #fde68a; }
-    .cat-btn-sandwich      { background: #f1f5f9; color: #334155; border-color: #cbd5e1; }
-    .cat-btn-club-sandwich { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
-    .cat-btn-garlic-bread  { background: #fffbeb; color: #d97706; border-color: #fde68a; }
-    .cat-btn-pasta         { background: #fef2f2; color: #991b1b; border-color: #fca5a5; }
-    .cat-btn-pizza         { background: #ffedd5; color: #ea580c; border-color: #fdba74; }
-    .cat-btn-maggi         { background: #fef9c3; color: #854d0e; border-color: #fde047; }
-    .cat-btn-nachos        { background: #fef08a; color: #713f12; border-color: #facc15; }
-    .cat-btn-rice-bowl     { background: #ecfdf5; color: #065f46; border-color: #6ee7b7; }
-    .cat-btn-dessert       { background: #fdf2f8; color: #9d174d; border-color: #f472b6; }
-    .cat-btn-extra         { background: #f3f4f6; color: #374151; border-color: #d1d5db; }
+    /* Distinct Colors for Categories */
+    .cat-btn-jain          { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+    .cat-btn-hot-coffee    { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+    .cat-btn-hot-chocolate { background: #fce7f3; color: #9d174d; border-color: #fbcfe8; }
+    .cat-btn-cold-coffee   { background: #e0e7ff; color: #3730a3; border-color: #c7d2fe; }
+    .cat-btn-ice-blended   { background: #cffafe; color: #155e75; border-color: #a5f3fc; }
+    .cat-btn-ice-latte     { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+    .cat-btn-mocktails     { background: #ffe4e6; color: #be123c; border-color: #fecdd3; }
+    .cat-btn-thick-shakes  { background: #ede9fe; color: #5b21b6; border-color: #ddd6fe; }
+    .cat-btn-iced-coffee   { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+    .cat-btn-iced-tea      { background: #fef9c3; color: #854d0e; border-color: #fef08a; }
+    .cat-btn-appetizers    { background: #ffedd5; color: #9a3412; border-color: #fed7aa; }
+    .cat-btn-toast         { background: #fae8ff; color: #86198f; border-color: #f5d0fe; }
+    .cat-btn-sandwich      { background: #e2e8f0; color: #334155; border-color: #cbd5e1; }
+    .cat-btn-club-sandwich { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+    .cat-btn-garlic-bread  { background: #fef08a; color: #713f12; border-color: #fde047; }
+    .cat-btn-pasta         { background: #ffe4e6; color: #881337; border-color: #fda4af; }
+    .cat-btn-pizza         { background: #ffedd5; color: #c2410c; border-color: #fdba74; }
+    .cat-btn-maggi         { background: #fef08a; color: #854d0e; border-color: #eab308; }
+    .cat-btn-nachos        { background: #fef9c3; color: #a16207; border-color: #fde047; }
+    .cat-btn-rice-bowl     { background: #dcfce7; color: #14532d; border-color: #86efac; }
+    .cat-btn-dessert       { background: #fdf2f8; color: #be185d; border-color: #f472b6; }
+    .cat-btn-extra         { background: #f3f4f6; color: #1f2937; border-color: #d1d5db; }
 
+    /* Active Category Style */
     .cat-btn.active {
       background: var(--primary) !important;
       color: #ffffff !important;
-      border-color: var(--primary) !important;
-      box-shadow: 0 4px 10px rgba(31, 13, 5, 0.3) !important;
+      border-color: var(--accent-gold) !important;
+      transform: scale(0.96);
+      box-shadow: 0 4px 10px rgba(31, 13, 5, 0.35);
+    }
+    .cat-btn.active .cat-name { color: #ffffff !important; }
+
+    /* Right Side: Menu Items Content */
+    .menu-scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 10px 80px;
     }
 
-    /* Menu Container & Cards */
-    .menu-container { max-width: 720px; margin: auto; padding: 6px 16px; }
+    .active-cat-header {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1.5px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .menu-card {
       background: var(--card-bg);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      padding: 12px 10px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       border: 1.5px solid var(--border-color);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
     .menu-card.disabled { opacity: 0.55; background: #f1ece7; }
     .item-details { flex: 1; min-width: 0; }
-    .item-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; flex-wrap: wrap; }
+    .item-top { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; flex-wrap: wrap; }
     .veg-icon {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       border: 1.5px solid var(--veg-green);
       display: inline-flex;
       align-items: center;
@@ -247,11 +288,11 @@
       border-radius: 3px;
       flex-shrink: 0;
     }
-    .veg-icon span { width: 7px; height: 7px; background: var(--veg-green); border-radius: 50%; }
+    .veg-icon span { width: 6px; height: 6px; background: var(--veg-green); border-radius: 50%; }
     .item-badge {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 6px;
+      font-size: 9px;
+      padding: 2px 5px;
+      border-radius: 5px;
       font-weight: 800;
       text-transform: uppercase;
     }
@@ -259,74 +300,70 @@
     .badge-special { background: #fee2e2; color: #991b1b; }
     .badge-jain { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
 
-    .item-name { font-size: 15px; font-weight: 700; color: #111111; word-break: break-word; }
-    .item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.35; margin: 3px 0 6px; }
-    .item-price { font-size: 16px; font-weight: 800; color: var(--primary); }
+    .item-name { font-size: 14px; font-weight: 700; color: #111111; word-break: break-word; }
+    .item-desc { font-size: 11px; color: var(--text-muted); line-height: 1.3; margin: 2px 0 5px; }
+    .item-price { font-size: 15px; font-weight: 800; color: var(--primary); }
 
     /* Quantity Controls */
     .qty-controls {
       display: flex;
       align-items: center;
       background: #f7efe6;
-      border-radius: 10px;
-      padding: 3px 6px;
+      border-radius: 8px;
+      padding: 2px 4px;
       border: 1.5px solid var(--border-color);
       flex-shrink: 0;
-      gap: 6px;
+      gap: 4px;
     }
     .qty-btn {
       background: #ffffff;
       color: var(--primary);
       border: 1px solid #d9c7b5;
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      font-size: 16px;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      font-size: 15px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .qty-count { min-width: 24px; text-align: center; font-weight: 800; font-size: 14px; color: var(--primary); }
+    .qty-count { min-width: 20px; text-align: center; font-weight: 800; font-size: 13px; color: var(--primary); }
     .soldout-tag {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       color: #dc2626;
       background: #fef2f2;
-      padding: 5px 8px;
-      border-radius: 6px;
+      padding: 4px 6px;
+      border-radius: 5px;
       border: 1px solid #fecaca;
       flex-shrink: 0;
     }
 
-    /* Note Input & Footer */
-    .note-section { max-width: 720px; margin: 16px auto 0; padding: 0 16px; }
+    /* Note & Social Footer */
+    .note-section { padding: 8px 4px; }
     .note-section input {
       width: 100%;
-      padding: 12px 16px;
-      border-radius: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
       border: 1.5px solid var(--border-color);
       background: #ffffff;
-      font-size: 13px;
+      font-size: 12px;
       outline: none;
     }
     .social-footer {
-      max-width: 720px;
-      margin: 18px auto 10px;
       text-align: center;
-      padding: 0 16px;
-      display: flex;
-      justify-content: center;
+      padding: 10px 4px;
     }
     .instagram-link {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 13px;
+      gap: 5px;
+      font-size: 12px;
       font-weight: 700;
       text-decoration: none;
-      padding: 7px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
       color: #9d2d6d;
       background: #fdf0f7;
@@ -340,14 +377,14 @@
       left: 0;
       right: 0;
       background: #ffffff;
-      padding: 10px 18px;
+      padding: 8px 16px;
       box-shadow: 0 -4px 15px rgba(0,0,0,0.12);
       border-top: 1.5px solid var(--border-color);
       z-index: 999;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      max-width: 720px;
+      max-width: 900px;
       margin: auto;
     }
     .cart-info {
@@ -355,8 +392,8 @@
       display: flex;
       flex-direction: column;
     }
-    .cart-total-price { font-size: 18px; font-weight: 800; color: var(--primary); }
-    .cart-gst-hint { font-size: 10px; color: var(--text-muted); font-weight: 700; margin-top: -2px; }
+    .cart-total-price { font-size: 17px; font-weight: 800; color: var(--primary); }
+    .cart-gst-hint { font-size: 10px; color: var(--text-muted); font-weight: 700; }
     .view-bill-btn {
       font-size: 11px;
       color: var(--primary);
@@ -367,13 +404,13 @@
       background: var(--whatsapp);
       color: #ffffff;
       border: none;
-      padding: 11px 20px;
-      border-radius: 12px;
-      font-size: 15px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 14px;
       font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
     }
@@ -399,7 +436,7 @@
       width: 100%;
       max-width: 600px;
       border-radius: 20px 20px 0 0;
-      padding: 20px 18px 24px;
+      padding: 18px 16px 20px;
       max-height: 85vh;
       overflow-y: auto;
       animation: slideUp 0.3s ease-out;
@@ -412,23 +449,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1.5px dashed var(--border-color);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
-    .bill-header h3 { font-size: 18px; color: var(--primary); font-weight: 800; }
+    .bill-header h3 { font-size: 17px; color: var(--primary); font-weight: 800; }
     .btn-close {
       background: #f1ece7;
       border: none;
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       cursor: pointer;
       color: var(--primary);
     }
-    .bill-items-list { margin-bottom: 16px; }
+    .bill-items-list { margin-bottom: 14px; }
     .bill-item-row {
       display: flex;
       justify-content: space-between;
@@ -437,31 +474,31 @@
       border-bottom: 1px solid #f4ece4;
     }
     .bill-item-info { flex: 1; }
-    .bill-item-name { font-size: 14px; font-weight: 700; color: #222; }
+    .bill-item-name { font-size: 13px; font-weight: 700; color: #222; }
     .bill-item-opt { font-size: 11px; color: #d97706; font-weight: 700; }
     .bill-item-price { font-size: 12px; color: var(--text-muted); }
     .bill-summary-box {
       background: #fdfaf6;
       border: 1.5px solid var(--border-color);
-      border-radius: 12px;
-      padding: 12px 14px;
+      border-radius: 10px;
+      padding: 10px 12px;
       margin-top: 10px;
     }
     .summary-row {
       display: flex;
       justify-content: space-between;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     .summary-row.total-row {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
       color: var(--primary);
       border-top: 1.5px dashed var(--border-color);
       padding-top: 8px;
-      margin-top: 8px;
+      margin-top: 6px;
       margin-bottom: 0;
     }
     .btn-order-modal {
@@ -469,55 +506,37 @@
       background: var(--whatsapp);
       color: #ffffff;
       border: none;
-      padding: 14px;
-      border-radius: 14px;
-      font-size: 16px;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      margin-top: 16px;
+      margin-top: 14px;
       box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
     }
 
-    /* Generic Option Dialog (For Pizza Size & Maggi) */
+    /* Option Modal */
     .option-dialog {
       background: #ffffff;
       width: 100%;
-      max-width: 360px;
-      border-radius: 20px;
-      padding: 22px 20px;
+      max-width: 340px;
+      border-radius: 16px;
+      padding: 20px 16px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      animation: popIn 0.25s ease-out;
     }
-    @keyframes popIn {
-      from { transform: scale(0.85); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    .option-dialog h4 {
-      font-size: 17px;
-      color: var(--primary);
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .option-dialog p {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 18px;
-    }
-    .option-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .option-dialog h4 { font-size: 16px; color: var(--primary); font-weight: 800; margin-bottom: 5px; }
+    .option-dialog p { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+    .option-buttons { display: flex; flex-direction: column; gap: 8px; }
     .btn-option-item {
       width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       border: 1.5px solid var(--border-color);
@@ -526,12 +545,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all 0.2s;
-    }
-    .btn-option-item:hover {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
     }
   </style>
 </head>
@@ -545,16 +558,6 @@
       <div class="slide-img" style="background-image: url('banner3.jpg'), url('https://images.unsplash.com/photo-1541167760496-1628856ab772?w=800');"></div>
       <div class="slide-img" style="background-image: url('banner4.jpg');"></div>
       <div class="slide-img" style="background-image: url('banner5.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner6.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner7.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner8.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner9.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner10.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner11.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner12.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner13.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner14.jpg');"></div>
-      <div class="slide-img" style="background-image: url('banner15.jpg');"></div>
     </div>
     <div class="header-overlay"></div>
 
@@ -573,33 +576,39 @@
     </div>
   </header>
 
-  <!-- Service Buttons -->
-  <div class="service-bar">
-    <button class="service-btn" onclick="sendServiceReq('water')">💧 <span id="lblWater">પાણી મંગાવો</span></button>
-    <button class="service-btn" onclick="sendServiceReq('waiter')">🛎️ <span id="lblWaiter">વેઈટર બોલાવો</span></button>
+  <!-- Top Controls (Service & Search) -->
+  <div class="top-controls">
+    <div class="service-bar">
+      <button class="service-btn" onclick="sendServiceReq('water')">💧 <span id="lblWater">પાણી મંગાવો</span></button>
+      <button class="service-btn" onclick="sendServiceReq('waiter')">🛎️ <span id="lblWaiter">વેઈટર બોલાવો</span></button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 મેનુમાં વાનગી શોધો..." onkeyup="handleSearch()">
+    </div>
   </div>
 
-  <!-- Search -->
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 મેનુમાં વાનગી શોધો..." onkeyup="renderMenu()">
-  </div>
+  <!-- 2-Column Main Layout: Left Vertical Categories, Right Menu Content -->
+  <div class="layout-wrapper">
+    <!-- Left Vertical Category Sidebar -->
+    <nav class="categories-nav" id="categoryNav"></nav>
 
-  <!-- Categories Navigation -->
-  <nav class="categories-nav" id="categoryNav"></nav>
+    <!-- Right Scrollable Menu Items -->
+    <main class="menu-scroll-area">
+      <div class="active-cat-header" id="currentCategoryTitle">🌱 Jain</div>
+      <div id="menuList"></div>
 
-  <!-- Menu Items List -->
-  <main class="menu-container" id="menuList"></main>
+      <!-- Note Input -->
+      <div class="note-section">
+        <input type="text" id="orderNote" placeholder="✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)">
+      </div>
 
-  <!-- Note Input -->
-  <div class="note-section">
-    <input type="text" id="orderNote" placeholder="✍️ કોઈ ખાસ નોંધ? (દા.ત. Less Spicy, Jain)">
-  </div>
-
-  <!-- Social Link -->
-  <div class="social-footer">
-    <a href="https://instagram.com/devicoffeeday" target="_blank" class="instagram-link">
-      📸 Instagram: <b>@devicoffeeday</b>
-    </a>
+      <!-- Social Footer -->
+      <div class="social-footer">
+        <a href="https://instagram.com/devicoffeeday" target="_blank" class="instagram-link">
+          📸 Instagram: <b>@devicoffeeday</b>
+        </a>
+      </div>
+    </main>
   </div>
 
   <!-- Bottom Cart Bar -->
@@ -614,15 +623,13 @@
     </button>
   </footer>
 
-  <!-- Generic Option Modal (For Maggi, Pizza Size & Jain Pizza Size) -->
+  <!-- Generic Option Modal (Maggi & Pizza Size) -->
   <div class="modal-overlay center-modal" id="optionModal">
     <div class="option-dialog" onclick="event.stopPropagation()">
-      <div id="optionModalIcon" style="font-size:36px; margin-bottom:8px;">🍕</div>
+      <div id="optionModalIcon" style="font-size:32px; margin-bottom:6px;">🍕</div>
       <h4 id="optionModalItemName">Item Name</h4>
       <p id="optionModalDesc">કૃપા કરીને સાઈઝ પસંદ કરો:</p>
-      <div class="option-buttons" id="optionButtonsContainer">
-        <!-- Dynamically filled buttons -->
-      </div>
+      <div class="option-buttons" id="optionButtonsContainer"></div>
     </div>
   </div>
 
@@ -740,24 +747,24 @@
       }
     };
 
-    // Categories Order
+    // Categories Order with distinct color classes
     const categoriesList = [
       { id: 'jain', icon: '🌱', en: 'Jain', gu: 'Jain', hi: 'जैन', colorClass: 'cat-btn-jain' },
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी', colorClass: 'cat-btn-hot-coffee' },
-      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Chocolate', gu: 'Hot Chocolate', hi: 'હૉટ ચોકલેટ', colorClass: 'cat-btn-hot-chocolate' },
-      { id: 'cold-coffee', icon: '🥤', en: 'Cold coffee', gu: 'Cold coffee', hi: 'कोल्ड कॉफ़ी', colorClass: 'cat-btn-cold-coffee' },
-      { id: 'ice-blended', icon: '🧊', en: 'Ice - Blended', gu: 'Ice - Blended', hi: 'आइस ब्लेंडेड', colorClass: 'cat-btn-ice-blended' },
+      { id: 'hot-chocolate', icon: '🍫', en: 'Hot Choco', gu: 'Hot Choco', hi: 'हૉટ ચોકલેટ', colorClass: 'cat-btn-hot-chocolate' },
+      { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी', colorClass: 'cat-btn-cold-coffee' },
+      { id: 'ice-blended', icon: '🧊', en: 'Ice Blended', gu: 'Ice Blended', hi: 'आइस ब्लेंडेड', colorClass: 'cat-btn-ice-blended' },
       { id: 'ice-latte', icon: '🧋', en: 'Ice Latte', gu: 'Ice Latte', hi: 'आइस लाटे', colorClass: 'cat-btn-ice-latte' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल', colorClass: 'cat-btn-mocktails' },
       { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स', colorClass: 'cat-btn-thick-shakes' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी', colorClass: 'cat-btn-iced-coffee' },
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी', colorClass: 'cat-btn-iced-tea' },
       { id: 'appetizers', icon: '🍟', en: 'Appetisers', gu: 'Appetisers', hi: 'ऐपेटाइज़र', colorClass: 'cat-btn-appetizers' },
-      { id: 'toast', icon: '🍞', en: 'Tost', gu: 'Tost', hi: 'टोस्ट', colorClass: 'cat-btn-toast' },
-      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સैंडविच', colorClass: 'cat-btn-sandwich' },
-      { id: 'club-sandwich', icon: '🥪', en: 'Club sandwich', gu: 'Club sandwich', hi: 'ક્લબ સેન્ડવિચ', colorClass: 'cat-btn-club-sandwich' },
+      { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'टोस्ट', colorClass: 'cat-btn-toast' },
+      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'सैंडविच', colorClass: 'cat-btn-sandwich' },
+      { id: 'club-sandwich', icon: '🥪', en: 'Club Sand.', gu: 'Club Sand.', hi: 'ક્લબ સેન્ડવિચ', colorClass: 'cat-btn-club-sandwich' },
       { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ', colorClass: 'cat-btn-garlic-bread' },
-      { id: 'pasta', icon: '🍝', en: 'Indulging Pasta', gu: 'Indulging Pasta', hi: 'પાસ્તા', colorClass: 'cat-btn-pasta' },
+      { id: 'pasta', icon: '🍝', en: 'Pasta', gu: 'Pasta', hi: 'પાસ્તા', colorClass: 'cat-btn-pasta' },
       { id: 'pizza', icon: '🍕', en: 'Pizza', gu: 'Pizza', hi: 'पिज़्ज़ा', colorClass: 'cat-btn-pizza' },
       { id: 'maggi', icon: '🍜', en: 'Maggi', gu: 'Maggi', hi: 'मैगी', colorClass: 'cat-btn-maggi' },
       { id: 'nachos', icon: '🧀', en: 'Nachos', gu: 'Nachos', hi: 'નાચોસ', colorClass: 'cat-btn-nachos' },
@@ -767,7 +774,7 @@
     ];
 
     let menuData = [
-      // ====== 1. JAIN ITEMS (Combined Jain Pizzas into single items with size options) ======
+      // 1. JAIN ITEMS
       { id: 201, cat: 'jain', isJain: true, name: 'Cheese corn ball (jain)', price: 189, desc: 'Pure Jain preparation with rich melted cheese and golden sweet corn.', badge: 'jain', isAvailable: true },
       { id: 202, cat: 'jain', isJain: true, name: 'Butter toast (jain)', price: 89, desc: 'Crispy butter toasted bread without root vegetables.', badge: 'jain', isAvailable: true },
       { id: 203, cat: 'jain', isJain: true, name: 'Cheese corn toast (jain)', price: 119, desc: 'Jain bread topped with premium cheese and tender sweet corn.', badge: 'jain', isAvailable: true },
@@ -789,10 +796,7 @@
         badge: 'jain', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 249 },
-          { name: '11 Inch', price: 349 }
-        ]
+        sizes: [ { name: '8 Inch', price: 249 }, { name: '11 Inch', price: 349 } ]
       },
       { 
         id: 214, 
@@ -804,10 +808,7 @@
         badge: 'jain', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 299 },
-          { name: '11 Inch', price: 409 }
-        ]
+        sizes: [ { name: '8 Inch', price: 299 }, { name: '11 Inch', price: 409 } ]
       },
       { 
         id: 216, 
@@ -819,10 +820,7 @@
         badge: 'jain', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 319 },
-          { name: '11 Inch', price: 419 }
-        ]
+        sizes: [ { name: '8 Inch', price: 319 }, { name: '11 Inch', price: 419 } ]
       },
       { 
         id: 218, 
@@ -834,21 +832,18 @@
         badge: 'jain', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 399 },
-          { name: '11 Inch', price: 619 }
-        ]
+        sizes: [ { name: '8 Inch', price: 399 }, { name: '11 Inch', price: 619 } ]
       },
-      { id: 220, cat: 'jain', isJain: true, isMaggi: true, name: 'Masala meggi ( Meggi masala yes/no Jain)', price: 99, desc: 'Classic noodles in special Jain spices.', badge: 'jain', isAvailable: true },
-      { id: 221, cat: 'jain', isJain: true, isMaggi: true, name: 'Butter Meggi ( Meggi masala yes/no Jain)', price: 119, desc: 'Buttery noodles cooked in pure Jain recipe.', badge: 'jain', isAvailable: true },
-      { id: 222, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese masala meggi ( Maggi masala yes/no jain)', price: 139, desc: 'Mouthwatering melted cheese Maggi.', badge: 'jain', isAvailable: true },
-      { id: 223, cat: 'jain', isJain: true, isMaggi: true, name: 'Vegetable meggi ( Maggi masala yes/no jain)', price: 149, desc: 'Tossed with capsicum, corn and tomatoes.', badge: 'jain', isAvailable: true },
-      { id: 224, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese Vegetable meggi ( Maggi masala yes/no jain)', price: 169, desc: 'Loaded with rich cheese and fresh Jain veggies.', badge: 'jain', isAvailable: true },
+      { id: 220, cat: 'jain', isJain: true, isMaggi: true, name: 'Masala meggi (Jain)', price: 99, desc: 'Classic noodles in special Jain spices.', badge: 'jain', isAvailable: true },
+      { id: 221, cat: 'jain', isJain: true, isMaggi: true, name: 'Butter Meggi (Jain)', price: 119, desc: 'Buttery noodles cooked in pure Jain recipe.', badge: 'jain', isAvailable: true },
+      { id: 222, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese masala meggi (Jain)', price: 139, desc: 'Mouthwatering melted cheese Maggi.', badge: 'jain', isAvailable: true },
+      { id: 223, cat: 'jain', isJain: true, isMaggi: true, name: 'Vegetable meggi (Jain)', price: 149, desc: 'Tossed with capsicum, corn and tomatoes.', badge: 'jain', isAvailable: true },
+      { id: 224, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese Vegetable meggi (Jain)', price: 169, desc: 'Loaded with rich cheese and fresh Jain veggies.', badge: 'jain', isAvailable: true },
       { id: 225, cat: 'jain', isJain: true, name: 'Cheese nachos (jain)', price: 179, desc: 'Crisp nachos served with fresh Jain tomato salsa & warm cheese sauce.', badge: 'jain', isAvailable: true },
       { id: 226, cat: 'jain', isJain: true, name: 'Italian Risotto (jain)', price: 229, desc: 'Creamy Italian rice with sweet corn, capsicum & white cheese gravy.', badge: 'jain', isAvailable: true },
       { id: 227, cat: 'jain', isJain: true, name: 'Pink Risotto (jain)', price: 249, desc: 'Creamy pink sauce risotto with pure Jain herbs and veggies.', badge: 'jain', isAvailable: true },
 
-      // ====== 2. HOT COFFEE ======
+      // 2. HOT COFFEE
       { id: 1, cat: 'hot-coffee', name: 'Espresso', price: 79, desc: 'Creamy, brewed hot under pressure.', isAvailable: true },
       { id: 2, cat: 'hot-coffee', name: 'Affogato', price: 149, desc: 'Espresso poured over vanilla ice cream.', isAvailable: true },
       { id: 3, cat: 'hot-coffee', name: 'Hot Americano', price: 159, desc: 'Brewed coffee with hot water.', isAvailable: true },
@@ -859,13 +854,13 @@
       { id: 8, cat: 'hot-coffee', name: 'Hazelnut Mocha', price: 249, desc: 'Mocha & nutty hazelnut sweetness.', isAvailable: true },
       { id: 9, cat: 'hot-coffee', name: 'Spanish Latte', price: 249, desc: 'Latte with sweet condensed milk.', badge: 'special', isAvailable: true },
 
-      // ====== 3. HOT CHOCOLATE ======
+      // 3. HOT CHOCOLATE
       { id: 10, cat: 'hot-chocolate', name: 'Signature Hot Chocolate', price: 229, desc: 'Classic thick cocoa delight.', badge: 'bestseller', isAvailable: true },
       { id: 11, cat: 'hot-chocolate', name: 'Hazelnut Hot Chocolate', price: 239, desc: 'Hot chocolate with hazelnut.', isAvailable: true },
       { id: 12, cat: 'hot-chocolate', name: 'Orange Hot Chocolate', price: 249, desc: 'Hot chocolate with hint of orange.', isAvailable: true },
       { id: 13, cat: 'hot-chocolate', name: 'Nutella Hot Chocolate', price: 279, desc: 'Blended with alluring Nutella.', isAvailable: true },
 
-      // ====== 4. COLD COFFEE ======
+      // 4. COLD COFFEE
       { id: 14, cat: 'cold-coffee', name: 'Classic Cold Coffee', price: 199, desc: 'Thick and creamy chilled coffee.', badge: 'bestseller', isAvailable: true },
       { id: 15, cat: 'cold-coffee', name: 'Mocha Cold Coffee', price: 209, desc: 'Cold coffee with chocolate syrup.', isAvailable: true },
       { id: 16, cat: 'cold-coffee', name: 'Oreo Coffee', price: 219, desc: 'Blended with Oreo biscuits.', isAvailable: true },
@@ -875,19 +870,19 @@
       { id: 20, cat: 'cold-coffee', name: 'Lotus Biscoff Cold Coffee', price: 249, desc: 'Combined with Lotus Biscoff cookies.', badge: 'special', isAvailable: true },
       { id: 21, cat: 'cold-coffee', name: 'Add On: Espresso (30 ml)', price: 49, desc: 'Extra fresh double shot espresso.', isAvailable: true },
 
-      // ====== 5. ICE - BLENDED ======
+      // 5. ICE BLENDED
       { id: 22, cat: 'ice-blended', name: 'Oreo Ice-Blended', price: 169, desc: 'Icy coffee blended with Oreo.', isAvailable: true },
       { id: 23, cat: 'ice-blended', name: 'Caramel Ice-Blended', price: 179, desc: 'Coffee swirled with caramel.', isAvailable: true },
       { id: 24, cat: 'ice-blended', name: 'Hazelnut Ice-Blended', price: 189, desc: 'Nutty bliss iced coffee.', isAvailable: true },
 
-      // ====== 6. ICE LATTE ======
-      { id: 250, cat: 'ice-latte', name: 'Honey Ice Latte', price: 199, desc: 'Refreshing iced latte sweetened with natural honey and chilled milk over ice.', badge: 'special', isAvailable: true },
-      { id: 251, cat: 'ice-latte', name: 'Hezulnet Ice Latte', price: 199, desc: 'Chilled espresso and milk infused with rich nutty hazelnut flavor over ice.', badge: 'bestseller', isAvailable: true },
-      { id: 252, cat: 'ice-latte', name: 'Tiramisu Ice Latte', price: 199, desc: 'Iced coffee blended with classic Italian tiramisu notes and creamy milk.', isAvailable: true },
-      { id: 253, cat: 'ice-latte', name: 'Vanilla Ice Latte', price: 199, desc: 'Smooth chilled espresso combined with sweet vanilla syrup and fresh milk.', isAvailable: true },
-      { id: 254, cat: 'ice-latte', name: 'Caramel Ice Latte', price: 199, desc: 'Chilled espresso and milk layered with rich sweet caramel syrup over ice.', badge: 'special', isAvailable: true },
+      // 6. ICE LATTE
+      { id: 250, cat: 'ice-latte', name: 'Honey Ice Latte', price: 199, desc: 'Refreshing iced latte sweetened with honey over ice.', badge: 'special', isAvailable: true },
+      { id: 251, cat: 'ice-latte', name: 'Hazelnut Ice Latte', price: 199, desc: 'Chilled espresso and milk infused with hazelnut flavor.', badge: 'bestseller', isAvailable: true },
+      { id: 252, cat: 'ice-latte', name: 'Tiramisu Ice Latte', price: 199, desc: 'Iced coffee blended with classic tiramisu notes.', isAvailable: true },
+      { id: 253, cat: 'ice-latte', name: 'Vanilla Ice Latte', price: 199, desc: 'Smooth chilled espresso combined with vanilla syrup.', isAvailable: true },
+      { id: 254, cat: 'ice-latte', name: 'Caramel Ice Latte', price: 199, desc: 'Chilled espresso and milk layered with rich caramel.', badge: 'special', isAvailable: true },
 
-      // ====== 7. MOCKTAILS ======
+      // 7. MOCKTAILS
       { id: 25, cat: 'mocktails', name: 'Fresh Lime Soda', price: 149, desc: 'Classic lemon soda.', isAvailable: true },
       { id: 26, cat: 'mocktails', name: 'Chiaseeds Lemonade', price: 179, desc: 'Lemonade with chia seeds.', isAvailable: true },
       { id: 27, cat: 'mocktails', name: 'Virgin Mojito', price: 199, desc: 'Lemon & fresh mint mojito.', badge: 'bestseller', isAvailable: true },
@@ -903,7 +898,7 @@
       { id: 37, cat: 'mocktails', name: 'Berry Mist', price: 249, desc: 'Berries and lemon juice with soda.', isAvailable: true },
       { id: 38, cat: 'mocktails', name: 'Redbull Mojito', price: 259, desc: 'Red Bull with mojito mint.', isAvailable: true },
 
-      // ====== 8. THICK SHAKES ======
+      // 8. THICK SHAKES
       { id: 39, cat: 'thick-shakes', name: 'Kitkat Thick Shake', price: 209, desc: 'KitKat blended with choco ice cream.', isAvailable: true },
       { id: 40, cat: 'thick-shakes', name: 'Snackers Doodles', price: 219, desc: 'Cookies and cream shake.', isAvailable: true },
       { id: 41, cat: 'thick-shakes', name: 'Strawberry Thick Shake', price: 229, desc: 'Sweet strawberry shake.', isAvailable: true },
@@ -916,7 +911,7 @@
       { id: 48, cat: 'thick-shakes', name: 'Lotus Biscoff Shake', price: 269, desc: 'Lotus Biscoff cookies shake.', badge: 'bestseller', isAvailable: true },
       { id: 49, cat: 'thick-shakes', name: 'Choco Dark Indulgence', price: 269, desc: 'Dark chocolate & vanilla shake.', isAvailable: true },
 
-      // ====== 9. ICED COFFEE ======
+      // 9. ICED COFFEE
       { id: 50, cat: 'iced-coffee', name: 'Iced Americano', price: 159, desc: 'Espresso over ice.', isAvailable: true },
       { id: 51, cat: 'iced-coffee', name: 'Espresso Tonic', price: 209, desc: 'Espresso with tonic water.', isAvailable: true },
       { id: 52, cat: 'iced-coffee', name: 'Cranberry Iced Coffee', price: 219, desc: 'Coffee with cranberry twist.', isAvailable: true },
@@ -924,14 +919,14 @@
       { id: 54, cat: 'iced-coffee', name: 'Coffee Peach Spritzer', price: 239, desc: 'Coffee infused with peach.', isAvailable: true },
       { id: 55, cat: 'iced-coffee', name: 'Red Bull Coffee', price: 269, desc: 'Iced coffee with Red Bull.', isAvailable: true },
 
-      // ====== 10. ICED TEA ======
+      // 10. ICED TEA
       { id: 56, cat: 'iced-tea', name: 'Lemon Iced Tea', price: 169, desc: 'Brewed tea with tangy lemon.', isAvailable: true },
       { id: 57, cat: 'iced-tea', name: 'Peach Iced Tea', price: 179, desc: 'Fruity tea with peach syrup.', isAvailable: true },
       { id: 58, cat: 'iced-tea', name: 'Strawberry Iced Tea', price: 199, desc: 'Strawberry infused iced tea.', isAvailable: true },
       { id: 59, cat: 'iced-tea', name: 'Passion Fruit Iced Tea', price: 209, desc: 'Passion fruit blended iced tea.', isAvailable: true },
       { id: 60, cat: 'iced-tea', name: 'Cranberry Iced Tea', price: 219, desc: 'Cranberry infused iced tea.', isAvailable: true },
 
-      // ====== 11. APPETISERS ======
+      // 11. APPETISERS
       { id: 61, cat: 'appetizers', name: 'Salted Fries', price: 149, desc: 'Crispy salted fries.', isAvailable: true },
       { id: 62, cat: 'appetizers', name: 'Peri Peri Fries', price: 169, desc: 'Spicy peri peri fries.', isAvailable: true },
       { id: 63, cat: 'appetizers', name: 'Cheese Corn Balls', price: 189, desc: 'Cheese corn bites.', badge: 'bestseller', isAvailable: true },
@@ -941,7 +936,7 @@
       { id: 67, cat: 'appetizers', name: 'Veggie Fingers', price: 219, desc: 'Crispy vegetable sticks.', isAvailable: true },
       { id: 68, cat: 'appetizers', name: 'Coin Pizza', price: 249, desc: 'Cheesy pocket pizza bites.', isAvailable: true },
 
-      // ====== 12. TOST ======
+      // 12. TOAST
       { id: 69, cat: 'toast', name: 'Butter Toast', price: 89, desc: 'Classic butter toast.', isAvailable: true },
       { id: 70, cat: 'toast', name: 'Cheese Garlic Toast', price: 99, desc: 'Cheese and garlic toast.', isAvailable: true },
       { id: 71, cat: 'toast', name: 'Cheese Chilli Garlic Toast', price: 109, desc: 'Zesty chili garlic toast.', isAvailable: true },
@@ -949,7 +944,7 @@
       { id: 73, cat: 'toast', name: 'Italian Toast', price: 139, desc: 'Italian herb toast.', isAvailable: true },
       { id: 74, cat: 'toast', name: 'Cheesy Peri Peri Paneer Toast', price: 149, desc: 'Paneer toast with peri peri.', isAvailable: true },
 
-      // ====== 13. SANDWICH ======
+      // 13. SANDWICH
       { id: 75, cat: 'sandwich', name: 'Classic Veg Sandwich', price: 149, desc: 'Fresh crisp vegetable sandwich.', isAvailable: true },
       { id: 76, cat: 'sandwich', name: 'Cheese Chilli Garlic Sandwich', price: 159, desc: 'Spicy garlic & cheese.', isAvailable: true },
       { id: 77, cat: 'sandwich', name: 'Pasta Heaven Sandwich', price: 169, desc: 'Pasta filled grilled sandwich.', isAvailable: true },
@@ -959,7 +954,7 @@
       { id: 81, cat: 'sandwich', name: 'Garlic Bonanza Grilled Sandwich', price: 209, desc: 'Garlic flavor explosion.', isAvailable: true },
       { id: 82, cat: 'sandwich', name: 'Pizzawhich', price: 219, desc: 'Pizza grilled sandwich.', isAvailable: true },
 
-      // ====== 14. CLUB SANDWICH ======
+      // 14. CLUB SANDWICH
       { id: 83, cat: 'club-sandwich', name: 'American Club Grilled Sandwich', price: 249, desc: 'Triple-decker club sandwich.', isAvailable: true },
       { id: 84, cat: 'club-sandwich', name: 'Chipotle Blast Club Sandwich', price: 259, desc: 'Chipotle sauce & melted cheese.', isAvailable: true },
       { id: 85, cat: 'club-sandwich', name: 'Three in One Sandwich', price: 269, desc: 'Potatoes, chutney, jam & cheese.', isAvailable: true },
@@ -967,14 +962,14 @@
       { id: 87, cat: 'club-sandwich', name: 'Paneer Tikka Masala Club', price: 309, desc: 'Paneer tikka masala sandwich.', isAvailable: true },
       { id: 88, cat: 'club-sandwich', name: 'Devi Special Sandwich', price: 329, desc: 'Chef special premium sandwich.', badge: 'special', isAvailable: true },
 
-      // ====== 15. GARLIC BREAD ======
+      // 15. GARLIC BREAD
       { id: 89, cat: 'garlic-bread', name: 'Cheese Garlic Bread', price: 179, desc: 'Garlic bread with cheese.', isAvailable: true },
       { id: 90, cat: 'garlic-bread', name: 'Cheese Corn Bread', price: 189, desc: 'Sweet corn & garlic bread.', isAvailable: true },
       { id: 91, cat: 'garlic-bread', name: 'Cheese Chilli Garlic Bread', price: 199, desc: 'Fiery chili garlic bread.', isAvailable: true },
       { id: 92, cat: 'garlic-bread', name: 'Italian Premium Bread', price: 209, desc: 'Veggies & cheese garlic bread.', isAvailable: true },
       { id: 93, cat: 'garlic-bread', name: 'Exotic Garlic Bread', price: 219, desc: 'Olives, jalapenos & bell pepper.', badge: 'bestseller', isAvailable: true },
 
-      // ====== 16. INDULGING PASTA ======
+      // 16. PASTA
       { id: 94, cat: 'pasta', name: 'Arrabiata Pasta (Red Sauce)', price: 269, desc: 'Spicy tomato sauce pasta + Garlic Bread.', isAvailable: true },
       { id: 95, cat: 'pasta', name: 'Alfredo Pasta (White Sauce)', price: 279, desc: 'Creamy white cheese pasta + Garlic Bread.', badge: 'bestseller', isAvailable: true },
       { id: 96, cat: 'pasta', name: 'Pesto Pasta (Green Sauce)', price: 289, desc: 'Basil pesto sauce pasta.', isAvailable: true },
@@ -982,7 +977,7 @@
       { id: 98, cat: 'pasta', name: 'Rosato Pasta (Pink Sauce)', price: 309, desc: 'Pink sauce herb pasta.', isAvailable: true },
       { id: 99, cat: 'pasta', name: 'Mac-N-Cheese Pasta', price: 329, desc: 'Baked mac and cheddar cheese.', badge: 'special', isAvailable: true },
 
-      // ====== 17. PIZZA ======
+      // 17. PIZZA
       { 
         id: 101, 
         cat: 'pizza', 
@@ -992,10 +987,7 @@
         badge: 'bestseller', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 249 },
-          { name: '11 Inch', price: 349 }
-        ]
+        sizes: [ { name: '8 Inch', price: 249 }, { name: '11 Inch', price: 349 } ]
       },
       { 
         id: 103, 
@@ -1005,10 +997,7 @@
         desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 279 },
-          { name: '11 Inch', price: 379 }
-        ]
+        sizes: [ { name: '8 Inch', price: 279 }, { name: '11 Inch', price: 379 } ]
       },
       { 
         id: 105, 
@@ -1018,10 +1007,7 @@
         desc: 'Four cheese: Cheddar, Mozzarella, White cheese & cheese jalapeno.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 299 },
-          { name: '11 Inch', price: 409 }
-        ]
+        sizes: [ { name: '8 Inch', price: 299 }, { name: '11 Inch', price: 409 } ]
       },
       { 
         id: 107, 
@@ -1031,10 +1017,7 @@
         desc: 'Mozzarella Cheese with Chilli, Jalapeno, Onion & Tabasco sauce.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 309 },
-          { name: '11 Inch', price: 409 }
-        ]
+        sizes: [ { name: '8 Inch', price: 309 }, { name: '11 Inch', price: 409 } ]
       },
       { 
         id: 109, 
@@ -1044,10 +1027,7 @@
         desc: 'Mozzarella Cheese with colorful bellpeppers, green chilli, jalapeno.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 319 },
-          { name: '11 Inch', price: 419 }
-        ]
+        sizes: [ { name: '8 Inch', price: 319 }, { name: '11 Inch', price: 419 } ]
       },
       { 
         id: 111, 
@@ -1058,10 +1038,7 @@
         badge: 'special', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 349 },
-          { name: '11 Inch', price: 459 }
-        ]
+        sizes: [ { name: '8 Inch', price: 349 }, { name: '11 Inch', price: 459 } ]
       },
       { 
         id: 113, 
@@ -1071,10 +1048,7 @@
         desc: 'Spice Mix Sprinkle over base of Red onions and green chillies.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 269 },
-          { name: '11 Inch', price: 379 }
-        ]
+        sizes: [ { name: '8 Inch', price: 269 }, { name: '11 Inch', price: 379 } ]
       },
       { 
         id: 115, 
@@ -1084,10 +1058,7 @@
         desc: 'Pesto sauce with olives, onions, capsicum, and mozzarella cheese.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 299 },
-          { name: '11 Inch', price: 399 }
-        ]
+        sizes: [ { name: '8 Inch', price: 299 }, { name: '11 Inch', price: 399 } ]
       },
       { 
         id: 117, 
@@ -1097,10 +1068,7 @@
         desc: 'Mozzarella Cheese, fresh veggies with fiery Peri Peri Spice.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 319 },
-          { name: '11 Inch', price: 429 }
-        ]
+        sizes: [ { name: '8 Inch', price: 319 }, { name: '11 Inch', price: 429 } ]
       },
       { 
         id: 119, 
@@ -1110,10 +1078,7 @@
         desc: 'Mozzarella, Corn, Black Olive, Onion, Pepper & Jalapeno kick.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 369 },
-          { name: '11 Inch', price: 549 }
-        ]
+        sizes: [ { name: '8 Inch', price: 369 }, { name: '11 Inch', price: 549 } ]
       },
       { 
         id: 121, 
@@ -1124,10 +1089,7 @@
         badge: 'special', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 379 },
-          { name: '11 Inch', price: 579 }
-        ]
+        sizes: [ { name: '8 Inch', price: 379 }, { name: '11 Inch', price: 579 } ]
       },
       { 
         id: 123, 
@@ -1137,39 +1099,36 @@
         desc: 'Served with 7 different types of rich cheese.', 
         isAvailable: true,
         isPizza: true,
-        sizes: [
-          { name: '8 Inch', price: 399 },
-          { name: '11 Inch', price: 619 }
-        ]
+        sizes: [ { name: '8 Inch', price: 399 }, { name: '11 Inch', price: 619 } ]
       },
       { id: 125, cat: 'pizza', name: 'Add-On: Double Cheese (75 gm)', price: 99, desc: 'Extra loaded cheese topping.', isAvailable: true },
       { id: 126, cat: 'pizza', name: 'Add-On: Jain Preparation', price: 69, desc: 'Custom Jain preparation.', isAvailable: true },
       { id: 127, cat: 'pizza', name: 'Add-On: Thin Crust Base', price: 69, desc: 'Crispy Thin Crust base.', isAvailable: true },
       { id: 128, cat: 'pizza', name: 'Add-On: Pan Crust Base', price: 69, desc: 'Soft and thick Pan Crust base.', isAvailable: true },
 
-      // ====== 18. MAGGI ======
+      // 18. MAGGI
       { id: 129, cat: 'maggi', isMaggi: true, name: 'Masala Maggi', price: 99, desc: 'Classic Maggi with spicy Indian masala.', isAvailable: true },
       { id: 130, cat: 'maggi', isMaggi: true, name: 'Butter Maggi', price: 119, desc: 'Enriched with buttery goodness.', isAvailable: true },
       { id: 131, cat: 'maggi', isMaggi: true, name: 'Cheese Masala Maggi', price: 139, desc: 'Maggi with mouthwatering melted cheese.', badge: 'bestseller', isAvailable: true },
       { id: 132, cat: 'maggi', isMaggi: true, name: 'Vegetable Maggi', price: 149, desc: 'Maggi with medley of fresh vegetables.', isAvailable: true },
       { id: 133, cat: 'maggi', isMaggi: true, name: 'Cheese Vegetable Maggi', price: 169, desc: 'Rich cheese with veggies & spices.', isAvailable: true },
 
-      // ====== 19. NACHOS ======
+      // 19. NACHOS
       { id: 134, cat: 'nachos', name: 'Cheese Nachos', price: 179, desc: 'Crispy Nachos with tangy salsa & cheese sauce.', isAvailable: true },
       { id: 135, cat: 'nachos', name: 'Loaded Nachos', price: 209, desc: 'Topped with cheese, olives, jalapenos & dips.', badge: 'special', isAvailable: true },
 
-      // ====== 20. RICE BOWL ======
+      // 20. RICE BOWL
       { id: 136, cat: 'rice-bowl', name: 'Italian Risotto', price: 229, desc: 'Creamy rice, veggies & white cheese gravy.', isAvailable: true },
       { id: 137, cat: 'rice-bowl', name: 'Pink Risotto', price: 249, desc: 'Rice & veggies in creamy pink sauce gravy.', isAvailable: true },
       { id: 138, cat: 'rice-bowl', name: 'Mexican Hot Pot', price: 299, desc: 'Rice, veggies, nachos with cheese sauce gravy.', isAvailable: true },
       { id: 139, cat: 'rice-bowl', name: 'Paneer Tikka Rice Bowl', price: 329, desc: 'Paneer tikka on rice with rich gravy.', badge: 'bestseller', isAvailable: true },
 
-      // ====== 21. DESSERT ======
+      // 21. DESSERT
       { id: 140, cat: 'dessert', name: 'Jamun Shot', price: 199, desc: 'Refreshing Jamun Ice with sweet & lemon twist.', isAvailable: true },
       { id: 141, cat: 'dessert', name: 'Sizzling Brownie', price: 249, desc: 'Chocolate brownie, vanilla ice cream on sizzler.', badge: 'special', isAvailable: true },
       { id: 142, cat: 'dessert', name: 'Special Dessert', price: 269, desc: 'Brownie topped with dual ice cream & KitKat.', isAvailable: true },
 
-      // ====== 22. EXTRA ======
+      // 22. EXTRA
       { id: 143, cat: 'extra', name: 'Water Bottle', price: 29, desc: 'Packaged drinking water.', isAvailable: true },
       { id: 144, cat: 'extra', name: 'Cheese Dip', price: 39, desc: 'Cheesy dip sauce.', isAvailable: true },
       { id: 145, cat: 'extra', name: 'Vanilla Ice Cream', price: 59, desc: 'Single scoop.', isAvailable: true },
@@ -1240,14 +1199,33 @@
       categoriesList.forEach(cat => {
         const btn = document.createElement('button');
         btn.className = `cat-btn ${cat.colorClass}` + (activeCategory === cat.id ? ' active' : '');
-        btn.innerText = cat.icon + ' ' + (cat[currentLang] || cat.en);
+        btn.innerHTML = `<span class="cat-icon">${cat.icon}</span><span class="cat-name">${cat[currentLang] || cat.en}</span>`;
         btn.onclick = () => {
           activeCategory = cat.id;
+          document.getElementById('searchInput').value = '';
           renderCategories();
           renderMenu();
         };
         nav.appendChild(btn);
       });
+
+      const currentCatObj = categoriesList.find(c => c.id === activeCategory);
+      if (currentCatObj) {
+        document.getElementById('currentCategoryTitle').innerText = currentCatObj.icon + ' ' + (currentCatObj[currentLang] || currentCatObj.en);
+      }
+    }
+
+    function handleSearch() {
+      const q = document.getElementById('searchInput').value.trim();
+      if (q.length > 0) {
+        document.getElementById('currentCategoryTitle').innerText = `🔍 શોધ પરિણામ: "${q}"`;
+      } else {
+        const currentCatObj = categoriesList.find(c => c.id === activeCategory);
+        if (currentCatObj) {
+          document.getElementById('currentCategoryTitle').innerText = currentCatObj.icon + ' ' + (currentCatObj[currentLang] || currentCatObj.en);
+        }
+      }
+      renderMenu();
     }
 
     function renderMenu() {
@@ -1261,6 +1239,11 @@
         if (q.length > 0) return matchSearch;
         return matchCat;
       });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding:30px 10px; color:var(--text-muted); font-size:13px; font-weight:700;">કોઈ વાનગી મળી નથી.</div>`;
+        return;
+      }
 
       filtered.forEach(item => {
         let itemTotalQty = 0;
@@ -1290,7 +1273,7 @@
           <div class="soldout-tag">${UI_TRANSLATIONS[currentLang].soldOut}</div>
         `;
 
-        let priceDisplay = item.isPizza ? `₹${item.price} onwards` : `₹${item.price}`;
+        let priceDisplay = item.isPizza ? `₹${item.price}+` : `₹${item.price}`;
 
         div.innerHTML = `
           <div class="item-details">
@@ -1485,7 +1468,7 @@
               ${optText}
               <div class="bill-item-price">₹${item.price} × ${item.qty} = <b>₹${item.price * item.qty}</b></div>
             </div>
-            <div class="qty-controls" style="width: 85px;">
+            <div class="qty-controls" style="width: 80px;">
               <button class="qty-btn" onclick="updateCartDirect('${item.cartKey}', -1)">-</button>
               <span class="qty-count">${item.qty}</span>
               <button class="qty-btn" onclick="updateCartDirect('${item.cartKey}', 1)">+</button>
