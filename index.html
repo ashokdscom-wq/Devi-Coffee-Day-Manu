@@ -486,6 +486,10 @@
       justify-content: space-between;
       max-width: 900px;
       margin: auto;
+      transition: transform 0.2s ease;
+    }
+    .cart-bar.cart-bump {
+      transform: scale(1.02);
     }
     .cart-info {
       cursor: pointer;
@@ -513,6 +517,21 @@
       gap: 6px;
       cursor: pointer;
       box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Payment Badge in Bill */
+    .payment-methods-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: #f6f0ea;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-top: 10px;
     }
 
     /* Modals */
@@ -730,7 +749,7 @@
   </div>
 
   <!-- Bottom Cart Bar -->
-  <footer class="cart-bar">
+  <footer class="cart-bar" id="cartBar">
     <div class="cart-info" onclick="openBillModal()">
       <span style="font-size:11px; color:var(--text-muted); font-weight:700;" id="cartCount">0 આઇટમ્સ સિલેક્ટ કરી</span>
       <span class="cart-total-price">₹<span id="cartGrandTotal">0</span></span>
@@ -746,7 +765,7 @@
     <div class="option-dialog" onclick="event.stopPropagation()">
       <div id="optionModalIcon" style="font-size:32px; margin-bottom:6px;">🍕</div>
       <h4 id="optionModalItemName">Item Name</h4>
-      <p id="optionModalDesc">કૃપા કરીને સાઈઝ પસંદ કરો:</p>
+      <p id="optionModalDesc">કૃપા કરીને વિકલ્પ પસંદ કરો:</p>
       <div class="option-buttons" id="optionButtonsContainer"></div>
     </div>
   </div>
@@ -782,6 +801,11 @@
           <span id="lblGrandTotal">કુલ રકમ (GRAND TOTAL):</span>
           <span>₹<span id="billFinalTotal">0</span></span>
         </div>
+      </div>
+
+      <div class="payment-methods-strip">
+        <span>💳 UPI સ્વીકાર્ય છે:</span>
+        <b>GPay • PhonePe • Paytm • Cash</b>
       </div>
 
       <button class="btn-order-modal" onclick="sendOrderWhatsAppDirect()">
@@ -839,7 +863,8 @@
         soldOut: "હાજર નથી (Sold Out)",
         alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!",
         emptyBill: "તમારા કાર્ટમાં કોઈ વાનગી નથી.",
-        jainBanner: "🌱 <b>100% શુદ્ધ જૈન વાનગીઓ</b> — કાંદા-લસણ વગર બનાવેલ (No Onion • No Garlic)"
+        jainBanner: "🌱 <b>100% શુદ્ધ જૈન વાનગીઓ</b> — કાંદા-લસણ વગર બનાવેલ (No Onion • No Garlic)",
+        confirmClearCart: "શું તમારો ઓર્ડર WhatsApp પર મોકલાઈ ગયો છે? કાર્ટ ખાલી કરવું છે?"
       },
       en: {
         water: "Order Water",
@@ -857,7 +882,8 @@
         soldOut: "Sold Out",
         alertNoItem: "Please add items to cart first!",
         emptyBill: "Your cart is empty.",
-        jainBanner: "🌱 <b>100% Pure Jain Food</b> — Specially prepared without onion & garlic"
+        jainBanner: "🌱 <b>100% Pure Jain Food</b> — Specially prepared without onion & garlic",
+        confirmClearCart: "Order opened in WhatsApp. Do you want to clear your current cart?"
       },
       hi: {
         water: "पानी मंगवाएं",
@@ -875,17 +901,18 @@
         soldOut: "उपलब्ध नहीं (Sold Out)",
         alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!",
         emptyBill: "आपके कार्ट में कोई आइटम नहीं है।",
-        jainBanner: "🌱 <b>100% शुद्ध जैन व्यंजन</b> — बिना प्याज और लहसुन के तैयार"
+        jainBanner: "🌱 <b>100% शुद्ध जैन व्यंजन</b> — बिना प्याज और लहसुन के तैयार",
+        confirmClearCart: "ऑर्डर WhatsApp पर भेज दिया गया? क्या कार्ट खाली करना चाहते हैं?"
       }
     };
 
-    // Categories Order: Jain is now placed right before 'extra'
+    // Categories Order: Jain is placed right before Extra
     const categoriesList = [
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी', colorClass: 'cat-btn-hot-coffee' },
       { id: 'hot-chocolate', icon: '🍫', en: 'Hot Choco', gu: 'Hot Choco', hi: 'हૉટ ચોકલેટ', colorClass: 'cat-btn-hot-chocolate' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी', colorClass: 'cat-btn-cold-coffee' },
       { id: 'ice-blended', icon: '🧊', en: 'Ice Blended', gu: 'Ice Blended', hi: 'आइस ब्लेंडेड', colorClass: 'cat-btn-ice-blended' },
-      { id: 'ice-latte', icon: '🧋', en: 'Ice Latte', gu: 'Ice Latte', hi: 'आइस लाटे', colorClass: 'cat-btn-ice-latte' },
+      { id: 'ice-latte', icon: '🧋', en: 'Ice Latte', gu: 'Ice Latte', hi: 'આઇસ લાટે', colorClass: 'cat-btn-ice-latte' },
       { id: 'mocktails', icon: '🍹', en: 'Mocktails', gu: 'Mocktails', hi: 'मॉकटेल', colorClass: 'cat-btn-mocktails' },
       { id: 'thick-shakes', icon: '🥤', en: 'Thick Shakes', gu: 'Thick Shakes', hi: 'थिक शेक्स', colorClass: 'cat-btn-thick-shakes' },
       { id: 'iced-coffee', icon: '🧊', en: 'Iced Coffee', gu: 'Iced Coffee', hi: 'आइस्ड कॉफ़ी', colorClass: 'cat-btn-iced-coffee' },
@@ -1165,16 +1192,16 @@
         sizes: [ { name: '8 Inch', price: 399 }, { name: '11 Inch', price: 619 } ]
       },
       { id: 125, cat: 'pizza', name: 'Add-On: Double Cheese (75 gm)', price: 99, desc: 'Extra loaded cheese topping.', isAvailable: true },
-      { id: 126, cat: 'pizza', name: 'Add-On: Jain Preparation', price: 69, desc: 'Custom Jain preparation.', isAvailable: true },
+      { id: 126, cat: 'pizza', name: 'Add-On: Jain Preparation (Regular Pizza Only)', price: 69, desc: 'Custom Jain prep for regular pizzas (Jain pizzas are already 100% Jain).', isAvailable: true },
       { id: 127, cat: 'pizza', name: 'Add-On: Thin Crust Base', price: 69, desc: 'Crispy Thin Crust base.', isAvailable: true },
       { id: 128, cat: 'pizza', name: 'Add-On: Pan Crust Base', price: 69, desc: 'Soft and thick Pan Crust base.', isAvailable: true },
 
-      // 17. MAGGI
-      { id: 129, cat: 'maggi', isMaggi: true, name: 'Masala Maggi', price: 99, desc: 'Classic Maggi with spicy Indian masala.', isAvailable: true },
-      { id: 130, cat: 'maggi', isMaggi: true, name: 'Butter Maggi', price: 119, desc: 'Enriched with buttery goodness.', isAvailable: true },
-      { id: 131, cat: 'maggi', isMaggi: true, name: 'Cheese Masala Maggi', price: 139, desc: 'Maggi with mouthwatering melted cheese.', badge: 'bestseller', isAvailable: true },
-      { id: 132, cat: 'maggi', isMaggi: true, name: 'Vegetable Maggi', price: 149, desc: 'Maggi with medley of fresh vegetables.', isAvailable: true },
-      { id: 133, cat: 'maggi', isMaggi: true, name: 'Cheese Vegetable Maggi', price: 169, desc: 'Rich cheese with veggies & spices.', isAvailable: true },
+      // 17. MAGGI (Regular Maggi - Directly adds to cart)
+      { id: 129, cat: 'maggi', name: 'Masala Maggi', price: 99, desc: 'Classic Maggi with spicy Indian masala.', isAvailable: true },
+      { id: 130, cat: 'maggi', name: 'Butter Maggi', price: 119, desc: 'Enriched with buttery goodness.', isAvailable: true },
+      { id: 131, cat: 'maggi', name: 'Cheese Masala Maggi', price: 139, desc: 'Maggi with mouthwatering melted cheese.', badge: 'bestseller', isAvailable: true },
+      { id: 132, cat: 'maggi', name: 'Vegetable Maggi', price: 149, desc: 'Maggi with medley of fresh vegetables.', isAvailable: true },
+      { id: 133, cat: 'maggi', name: 'Cheese Vegetable Maggi', price: 169, desc: 'Rich cheese with veggies & spices.', isAvailable: true },
 
       // 18. NACHOS
       { id: 134, cat: 'nachos', name: 'Cheese Nachos', price: 179, desc: 'Crispy Nachos with tangy salsa & cheese sauce.', isAvailable: true },
@@ -1191,7 +1218,7 @@
       { id: 141, cat: 'dessert', name: 'Sizzling Brownie', price: 249, desc: 'Chocolate brownie, vanilla ice cream on sizzler.', badge: 'special', isAvailable: true },
       { id: 142, cat: 'dessert', name: 'Special Dessert', price: 269, desc: 'Brownie topped with dual ice cream & KitKat.', isAvailable: true },
 
-      // 21. JAIN ITEMS (Cheese corn ball removed)
+      // 21. JAIN ITEMS (Cheese corn ball removed; Jain Maggi triggers masala question)
       { id: 202, cat: 'jain', isJain: true, name: 'Butter toast (jain)', price: 89, desc: 'Crispy butter toasted bread without root vegetables.', badge: 'jain', isAvailable: true },
       { id: 203, cat: 'jain', isJain: true, name: 'Cheese corn toast (jain)', price: 119, desc: 'Jain bread topped with premium cheese and tender sweet corn.', badge: 'jain', isAvailable: true },
       { id: 204, cat: 'jain', isJain: true, name: 'Italian toast (jain)', price: 139, desc: 'Toasted with aromatic Italian herbs, cheese and capsicum.', badge: 'jain', isAvailable: true },
@@ -1250,11 +1277,11 @@
         isPizza: true,
         sizes: [ { name: '8 Inch', price: 399 }, { name: '11 Inch', price: 619 } ]
       },
-      { id: 220, cat: 'jain', isJain: true, isMaggi: true, name: 'Masala meggi (Jain)', price: 99, desc: 'Classic noodles in special Jain spices.', badge: 'jain', isAvailable: true },
-      { id: 221, cat: 'jain', isJain: true, isMaggi: true, name: 'Butter Meggi (Jain)', price: 119, desc: 'Buttery noodles cooked in pure Jain recipe.', badge: 'jain', isAvailable: true },
-      { id: 222, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese masala meggi (Jain)', price: 139, desc: 'Mouthwatering melted cheese Maggi.', badge: 'jain', isAvailable: true },
-      { id: 223, cat: 'jain', isJain: true, isMaggi: true, name: 'Vegetable meggi (Jain)', price: 149, desc: 'Tossed with capsicum, corn and tomatoes.', badge: 'jain', isAvailable: true },
-      { id: 224, cat: 'jain', isJain: true, isMaggi: true, name: 'Cheese Vegetable meggi (Jain)', price: 169, desc: 'Loaded with rich cheese and fresh Jain veggies.', badge: 'jain', isAvailable: true },
+      { id: 220, cat: 'jain', isJain: true, isJainMaggi: true, name: 'Masala meggi (Jain)', price: 99, desc: 'Classic noodles in special Jain spices (No Onion/Garlic).', badge: 'jain', isAvailable: true },
+      { id: 221, cat: 'jain', isJain: true, isJainMaggi: true, name: 'Butter Meggi (Jain)', price: 119, desc: 'Buttery noodles cooked in pure Jain recipe.', badge: 'jain', isAvailable: true },
+      { id: 222, cat: 'jain', isJain: true, isJainMaggi: true, name: 'Cheese masala meggi (Jain)', price: 139, desc: 'Mouthwatering melted cheese Jain Maggi.', badge: 'jain', isAvailable: true },
+      { id: 223, cat: 'jain', isJain: true, isJainMaggi: true, name: 'Vegetable meggi (Jain)', price: 149, desc: 'Tossed with capsicum, corn and tomatoes.', badge: 'jain', isAvailable: true },
+      { id: 224, cat: 'jain', isJain: true, isJainMaggi: true, name: 'Cheese Vegetable meggi (Jain)', price: 169, desc: 'Loaded with rich cheese and fresh Jain veggies.', badge: 'jain', isAvailable: true },
       { id: 225, cat: 'jain', isJain: true, name: 'Cheese nachos (jain)', price: 179, desc: 'Crisp nachos served with fresh Jain tomato salsa & warm cheese sauce.', badge: 'jain', isAvailable: true },
       { id: 226, cat: 'jain', isJain: true, name: 'Italian Risotto (jain)', price: 229, desc: 'Creamy Italian rice with sweet corn, capsicum & white cheese gravy.', badge: 'jain', isAvailable: true },
       { id: 227, cat: 'jain', isJain: true, name: 'Pink Risotto (jain)', price: 249, desc: 'Creamy pink sauce risotto with pure Jain herbs and veggies.', badge: 'jain', isAvailable: true },
@@ -1440,7 +1467,8 @@
       const item = menuData.find(i => i.id === id);
       if (!item || !item.isAvailable) return;
 
-      if (item.isMaggi) {
+      // Maggi masala prompt is ONLY shown for Jain Maggi
+      if (item.isJainMaggi) {
         openMaggiModal(item);
       } else if (item.isPizza) {
         openPizzaSizeModal(item);
@@ -1453,15 +1481,15 @@
       pendingItem = item;
       document.getElementById('optionModalIcon').innerText = '🍜';
       document.getElementById('optionModalItemName').innerText = item.name;
-      document.getElementById('optionModalDesc').innerText = 'શું તમારે આ મેગીમાં મેગી મસાલો ઉમેરવો છે?';
+      document.getElementById('optionModalDesc').innerText = 'શું તમારે આ જૈન મેગીમાં જૈન મેગી મસાલો ઉમેરવો છે?';
       
       const btnContainer = document.getElementById('optionButtonsContainer');
       btnContainer.innerHTML = `
-        <button class="btn-option-item" onclick="confirmOptionChoice('હા (Masala Yes)')">
-          <span>✅ હા (Yes)</span>
+        <button class="btn-option-item" onclick="confirmOptionChoice('હા (Jain Masala Yes)')">
+          <span>✅ હા (Yes, Jain Masala)</span>
         </button>
-        <button class="btn-option-item" onclick="confirmOptionChoice('ના (Masala No)')">
-          <span>❌ ના (No)</span>
+        <button class="btn-option-item" onclick="confirmOptionChoice('ના (Plain - No Masala)')">
+          <span>❌ ના (Plain - No Masala)</span>
         </button>
       `;
       document.getElementById('optionModal').classList.add('active');
@@ -1535,6 +1563,13 @@
         };
       }
       cart[cartKey].qty += 1;
+
+      // Animate bottom bar to indicate item addition
+      const cartBar = document.getElementById('cartBar');
+      if (cartBar) {
+        cartBar.classList.add('cart-bump');
+        setTimeout(() => cartBar.classList.remove('cart-bump'), 200);
+      }
 
       updateTotal();
       renderMenu();
@@ -1679,7 +1714,7 @@
                     `--------------------------------\n` +
                     `💵 *AMOUNT (Subtotal):* ₹${calc.subtotal}\n` +
                     `🏛️ *CGST (2.5%):* ₹${calc.cgst.toFixed(2)}\n` +
-                    `🏛️ *SGST (2.5%):* ₹${calc.sgst.toFixed(2)}\n` +
+                    `🏛️️ *SGST (2.5%):* ₹${calc.sgst.toFixed(2)}\n` +
                     `--------------------------------\n` +
                     `💰 *GRAND TOTAL: ₹${calc.grandTotal}*\n` +
                     `--------------------------------` +
@@ -1688,11 +1723,16 @@
 
       openWhatsAppUnified(RESTAURANT_PHONE, message);
 
-      cart = {};
-      document.getElementById('orderNote').value = "";
-      closeBillModal();
-      updateTotal();
-      renderMenu();
+      // Confirmation prompt before clearing cart
+      setTimeout(() => {
+        if (confirm(UI_TRANSLATIONS[currentLang].confirmClearCart)) {
+          cart = {};
+          document.getElementById('orderNote').value = "";
+          closeBillModal();
+          updateTotal();
+          renderMenu();
+        }
+      }, 1000);
     }
 
     // Initialization
