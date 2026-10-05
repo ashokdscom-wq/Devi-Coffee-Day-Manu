@@ -6,7 +6,7 @@
   <title>DEVI COFFEE DAY - Digital Menu</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #1f0d05;
@@ -23,6 +23,90 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 120px; overflow-x: hidden; }
+
+    /* ====== WELCOME SPLASH SCREEN ====== */
+    #welcomeSplash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #2e1509 0%, #150803 100%);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    #welcomeSplash.fade-out {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+    .splash-logo-box {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #eedcc9;
+      border: 3px solid var(--accent-gold);
+      box-shadow: 0 0 25px rgba(229, 176, 123, 0.45);
+      overflow: hidden;
+      margin-bottom: 18px;
+      animation: pulseLogo 2s infinite alternate ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .splash-logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(2.2);
+    }
+    @keyframes pulseLogo {
+      0% { transform: scale(0.96); box-shadow: 0 0 15px rgba(229, 176, 123, 0.3); }
+      100% { transform: scale(1.04); box-shadow: 0 0 30px rgba(229, 176, 123, 0.6); }
+    }
+    .splash-tagline-top {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .splash-brand-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.8);
+    }
+    .splash-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent-gold);
+      margin: 8px auto 14px;
+      border-radius: 2px;
+    }
+    .splash-quote {
+      font-size: 14px;
+      color: #f1ede7;
+      font-weight: 600;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+    .splash-subtext {
+      font-size: 11px;
+      color: var(--accent-gold);
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+    }
 
     /* Header */
     .header {
@@ -161,7 +245,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
-    /* ====== 2-COLUMN MAIN LAYOUT ====== */
+    /* 2-COLUMN MAIN LAYOUT */
     .layout-wrapper {
       display: flex;
       max-width: 900px;
@@ -211,7 +295,7 @@
     }
 
     /* Distinct Colors for Categories */
-    .cat-btn-jain          { background: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+    .cat-btn-jain          { background: #d1fae5; color: #065f46; border-color: #34d399; font-weight: 800; }
     .cat-btn-hot-coffee    { background: #fef3c7; color: #92400e; border-color: #fde68a; }
     .cat-btn-hot-chocolate { background: #fce7f3; color: #9d174d; border-color: #fbcfe8; }
     .cat-btn-cold-coffee   { background: #e0e7ff; color: #3730a3; border-color: #c7d2fe; }
@@ -261,6 +345,22 @@
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    /* Jain Info Banner */
+    .jain-info-banner {
+      background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+      border: 1.5px solid #6ee7b7;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: #065f46;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 5px rgba(16, 185, 129, 0.1);
     }
 
     .menu-card {
@@ -550,6 +650,18 @@
 </head>
 <body>
 
+  <!-- WELCOME SPLASH SCREEN -->
+  <div id="welcomeSplash">
+    <div class="splash-logo-box">
+      <img src="logo.jpg" alt="DEVI COFFEE DAY" onerror="this.onerror=null; this.src='logo.png';">
+    </div>
+    <div class="splash-tagline-top">Welcome to</div>
+    <h1 class="splash-brand-title">DEVI COFFEE DAY</h1>
+    <div class="splash-divider"></div>
+    <p class="splash-quote">“Brewing Moments, Serving Happiness”</p>
+    <div class="splash-subtext">✨ Fresh Coffee • Delicious Bites • 100% Pure Jain & Veg ✨</div>
+  </div>
+
   <!-- Header -->
   <header class="header">
     <div class="header-bg-slider" id="bgSlider">
@@ -594,7 +706,13 @@
 
     <!-- Right Scrollable Menu Items -->
     <main class="menu-scroll-area">
-      <div class="active-cat-header" id="currentCategoryTitle">🌱 Jain</div>
+      <!-- Special Jain Info Strip -->
+      <div id="jainBannerStrip" class="jain-info-banner">
+        <span>🌱</span>
+        <div><b>100% શુદ્ધ જૈન વાનગીઓ</b> — કાંદા-લસણ વગર બનાવેલ (No Onion • No Garlic)</div>
+      </div>
+
+      <div class="active-cat-header" id="currentCategoryTitle">🌱 Special Jain</div>
       <div id="menuList"></div>
 
       <!-- Note Input -->
@@ -623,7 +741,7 @@
     </button>
   </footer>
 
-  <!-- Generic Option Modal (Maggi & Pizza Size) -->
+  <!-- Option Modal -->
   <div class="modal-overlay center-modal" id="optionModal">
     <div class="option-dialog" onclick="event.stopPropagation()">
       <div id="optionModalIcon" style="font-size:32px; margin-bottom:6px;">🍕</div>
@@ -673,6 +791,17 @@
   </div>
 
   <script>
+    // Splash screen auto dismiss after 1.8 seconds
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const splash = document.getElementById('welcomeSplash');
+        if (splash) {
+          splash.classList.add('fade-out');
+          setTimeout(() => splash.remove(), 800);
+        }
+      }, 1800);
+    });
+
     const RESTAURANT_PHONE = "919898237900";
     const SHEET_ID = "1tmy2M5sRI8pNpvsgv_dwRXyIGitCTDlVUBDpQI2bjaU";
 
@@ -709,7 +838,8 @@
         sendBtn: "Send Order on WhatsApp",
         soldOut: "હાજર નથી (Sold Out)",
         alertNoItem: "કૃપા કરીને પહેલા વાનગી પસંદ કરો (+ બટન દબાવો)!",
-        emptyBill: "તમારા કાર્ટમાં કોઈ વાનગી નથી."
+        emptyBill: "તમારા કાર્ટમાં કોઈ વાનગી નથી.",
+        jainBanner: "🌱 <b>100% શુદ્ધ જૈન વાનગીઓ</b> — કાંદા-લસણ વગર બનાવેલ (No Onion • No Garlic)"
       },
       en: {
         water: "Order Water",
@@ -726,7 +856,8 @@
         sendBtn: "Send Order on WhatsApp",
         soldOut: "Sold Out",
         alertNoItem: "Please add items to cart first!",
-        emptyBill: "Your cart is empty."
+        emptyBill: "Your cart is empty.",
+        jainBanner: "🌱 <b>100% Pure Jain Food</b> — Specially prepared without onion & garlic"
       },
       hi: {
         water: "पानी मंगवाएं",
@@ -743,13 +874,14 @@
         sendBtn: "Send Order on WhatsApp",
         soldOut: "उपलब्ध नहीं (Sold Out)",
         alertNoItem: "कृपया पहले आइटम चुनें (+ बटन दबाएं)!",
-        emptyBill: "आपके कार्ट में कोई आइटम नहीं है।"
+        emptyBill: "आपके कार्ट में कोई आइटम नहीं है।",
+        jainBanner: "🌱 <b>100% शुद्ध जैन व्यंजन</b> — बिना प्याज और लहसुन के तैयार"
       }
     };
 
-    // Categories Order with distinct color classes
+    // Categories Order with clearly specified Jain label
     const categoriesList = [
-      { id: 'jain', icon: '🌱', en: 'Jain', gu: 'Jain', hi: 'जैन', colorClass: 'cat-btn-jain' },
+      { id: 'jain', icon: '🌱', en: 'Pure Jain', gu: 'જૈન સ્પેશિયલ', hi: 'जैन स्पेशल', colorClass: 'cat-btn-jain' },
       { id: 'hot-coffee', icon: '☕', en: 'Hot Coffee', gu: 'Hot Coffee', hi: 'हॉट कॉफ़ी', colorClass: 'cat-btn-hot-coffee' },
       { id: 'hot-chocolate', icon: '🍫', en: 'Hot Choco', gu: 'Hot Choco', hi: 'हૉટ ચોકલેટ', colorClass: 'cat-btn-hot-chocolate' },
       { id: 'cold-coffee', icon: '🥤', en: 'Cold Coffee', gu: 'Cold Coffee', hi: 'कोल्ड कॉफ़ी', colorClass: 'cat-btn-cold-coffee' },
@@ -761,7 +893,7 @@
       { id: 'iced-tea', icon: '🧋', en: 'Iced Tea', gu: 'Iced Tea', hi: 'आइस्ड टी', colorClass: 'cat-btn-iced-tea' },
       { id: 'appetizers', icon: '🍟', en: 'Appetisers', gu: 'Appetisers', hi: 'ऐपेटाइज़र', colorClass: 'cat-btn-appetizers' },
       { id: 'toast', icon: '🍞', en: 'Toast', gu: 'Toast', hi: 'टोस्ट', colorClass: 'cat-btn-toast' },
-      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'सैंडविच', colorClass: 'cat-btn-sandwich' },
+      { id: 'sandwich', icon: '🥪', en: 'Sandwich', gu: 'Sandwich', hi: 'સैंडવિચ', colorClass: 'cat-btn-sandwich' },
       { id: 'club-sandwich', icon: '🥪', en: 'Club Sand.', gu: 'Club Sand.', hi: 'ક્લબ સેન્ડવિચ', colorClass: 'cat-btn-club-sandwich' },
       { id: 'garlic-bread', icon: '🥖', en: 'Garlic Bread', gu: 'Garlic Bread', hi: 'ગાર્લિક બ્રેડ', colorClass: 'cat-btn-garlic-bread' },
       { id: 'pasta', icon: '🍝', en: 'Pasta', gu: 'Pasta', hi: 'પાસ્તા', colorClass: 'cat-btn-pasta' },
@@ -1187,6 +1319,7 @@
       document.getElementById('lblSubtotal').innerText = t.subtotal;
       document.getElementById('lblGrandTotal').innerText = t.grandTotal;
       document.getElementById('lblSendOrderBtn').innerText = t.sendBtn;
+      document.getElementById('jainBannerStrip').innerHTML = `<span>🌱</span><div>${t.jainBanner}</div>`;
 
       renderCategories();
       renderMenu();
@@ -1217,9 +1350,13 @@
 
     function handleSearch() {
       const q = document.getElementById('searchInput').value.trim();
+      const banner = document.getElementById('jainBannerStrip');
+
       if (q.length > 0) {
+        banner.style.display = 'none';
         document.getElementById('currentCategoryTitle').innerText = `🔍 શોધ પરિણામ: "${q}"`;
       } else {
+        banner.style.display = activeCategory === 'jain' ? 'flex' : 'none';
         const currentCatObj = categoriesList.find(c => c.id === activeCategory);
         if (currentCatObj) {
           document.getElementById('currentCategoryTitle').innerText = currentCatObj.icon + ' ' + (currentCatObj[currentLang] || currentCatObj.en);
@@ -1231,6 +1368,14 @@
     function renderMenu() {
       const container = document.getElementById('menuList');
       const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const banner = document.getElementById('jainBannerStrip');
+
+      if (q.length === 0) {
+        banner.style.display = (activeCategory === 'jain') ? 'flex' : 'none';
+      } else {
+        banner.style.display = 'none';
+      }
+
       container.innerHTML = '';
 
       let filtered = menuData.filter(item => {
@@ -1253,7 +1398,7 @@
 
         let badgeHtml = '';
         if (item.badge === 'jain' || item.isJain) {
-          badgeHtml = '<span class="item-badge badge-jain">🌱 Jain</span>';
+          badgeHtml = '<span class="item-badge badge-jain">🌱 Jain Special</span>';
         } else if (item.badge === 'bestseller') {
           badgeHtml = '<span class="item-badge badge-bestseller">★ Bestseller</span>';
         } else if (item.badge === 'special') {
